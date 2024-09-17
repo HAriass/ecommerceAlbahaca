@@ -16,4 +16,18 @@ public class MarcaService {
     public ArrayList<MarcaModel> listarMarcas(){
         return (ArrayList<MarcaModel>) marcaRepository.findAll();
     }
+    
+    public MarcaModel guardarMarca(MarcaModel marcaModel){
+        return marcaRepository.save(marcaModel);
+    }
+    
+    public boolean eliminarMarca(Long id){
+        try {
+            marcaRepository.deleteById(id);
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
+    }
+    
 }
