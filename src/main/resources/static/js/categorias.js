@@ -1,15 +1,16 @@
-        function getMarcas() {
-            axios.get("/marca/listarMarcas")
+        function getCategorias() {
+            axios.get("/categoria/listarCategorias")
             .then(function(response) {
-                const marcas = response.data;
+                const categorias = response.data;
                 const tbody = document.querySelector(".tbody");
                 let htmlContent = '';
-                marcas.forEach(marca => {
+                categorias.forEach(categoria => {
                     htmlContent += `
                         <tr>
-                            <td>${marca.nombre}</td>
-                            <td><a href="/modificarMarca/${marca.id}">Modificar</a></td>
-                            <td><button onclick="eliminarMarca(${marca.id})">Eliminar</button></td>
+                            <td>${categoria.nombre}</td>
+                            <td>${categoria.descripcion}</td>
+                            <td><a href="/modificarCategoria/${categoria.id}">Modificar</a></td>
+                            <td><button onclick="eliminarCategoria(${categoria.id})">Eliminar</button></td>
                         </tr>
                     `;
                 });
@@ -18,8 +19,8 @@
             .catch((err) => console.error(err));
         }
         
-        function eliminarMarca(id) {
-            axios.delete(`/marca/eliminarMarca/${id}`)
+        function eliminarCategoria(id) {
+            axios.delete(`/categoria/eliminarCategoria/${id}`)
             .then(response => {
                 console.log('Éxito:', response.data);
             })
@@ -27,18 +28,19 @@
                 console.error('Error:', error);
             });
         }
-        function getMarcaById(id) {
-            axios.get(`/marca/obtenerMarcaPorId/${id}`)
+        function getCategoriaById(id) {
+            axios.get(`/categoria/obtenerCategoriaPorId/${id}`)
             .then(function(response) {
-                const marca = response.data;
+                const categoria = response.data;
                 const tbody = document.querySelector(".tbody");
                 let htmlContent = '';
-                if (marca) {
+                if (categoria) {
                     htmlContent += `
                         <tr>
-                            <td>${marca.nombre}</td>
-                            <td><a href="/modificarMarca/${marca.id}">Modificar</a></td>
-                            <td><button onclick="eliminarMarca(${marca.id})">Eliminar</button></td>
+                            <td>${categoria.nombre}</td>
+                            <td>${categoria.descripcion}</td>
+                            <td><a href="/modificarMarca/${categoria.id}">Modificar</a></td>
+                            <td><button onclick="eliminarMarca(${categoria.id})">Eliminar</button></td>
                         </tr>
                     `;
                 }
@@ -52,15 +54,15 @@
             const filtroInput = document.getElementById('filtro');
             
             // Cargar usuarios al inicio
-            getMarcas();
+            getCategorias();
             
             // Evento de entrada para el campo de filtro
             filtroInput.addEventListener('input', function() {
                 const filtroValue = filtroInput.value;
                 if (filtroValue.trim() !== "") {
-                    getMarcaById(filtroValue);
+                    getCategoriaById(filtroValue);
                 } else {
-                    getMarcas();
+                    getCategorias();
                 }
             });
         });

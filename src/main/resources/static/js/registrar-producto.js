@@ -1,6 +1,6 @@
-const form = document.getElementById('addMarca');
+const form = document.getElementById('addProducto');
 
-        function guardarMarca() {
+        function guardarProducto() {
             form.addEventListener('submit', function(event) {
                 event.preventDefault(); // Previene el comportamiento por defecto del formulario
 
@@ -12,12 +12,16 @@ const form = document.getElementById('addMarca');
                 formData.forEach((value, key) => {
                     data[key] = value;
                 });
+                
+                // Asegúrate de que el precio sea un número
+                data["precio"] = parseFloat(data["precio"]);
 
                 // Convierte el objeto a JSON
                 const jsonData = JSON.stringify(data);
+                console.log('JSON enviado:', jsonData);
 
                 // Envía los datos JSON usando Axios
-                axios.post("/marca/guardarMarca", jsonData, {
+                axios.post("/producto/guardarProducto", jsonData, {
                     headers: {
                         'Content-Type': 'application/json'
                     }
@@ -32,4 +36,5 @@ const form = document.getElementById('addMarca');
         }
 
         // Llama a la función para añadir el listener
-        guardarMarca();
+        guardarProducto();
+

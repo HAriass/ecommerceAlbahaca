@@ -1,15 +1,19 @@
-        function getMarcas() {
-            axios.get("/marca/listarMarcas")
+        function getProductos() {
+            axios.get("/producto/listarProductos")
             .then(function(response) {
-                const marcas = response.data;
+                const productos = response.data;
                 const tbody = document.querySelector(".tbody");
                 let htmlContent = '';
-                marcas.forEach(marca => {
+                productos.forEach(producto => {
                     htmlContent += `
                         <tr>
-                            <td>${marca.nombre}</td>
-                            <td><a href="/modificarMarca/${marca.id}">Modificar</a></td>
-                            <td><button onclick="eliminarMarca(${marca.id})">Eliminar</button></td>
+                            <td>${producto.nombre}</td>
+                            <td>${producto.descripcion}</td>
+                            <td>${producto.precio}</td>
+                            <td>${producto.marca}</td>
+                            <td>${producto.categoria}</td>
+                            <td><a href="/modificarProducto/${producto.id}">Modificar</a></td>
+                            <td><button onclick="eliminarProducto(${producto.id})">Eliminar</button></td>
                         </tr>
                     `;
                 });
@@ -18,8 +22,8 @@
             .catch((err) => console.error(err));
         }
         
-        function eliminarMarca(id) {
-            axios.delete(`/marca/eliminarMarca/${id}`)
+        function eliminarProducto(id) {
+            axios.delete(`/producto/eliminarProducto/${id}`)
             .then(response => {
                 console.log('Éxito:', response.data);
             })
@@ -27,18 +31,18 @@
                 console.error('Error:', error);
             });
         }
-        function getMarcaById(id) {
-            axios.get(`/marca/obtenerMarcaPorId/${id}`)
+        function getProductoById(id) {
+            axios.get(`/producto/obtenerProductoPorId/${id}`)
             .then(function(response) {
-                const marca = response.data;
+                const producto = response.data;
                 const tbody = document.querySelector(".tbody");
                 let htmlContent = '';
-                if (marca) {
+                if (producto) {
                     htmlContent += `
                         <tr>
-                            <td>${marca.nombre}</td>
-                            <td><a href="/modificarMarca/${marca.id}">Modificar</a></td>
-                            <td><button onclick="eliminarMarca(${marca.id})">Eliminar</button></td>
+                            <td>${producto.nombre}</td>
+                            <td><a href="/modificarProducto/${producto.id}">Modificar</a></td>
+                            <td><button onclick="eliminarProducto(${producto.id})">Eliminar</button></td>
                         </tr>
                     `;
                 }
@@ -52,15 +56,15 @@
             const filtroInput = document.getElementById('filtro');
             
             // Cargar usuarios al inicio
-            getMarcas();
+            getProductos();
             
             // Evento de entrada para el campo de filtro
             filtroInput.addEventListener('input', function() {
                 const filtroValue = filtroInput.value;
                 if (filtroValue.trim() !== "") {
-                    getMarcaById(filtroValue);
+                    getProductoById(filtroValue);
                 } else {
-                    getMarcas();
+                    getProductos();
                 }
             });
         });

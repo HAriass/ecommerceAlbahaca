@@ -1,4 +1,3 @@
-
 package com.albahaca.ecommerce.models;
 
 import jakarta.persistence.Column;

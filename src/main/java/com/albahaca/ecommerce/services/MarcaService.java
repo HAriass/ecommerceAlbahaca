@@ -33,6 +33,5 @@ public class MarcaService {
     
     public Optional<MarcaModel> obtenerMarcaPorId(Long id){
         return marcaRepository.findById(id);
-    }
-    
+    }   
 }
