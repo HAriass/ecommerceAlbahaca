@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <title>TODO supply a title</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body>
+        <div>
+            <form id="addMarca">
+                
+                <label for="nombre">Nombre:</label>
+                <input type="text" id="nombre" name="nombre"/>
+                
+                <input type="submit" value="Registrar"/>
+            </form>
+        </div>
+        
+        <!--Script para poder usar axios-->
+        <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+        <!--Llamada al archivo js-->
+        <script src="/js/registrar-marca.js"></script>
+    </body>
+</html>

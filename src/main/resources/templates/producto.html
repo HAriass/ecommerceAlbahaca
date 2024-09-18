@@ -2,7 +2,7 @@
 
 <html xmlns:th="http://www.thymeleaf.org">
     <head>
-        <title>Marca</title>
+        <title>Producto</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <style>
@@ -21,8 +21,8 @@
         </style>
     </head>
     <body>
-        <div class="marcas">
-        <h1>Marcas</h1>
+        <div class="productos">
+        <h1>Productos</h1>
         <div>
             <label for="filtro">Filtrar por ID:</label>
             <input type="text" id="filtro" name="filtro">
@@ -31,6 +31,10 @@
             <thead>
                 <tr>
                     <th>Nombre</th>
+                    <th>Descripcion</th>
+                    <th>Precio</th>
+                    <th>Marca</th>
+                    <th>Categoria</th>
                     <th>Modificar</th>
                     <th>Eliminar</th>
                 </tr>
@@ -42,6 +46,7 @@
     </div>
     
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-    <script src="/js/marcas.js"></script>
+    <script src="/js/productos.js"></script>
     </body>
 </html>
+

@@ -4,6 +4,7 @@ package com.albahaca.ecommerce.services;
 import com.albahaca.ecommerce.models.MarcaModel;
 import com.albahaca.ecommerce.repositories.MarcaRepository;
 import java.util.ArrayList;
+import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -30,4 +31,7 @@ public class MarcaService {
         }
     }
     
+    public Optional<MarcaModel> obtenerMarcaPorId(Long id){
+        return marcaRepository.findById(id);
+    }   
 }

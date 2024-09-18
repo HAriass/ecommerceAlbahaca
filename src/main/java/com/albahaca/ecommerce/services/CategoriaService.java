@@ -4,6 +4,7 @@ package com.albahaca.ecommerce.services;
 import com.albahaca.ecommerce.models.CategoriaModel;
 import com.albahaca.ecommerce.repositories.CategoriaRepository;
 import java.util.ArrayList;
+import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -30,5 +31,7 @@ public class CategoriaService {
         }
     }
     
-    
+    public Optional<CategoriaModel> obtenerCategoriaPorId(Long id){
+        return categoriaRepository.findById(id);
+    }
 }
