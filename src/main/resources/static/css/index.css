@@ -94,3 +94,8 @@ html, body {
 .dropdown a:hover {
     background-color: #444;
 }
+    padding: 20px 5px;
+    transition: background-color 0.3s ease;
+    text-align: center;
+    font-size: small;
+}
