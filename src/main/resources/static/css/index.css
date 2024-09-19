@@ -1,39 +1,96 @@
-.containerIndex {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 20px;
-    padding: 20px;
-    border-radius: 10px;
-    background-color: #000000;
-    box-shadow: 0 0 10px #589434;
-    text-decoration: none;
-    text-transform: uppercase;
-    color: white;
-    width: 100%;
+/* Estilos generales para la página */
+html, body {
     height: 100%;
+    margin: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #1a1a1a;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
+/* Contenedor principal */
+.containerIndex {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 50px;
+    padding: 40px;
+    border-radius: 15px;
+    background-color: #121212;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.7);
+    max-width: 800px;
+}
+
+/* Estilos de los enlaces */
 .boxSection {
     display: flex;
-    flex-direction: column;
-    align-items: center;
     justify-content: center;
-    gap: 20px;
-    padding: 20px;
+    align-items: center;
+    flex-direction: column;
+    padding: 15px;
     border-radius: 10px;
-    background-color: #000000;
-    box-shadow: 0 0 10px #589434;
+    background-color: #1e1e1e;
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.4);
     text-decoration: none;
     text-transform: uppercase;
     color: white;
-    width: 200px;
-    height: 250px;
+    width: 180px;
+    height: 100px;
+    text-align: center;
+    font-size: 1rem;
+    letter-spacing: 1px;
+    position: relative;
+    transition: transform 0.3s ease, background-color 0.3s ease;
+    cursor: pointer;
+}
+
+/* Efecto hover */
+.boxSection:hover {
+    background-color: #262626;
+    transform: translateY(-5px);
+    box-shadow: 0 12px 20px rgba(0, 0, 0, 0.6);
+}
+
+/* Menú desplegable oculto */
+.dropdown {
+    display: none;
+    flex-direction: column;
+    background-color: #333;
+    padding: 10px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 10px;
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.4);
+    z-index: 1;
+    opacity: 0;
+    transform: scaleY(0);
+    transform-origin: top;
+    transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+/* Mostrar el menú cuando se pasa el ratón por encima */
+.boxSection:hover .dropdown,
+.boxSection:focus-within .dropdown {
+    display: flex;
+    opacity: 1;
+    transform: scaleY(1);
+}
+
+/* Enlaces dentro del menú desplegable */
+.dropdown a {
+    color: white;
+    text-decoration: none;
+    padding: 5px 5px;
+    transition: background-color 0.3s ease;
     text-align: center;
 }
 
-.boxSection:hover {
-    transition: 0.3s;
-    transform: scale(1.05);
+/* Efecto hover en los enlaces */
+.dropdown a:hover {
+    background-color: #444;
 }
