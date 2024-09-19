@@ -17,10 +17,16 @@
             <input type="text" id="descripcion" name="descripcion" th:value="${producto.descripcion}" />
             <label for="descripcion">Precio:</label>
             <input type="text" id="precio" name="precio" th:value="${producto.precio}" />
-            <!--<label for="descripcion">Marca:</label>
-            <input type="text" id="marca" name="marca" th:value="${producto.marca}" />
-            <label for="descripcion">Categoria:</label>
-            <input type="text" id="categoria" name="categoria" th:value="${producto.categoria}" />-->
+            
+            <label for="marcas">Elige una marca:</label>
+            <select id="marcas" name="marcas">
+                <!--Cargo los datos desde el js-->
+            </select>
+            
+            <label for="categorias">Elige una categoria:</label>
+            <select id="categorias" name="categorias">
+                <!--Cargo los datos desde el js-->
+            </select>
             <input type="submit" value="Guardar Cambios" />
             
         </form>
