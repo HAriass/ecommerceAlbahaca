@@ -1,13 +1,10 @@
 /* Estilo general para el cuerpo */
 body {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
     margin: 0;
     background: linear-gradient(135deg, #1a1a1a, #333333); /* Fondo con gradiente oscuro */
     font-family: Arial, sans-serif;
     color: #ffffff;
+    height: 100vh;
 }
 
 /* Estilo para el contenedor principal */
