@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <title>TODO supply a title</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="/css/generalStyle.css"/>
+    </head>
+    <body>
+        <div>
+            <h2>Registrar TipoCuenta</h2>
+            <form id="addTipoCuenta">
+                
+                <label for="nombre">Nombre:</label>
+                <input type="text" id="nombre" name="nombre"/>
+                <label for="descripcion">Descripcion:</label>
+                <input type="text" id="descripcion" name="descripcion"/>
+
+                <input type="submit" value="Registrar"/>
+            </form>
+        </div>
+        
+        <!--Script para poder usar axios-->
+        <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+        <!--Llamada al archivo js-->
+        <script src="/js/registrar-tipoCuenta.js"></script>
+    </body>
+</html>
