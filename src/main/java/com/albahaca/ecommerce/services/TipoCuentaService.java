@@ -4,6 +4,7 @@ package com.albahaca.ecommerce.services;
 import com.albahaca.ecommerce.models.TipoCuentaModel;
 import com.albahaca.ecommerce.repositories.TipoCuentaRepository;
 import java.util.ArrayList;
+import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -29,4 +30,8 @@ public class TipoCuentaService {
             return false;
         }
     }
+    
+    public Optional<TipoCuentaModel> obtenerTipoCuentaPorId(Long id){
+        return tipoCuentaRepository.findById(id);
+    }  
 }

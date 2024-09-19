@@ -5,18 +5,29 @@
                 const tbody = document.querySelector(".tbody");
                 let htmlContent = '';
                 productos.forEach(producto => {
-                    htmlContent += `
-                        <tr>
-                            <td>${producto.nombre}</td>
-                            <td>${producto.descripcion}</td>
-                            <td>${producto.precio}</td>
-                            <td>${producto.marca}</td>
-                            <td>${producto.categoria}</td>
-                            <td><a href="/modificarProducto/${producto.id}">Modificar</a></td>
-                            <td><button onclick="eliminarProducto(${producto.id})">Eliminar</button></td>
-                        </tr>
-                    `;
+                    // Comprobar que producto, marca y categoría existen
+                    if (producto && producto.marca && producto.categoria) {
+                        htmlContent += `
+                            <tr>
+                                <td>${producto.nombre}</td>
+                                <td>${producto.descripcion}</td>
+                                <td>${producto.precio}</td>
+                                <td>
+                                    <li>${producto.marca.nombre}</li>
+                                </td>
+                                <td>
+                                    <li>${producto.categoria.nombre}</li>
+                                    <li>${producto.categoria.descripcion}</li>
+                                </td>
+                                <td><a href="/modificarProducto/${producto.id}">Modificar</a></td>
+                                <td><button onclick="eliminarProducto(${producto.id})">Eliminar</button></td>
+                            </tr>
+                        `;
+                    } else {
+                        console.warn('Producto o propiedades faltantes:', producto);
+                    }
                 });
+
                 tbody.innerHTML = htmlContent;
             })
             .catch((err) => console.error(err));
@@ -41,6 +52,15 @@
                     htmlContent += `
                         <tr>
                             <td>${producto.nombre}</td>
+                            <td>${producto.descripcion}</td>
+                            <td>${producto.precio}</td>
+                            <td>
+                                <li>${producto.marca.nombre}</li>
+                            </td>
+                            <td>
+                                <li>${producto.categoria.nombre}</li>
+                                <li>${producto.categoria.descripcion}</li>
+                            </td>
                             <td><a href="/modificarProducto/${producto.id}">Modificar</a></td>
                             <td><button onclick="eliminarProducto(${producto.id})">Eliminar</button></td>
                         </tr>
