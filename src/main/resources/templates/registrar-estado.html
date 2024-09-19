@@ -2,20 +2,20 @@
 
 <html xmlns:th="http://www.thymeleaf.org">
     <head>
-        <title>TODO supply a title</title>
+        <title>Registrar Estado</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
     </head>
     <body>
         <div>
-            <h2>Registrar Categoria</h2>
-            <form id="addCategoria">
+            <form id="addEstado" method="post">
                 
                 <label for="nombre">Nombre:</label>
                 <input type="text" id="nombre" name="nombre"/>
-                <label for="nombre">Descripcion:</label>
-                <input type="text" id="descripcion" name="descripcion"/>
                 
+                <label for="nombre">Descripcion</label>
+                <textarea id="descripcion" name="descripcion" rows="4" cols="50"></textarea>
+
                 <input type="submit" value="Registrar"/>
             </form>
         </div>
@@ -23,6 +23,6 @@
         <!--Script para poder usar axios-->
         <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
         <!--Llamada al archivo js-->
-        <script src="/js/registrar-categoria.js"></script>
+        <script src="/js/registrar-estado.js"></script>
     </body>
 </html>

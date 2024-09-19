@@ -4,6 +4,7 @@ package com.albahaca.ecommerce.services;
 import com.albahaca.ecommerce.models.EstadoModel;
 import com.albahaca.ecommerce.repositories.EstadoRepository;
 import java.util.ArrayList;
+import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -27,5 +28,9 @@ public class EstadoService {
         } catch (Exception e) {
             return false;
         }
+    }
+
+    public Optional<EstadoModel> obtenerEstadoPorId(Long id) {
+        return estadoRepository.findById(id); 
     }
 }
