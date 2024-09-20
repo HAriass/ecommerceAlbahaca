@@ -2,7 +2,7 @@
             axios.get("/producto/listarProductos")
             .then(function(response) {
                 const productos = response.data;
-                const tbody = document.querySelector(".tbody");
+                const tbody = document.querySelector("tbody");
                 let htmlContent = '';
                 productos.forEach(producto => {
                     // Comprobar que producto, marca y categoría existen
@@ -13,14 +13,13 @@
                                 <td>${producto.descripcion}</td>
                                 <td>${producto.precio}</td>
                                 <td>
-                                    <li>${producto.marca.nombre}</li>
+                                    ${producto.marca.nombre}
                                 </td>
                                 <td>
-                                    <li>${producto.categoria.nombre}</li>
-                                    <li>${producto.categoria.descripcion}</li>
+                                    ${producto.categoria.nombre}
                                 </td>
-                                <td><a href="/modificarProducto/${producto.id}">Modificar</a></td>
-                                <td><button onclick="eliminarProducto(${producto.id})">Eliminar</button></td>
+                                <td><button class="btn-modificar" onclick="location.href='/modificarProducto/${producto.id}'">Modificar</button></td>
+                                <td><button class="btn-eliminar" onclick="eliminarProducto(${producto.id})">Eliminar</button></td>
                             </tr>
                         `;
                     } else {
@@ -46,7 +45,7 @@
             axios.get(`/producto/obtenerProductoPorId/${id}`)
             .then(function(response) {
                 const producto = response.data;
-                const tbody = document.querySelector(".tbody");
+                const tbody = document.querySelector("tbody");  
                 let htmlContent = '';
                 if (producto) {
                     htmlContent += `
@@ -61,7 +60,7 @@
                                 <li>${producto.categoria.nombre}</li>
                                 <li>${producto.categoria.descripcion}</li>
                             </td>
-                            <td><a href="/modificarProducto/${producto.id}">Modificar</a></td>
+                            <td><button onclick="location.href='/modificarProducto/${producto.id}'">Modificar</button></td>
                             <td><button onclick="eliminarProducto(${producto.id})">Eliminar</button></td>
                         </tr>
                     `;

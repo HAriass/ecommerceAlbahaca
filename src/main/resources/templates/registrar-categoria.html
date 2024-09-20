@@ -1,29 +1,51 @@
 <!DOCTYPE html>
-
-<html xmlns:th="http://www.thymeleaf.org">
-    <head>
-        <title>TODO supply a title</title>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" href="/css/registrar-modificar.css"/>
-    </head>
-    <body>
-        <div>
-            <h2>Registrar Categoria</h2>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestión de Categorías</title>
+    <link rel="stylesheet" href="/css/registro-tabla.css" />
+</head>
+<body>
+    <div class="main-container">
+        <!-- Sección izquierda: Formulario de registro de categoría -->
+        <div class="form-container">
+            <h2>Registrar Categoría</h2>
             <form id="addCategoria">
-                
                 <label for="nombre">Nombre:</label>
-                <input type="text" id="nombre" name="nombre"/>
-                <label for="nombre">Descripcion:</label>
-                <input type="text" id="descripcion" name="descripcion"/>
-                
-                <input type="submit" value="Registrar"/>
+                <input type="text" id="nombre" name="nombre" />
+                <label for="descripcion">Descripción:</label>
+                <input type="text" id="descripcion" name="descripcion" />
+                <input type="submit" value="Registrar" />
             </form>
         </div>
-        
-        <!--Script para poder usar axios-->
-        <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-        <!--Llamada al archivo js-->
-        <script src="/js/registrar-categoria.js"></script>
-    </body>
+
+        <!-- Sección derecha: Tabla de categorías -->
+        <div class="table-container">
+            <h1>Categorías</h1>
+            <div class="filtro-container">
+                <label for="filtro" class="filtro-label">Filtrar por ID:</label>
+                <input type="text" class="filtro-input" id="filtro" name="filtro">
+            </div>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Nombre</th>
+                        <th>Descripción</th>
+                        <th>Modificar</th>
+                        <th>Eliminar</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Aquí se cargarán las categorías mediante JS -->
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- Script para Axios y para manejar Categorías -->
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="/js/registrar-categoria.js"></script>
+    <script src="/js/categorias.js"></script>
+</body>
 </html>

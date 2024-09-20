@@ -28,7 +28,6 @@ html, body {
     display: flex;
     justify-content: center;
     align-items: center;
-    flex-direction: column;
     padding: 15px;
     border-radius: 10px;
     background-color: #1e1e1e;
@@ -41,7 +40,6 @@ html, body {
     text-align: center;
     font-size: 1rem;
     letter-spacing: 1px;
-    position: relative;
     transition: transform 0.3s ease, background-color 0.3s ease;
     cursor: pointer;
 }
@@ -53,48 +51,17 @@ html, body {
     box-shadow: 0 12px 20px rgba(0, 0, 0, 0.6);
 }
 
-/* Menú desplegable oculto */
-.dropdown {
-    display: none;
-    flex-direction: column;
-    background-color: #333;
-    padding: 0px;
-    position: absolute;
-    top: 0;
-    left: 0;
+/* Estilos para que los enlaces se vean como texto */
+.boxSection a {
+    text-decoration: none;      /* Elimina el subrayado */
+    color: white;               /* Mantiene el color blanco */
+    font-size: 1rem;            /* Ajusta el tamaño de fuente */
+    text-transform: uppercase;  /* Hace el texto mayúsculas */
+    display: block;             /* Hace que ocupe todo el espacio del div */
     width: 100%;
     height: 100%;
-    border-radius: 10px;
-    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.4);
-    z-index: 1;
-    opacity: 0;
-    transform: scaleY(0);
-    transform-origin: top;
-    transition: opacity 0.3s ease, transform 0.3s ease;
-}
-
-/* Mostrar el menú cuando se pasa el ratón por encima */
-.boxSection:hover .dropdown,
-.boxSection:focus-within .dropdown {
     display: flex;
-    opacity: 1;
-    transform: scaleY(1);
+    justify-content: center;
+    align-items: center;
 }
 
-/* Enlaces dentro del menú desplegable */
-.dropdown a {
-    color: white;
-    text-decoration: none;
-    padding: 5px 20px;
-    transition: background-color 0.3s ease;
-    text-align: center;
-}
-
-/* Efecto hover en los enlaces */
-.dropdown a:hover {
-    background-color:#444;
-    padding: 20px 5px;
-    transition: background-color 0.3s ease;
-    text-align: center;
-    font-size: small;
-}

@@ -3,14 +3,14 @@
             axios.get("/tipoCuenta/listarTipoCuentas")
             .then(function(response) {
                 const tipoCuentas = response.data;
-                const tbody = document.querySelector(".tbody");
+                const tbody = document.querySelector("tbody");
                 let htmlContent = '';
                 tipoCuentas.forEach(tipoCuenta => {
                     htmlContent += `
                         <tr>
                             <td>${tipoCuenta.nombre}</td>
                             <td>${tipoCuenta.descripcion}</td>
-                            <td><button onclick="eliminarTipoCuenta(${tipoCuenta.id})">Eliminar</button></td>
+                            <td><button class="btn-eliminar" onclick="eliminarTipoCuenta(${tipoCuenta.id})">Eliminar</button></td>
                         </tr>
                     `;
                 });
@@ -32,7 +32,7 @@
             axios.get(`/tipoCuenta/obtenerTipoCuentaPorId/${id}`)
             .then(function(response) {
                 const tipoCuenta = response.data;
-                const tbody = document.querySelector(".tbody");
+                const tbody = document.querySelector("tbody");
                 let htmlContent = '';
                 if (tipoCuenta) {
                     htmlContent += `
