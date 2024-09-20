@@ -23,6 +23,7 @@
             axios.delete(`/tipoCuenta/eliminarTipoCuenta/${id}`)
             .then(response => {
                 console.log('Éxito:', response.data);
+                window.location.href='/registrarTipoCuenta';
             })
             .catch(error => {
                 console.error('Error:', error);

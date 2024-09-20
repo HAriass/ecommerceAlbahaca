@@ -24,10 +24,12 @@ const form = document.getElementById('addMarca');
                 })
                 .then(response => {
                     console.log('Éxito:', response.data);
+                    window.location.href='/registrarMarca';
                 })
                 .catch(error => {
                     console.error('Error:', error);
                 });
+                
             });
         }
 

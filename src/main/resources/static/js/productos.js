@@ -36,6 +36,7 @@
             axios.delete(`/producto/eliminarProducto/${id}`)
             .then(response => {
                 console.log('Éxito:', response.data);
+                window.location.href='/registrarProducto';
             })
             .catch(error => {
                 console.error('Error:', error);

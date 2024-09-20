@@ -25,10 +25,12 @@ const form = document.getElementById('addEstado');
                 })
                 .then(response => {
                     console.log('Éxito:', response.data);
+                    window.location.href='/registrarEstado';
                 })
                 .catch(error => {
                     console.error('Error:', error);
                 });
+                
             });
         }
 
