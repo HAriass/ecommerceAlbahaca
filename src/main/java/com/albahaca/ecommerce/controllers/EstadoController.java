@@ -4,6 +4,7 @@ package com.albahaca.ecommerce.controllers;
 import com.albahaca.ecommerce.models.EstadoModel;
 import com.albahaca.ecommerce.services.EstadoService;
 import java.util.ArrayList;
+import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -32,5 +33,10 @@ public class EstadoController {
     @DeleteMapping("/eliminarEstado/{id}")
     public boolean eliminarEstado(@PathVariable("id") Long id){
         return this.estadoService.eliminarEstado(id);   
+    }
+    
+    @GetMapping("/obtenerEstadoPorId/{id}")
+    public Optional<EstadoModel> obtenerEstadoPorId(@PathVariable("id") Long id){
+        return this.estadoService.obtenerEstadoPorId(id);
     }
 }

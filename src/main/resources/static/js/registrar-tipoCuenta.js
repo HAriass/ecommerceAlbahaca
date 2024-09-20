@@ -24,6 +24,7 @@ const form = document.getElementById('addTipoCuenta');
                 })
                 .then(response => {
                     console.log('Éxito:', response.data);
+                    alert('Tipo de Cuenta registrada exitosamente!');
                     window.location.href='/registrarTipoCuenta';
                 })
                 

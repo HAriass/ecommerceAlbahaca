@@ -24,6 +24,7 @@ const form = document.getElementById('addCategoria');
                 })
                 .then(response => {
                     console.log('Éxito:', response.data);
+                    alert('Categoría registrada exitosamente!');
                     window.location.href='/registrarCategoria';
                 })
                 .catch(error => {
