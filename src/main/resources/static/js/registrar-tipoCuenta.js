@@ -1,7 +1,6 @@
+const form = document.getElementById('addTipoCuenta');
 
-const form = document.getElementById('addEstado');
-
-        function guardarEstado() {
+        function guardarTipoCuenta() {
             form.addEventListener('submit', function(event) {
                 event.preventDefault(); // Previene el comportamiento por defecto del formulario
 
@@ -18,21 +17,22 @@ const form = document.getElementById('addEstado');
                 const jsonData = JSON.stringify(data);
 
                 // Envía los datos JSON usando Axios
-                axios.post("/estado/guardarEstado", jsonData, {
+                axios.post("/tipoCuenta/guardarTipoCuenta", jsonData, {
                     headers: {
-                        'Content-Type': 'application/json',
+                        'Content-Type': 'application/json'
                     }
                 })
                 .then(response => {
                     console.log('Éxito:', response.data);
-                    window.location.href='/registrarEstado';
+                    window.location.href='/registrarTipoCuenta';
                 })
+                
                 .catch(error => {
                     console.error('Error:', error);
                 });
-                
             });
         }
 
         // Llama a la función para añadir el listener
-        guardarEstado();
+        guardarTipoCuenta();
+

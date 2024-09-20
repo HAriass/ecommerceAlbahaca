@@ -1,15 +1,16 @@
-        function getMarcas() {
-            axios.get("/marca/listarMarcas")
+
+        function getTipoCuentas() {
+            axios.get("/tipoCuenta/listarTipoCuentas")
             .then(function(response) {
-                const marcas = response.data;
+                const tipoCuentas = response.data;
                 const tbody = document.querySelector("tbody");
                 let htmlContent = '';
-                marcas.forEach(marca => {
+                tipoCuentas.forEach(tipoCuenta => {
                     htmlContent += `
                         <tr>
-                            <td>${marca.nombre}</td>
-                            <td><button class="btn-modificar" onclick="location.href='/modificarMarca/${marca.id}'">Modificar</button></td>
-                            <td><button class="btn-eliminar" onclick="eliminarMarca(${marca.id})">Eliminar</button></td>
+                            <td>${tipoCuenta.nombre}</td>
+                            <td>${tipoCuenta.descripcion}</td>
+                            <td><button class="btn-eliminar" onclick="eliminarTipoCuenta(${tipoCuenta.id})">Eliminar</button></td>
                         </tr>
                     `;
                 });
@@ -18,28 +19,28 @@
             .catch((err) => console.error(err));
         }
         
-        function eliminarMarca(id) {
-            axios.delete(`/marca/eliminarMarca/${id}`)
+        function eliminarTipoCuenta(id) {
+            axios.delete(`/tipoCuenta/eliminarTipoCuenta/${id}`)
             .then(response => {
                 console.log('Éxito:', response.data);
-                window.location.href='/registrarMarca';
+                window.location.href='/registrarTipoCuenta';
             })
             .catch(error => {
                 console.error('Error:', error);
             });
         }
-        function getMarcaById(id) {
-            axios.get(`/marca/obtenerMarcaPorId/${id}`)
+        function getTipoCuentaById(id) {
+            axios.get(`/tipoCuenta/obtenerTipoCuentaPorId/${id}`)
             .then(function(response) {
-                const marca = response.data;
+                const tipoCuenta = response.data;
                 const tbody = document.querySelector("tbody");
                 let htmlContent = '';
-                if (marca) {
+                if (tipoCuenta) {
                     htmlContent += `
                         <tr>
-                            <td>${marca.nombre}</td>
-                            <td><a href="/modificarMarca/${marca.id}">Modificar</a></td>
-                            <td><button onclick="eliminarMarca(${marca.id})">Eliminar</button></td>
+                            <td>${tipoCuenta.nombre}</td>
+                            <td>${tipoCuenta.descripcion}</td>
+                            <td><button onclick="eliminarTipoCuenta(${tipoCuenta.id})">Eliminar</button></td>
                         </tr>
                     `;
                 }
@@ -53,15 +54,15 @@
             const filtroInput = document.getElementById('filtro');
             
             // Cargar usuarios al inicio
-            getMarcas();
+            getTipoCuentas();
             
             // Evento de entrada para el campo de filtro
             filtroInput.addEventListener('input', function() {
                 const filtroValue = filtroInput.value;
                 if (filtroValue.trim() !== "") {
-                    getMarcaById(filtroValue);
+                    getTipoCuentaById(filtroValue);
                 } else {
-                    getMarcas();
+                    getTipoCuentas();
                 }
             });
         });

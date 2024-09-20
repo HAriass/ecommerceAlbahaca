@@ -30,7 +30,9 @@ function guardarMarca() {
         .catch(error => {
             console.error('Error:', error);
         });
+        window.location.href='/registrarMarca';
     });
+    
 }
 
 document.addEventListener('DOMContentLoaded', function() {

@@ -3,17 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gestión de Estados</title>
+    <title>Gestión de TipoCuentas</title>
     <link rel="stylesheet" href="/css/registro-tabla.css" />
 </head>
 <body>
     <button class="boton" style="position: absolute; top: 20px; left: 20px;" onclick="window.location.href='/'">Volver</button>
 
     <div class="main-container">
-        <!-- Sección izquierda: Formulario de registro de estado -->
+        <!-- Sección izquierda: Formulario de registro de TipoCuenta -->
         <div class="form-container">
-            <h2>Registrar Estado</h2>
-            <form id="addEstado">
+            <h2>Registrar TipoCuenta</h2>
+            <form id="addTipoCuenta">
                 <label for="nombre">Nombre:</label>
                 <input type="text" id="nombre" name="nombre" />
                 <label for="descripcion">Descripción:</label>
@@ -22,9 +22,9 @@
             </form>
         </div>
 
-        <!-- Sección derecha: Tabla de estados -->
+        <!-- Sección derecha: Tabla de TipoCuentas -->
         <div class="table-container">
-            <h1>Estados</h1>
+            <h1>TipoCuentas</h1>
             <div class="filtro-container">
                 <label for="filtro" class="filtro-label">Filtrar por ID:</label>
                 <input type="text" class="filtro-input" id="filtro" name="filtro">
@@ -34,20 +34,19 @@
                     <tr>
                         <th>Nombre</th>
                         <th>Descripción</th>
-                        <th>Modificar</th>
                         <th>Eliminar</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <!-- Aquí se cargarán los estados mediante JS -->
+                    <!-- Aquí se cargarán las TipoCuentas mediante JS -->
                 </tbody>
             </table>
         </div>
     </div>
 
-    <!-- Script para Axios y para manejar Estados -->
+    <!-- Script para Axios y para manejar TipoCuentas -->
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-    <script src="/js/registrar-estado.js"></script>
-    <script src="/js/estados.js"></script>
+    <script src="/js/registrar-tipoCuenta.js"></script>
+    <script src="/js/tipoCuentas.js"></script>
 </body>
 </html>

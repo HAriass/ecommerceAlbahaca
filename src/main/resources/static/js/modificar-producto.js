@@ -14,6 +14,16 @@ function guardarProducto() {
             data[key] = value;
         });
 
+        // Asegúrate de que el precio sea un número
+        data["precio"] = parseFloat(data["precio"]);
+
+         // Aquí se asume que estás usando los IDs en lugar de objetos
+        data["marca"] = { id: parseInt(data["marcas"]) }; // Cambia 'marcas' a 'marca'
+        data["categoria"] = { id: parseInt(data["categorias"]) }; // Cambia 'categorias' a 'categoria'
+
+        delete data["marcas"]; // Elimina la propiedad original
+        delete data["categorias"]; // Elimina la propiedad original
+        //
         // Convierte el objeto a JSON
         const jsonData = JSON.stringify(data);
         console.log(jsonData); // Añade esta línea
@@ -30,11 +40,46 @@ function guardarProducto() {
         .catch(error => {
             console.error('Error:', error);
         });
+        window.location.href='/registrarProducto';
     });
+}
+
+function getMarcas() {
+    axios.get("/marca/listarMarcas")
+    .then(function(response) {
+        const marcas = response.data;
+        const selecetMarca = document.querySelector("#marcas");
+        let htmlContent = '';
+        marcas.forEach(marca => {
+            htmlContent += `
+                <option value="${marca.id}">${marca.nombre}</option>
+            `;
+        });
+        selecetMarca.innerHTML = htmlContent;
+    })
+    .catch((err) => console.error(err));
+}
+
+function getCategorias() {
+    axios.get("/categoria/listarCategorias")
+    .then(function(response) {
+        const categorias = response.data;
+        const selectCategoria = document.querySelector("#categorias");
+        let htmlContent = '';
+        categorias.forEach(categoria => {
+            htmlContent += `
+                <option value="${categoria.id}">${categoria.nombre}</option>
+            `;
+        });
+        selectCategoria.innerHTML = htmlContent;
+    })
+    .catch((err) => console.error(err));
 }
 
 document.addEventListener('DOMContentLoaded', function() {
     guardarProducto();
+    getMarcas();
+    getCategorias();
 });
 
 

@@ -30,6 +30,7 @@ function guardarEstado() {
         .catch(error => {
             console.error('Error:', error);
         });
+        window.location.href='/registrarEstado';
     });
 }
 

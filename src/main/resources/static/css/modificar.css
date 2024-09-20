@@ -1,0 +1,60 @@
+/* Estilos básicos */
+body {
+    background-color: #2c2c2c; /* color de fondo oscuro */
+    color: #fff; /* texto blanco para contraste */
+    font-family: Arial, sans-serif; /* fuente moderna y legible */
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh; /* ajuste para centrar verticalmente */
+}
+
+/* Contenedor del formulario */
+div {
+    background-color: #333; /* fondo oscuro para el formulario */
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.5); /* sombra para dar profundidad */
+    width: 30%; /* ancho según el contenido */
+}
+
+h2 {
+    color: #bbb; /* texto gris claro para los títulos */
+    text-align: center;
+}
+
+/* Estilos de los formularios */
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+label {
+    color: #999; /* color de los labels más suave que el texto general */
+}
+
+input[type="text"], select {
+    background-color: #444; /* color de fondo para inputs */
+    border: 1px solid #555; /* borde sutil */
+    border-radius: 5px;
+    padding: 10px;
+    color: #fff; /* texto en blanco */
+    margin-bottom: 10px;
+}
+
+input[type="submit"] {
+    background-color: #6867bc; /* color para botón de enviar */
+    border: none;
+    border-radius: 5px;
+    color: #fff;
+    padding: 10px;
+    cursor: pointer; /* cursor de mano para indicar clic */
+    transition: background-color 0.3s; /* transición suave al cambiar de color */
+}
+
+input[type="submit"]:hover {
+    background-color: #4d3697; /* color cuando el mouse pasa sobre el botón */
+}

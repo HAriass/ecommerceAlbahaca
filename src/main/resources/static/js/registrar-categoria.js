@@ -24,10 +24,12 @@ const form = document.getElementById('addCategoria');
                 })
                 .then(response => {
                     console.log('Éxito:', response.data);
+                    window.location.href='/registrarCategoria';
                 })
                 .catch(error => {
                     console.error('Error:', error);
                 });
+                
             });
         }
 

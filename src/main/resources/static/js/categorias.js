@@ -2,15 +2,15 @@
             axios.get("/categoria/listarCategorias")
             .then(function(response) {
                 const categorias = response.data;
-                const tbody = document.querySelector(".tbody");
+                const tbody = document.querySelector("tbody");
                 let htmlContent = '';
                 categorias.forEach(categoria => {
                     htmlContent += `
                         <tr>
                             <td>${categoria.nombre}</td>
                             <td>${categoria.descripcion}</td>
-                            <td><a href="/modificarCategoria/${categoria.id}">Modificar</a></td>
-                            <td><button onclick="eliminarCategoria(${categoria.id})">Eliminar</button></td>
+                            <td><button class="btn-modificar" onclick="location.href='/modificarCategoria/${categoria.id}'">Modificar</button></td>
+                            <td><button class="btn-eliminar" onclick="eliminarCategoria(${categoria.id})">Eliminar</button></td>
                         </tr>
                     `;
                 });
@@ -23,6 +23,7 @@
             axios.delete(`/categoria/eliminarCategoria/${id}`)
             .then(response => {
                 console.log('Éxito:', response.data);
+                window.location.href='/registrarCategoria';
             })
             .catch(error => {
                 console.error('Error:', error);
@@ -32,7 +33,7 @@
             axios.get(`/categoria/obtenerCategoriaPorId/${id}`)
             .then(function(response) {
                 const categoria = response.data;
-                const tbody = document.querySelector(".tbody");
+                const tbody = document.querySelector("tbody");
                 let htmlContent = '';
                 if (categoria) {
                     htmlContent += `

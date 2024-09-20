@@ -1,27 +1,50 @@
 <!DOCTYPE html>
-
-<html xmlns:th="http://www.thymeleaf.org">
-    <head>
-        <title>TODO supply a title</title>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" href="/css/generalStyle.css"/>
-    </head>
-    <body>
-        <div>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestión de Marcas</title>
+    <link rel="stylesheet" href="/css/registro-tabla.css" />
+</head>
+<body>
+    
+    <button class="boton" style="position: absolute; top: 20px; left: 20px;" onclick="window.location.href='/'">Volver</button>
+    <div class="main-container">
+        <!-- Sección izquierda: Formulario de registro de marca -->
+        <div class="form-container">
             <h2>Registrar Marca</h2>
             <form id="addMarca">
-                
                 <label for="nombre">Nombre:</label>
-                <input type="text" id="nombre" name="nombre"/>
-
-                <input type="submit" value="Registrar"/>
+                <input type="text" id="nombre" name="nombre" />
+                <input type="submit" value="Registrar" />
             </form>
         </div>
-        
-        <!--Script para poder usar axios-->
-        <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-        <!--Llamada al archivo js-->
-        <script src="/js/registrar-marca.js"></script>
-    </body>
+
+        <!-- Sección derecha: Tabla de marcas -->
+        <div class="table-container">
+            <h1>Marcas</h1>
+            <div class="filtro-container">
+                <label for="filtro" class="filtro-label">Filtrar por ID:</label>
+                <input type="text" class="filtro-input" id="filtro" name="filtro">
+            </div>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Nombre</th>
+                        <th>Modificar</th>
+                        <th>Eliminar</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Aquí se cargarán las marcas mediante JS -->
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- Script para Axios y para manejar marcas -->
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="/js/registrar-marca.js"></script>
+    <script src="/js/marcas.js"></script>
+</body>
 </html>

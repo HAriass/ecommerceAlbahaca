@@ -4,6 +4,7 @@ package com.albahaca.ecommerce.controllers;
 import com.albahaca.ecommerce.models.TipoCuentaModel;
 import com.albahaca.ecommerce.services.TipoCuentaService;
 import java.util.ArrayList;
+import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -32,11 +33,11 @@ public class TipoCuentaController {
     
     @DeleteMapping("/eliminarTipoCuenta/{id}")
     public boolean eliminarTipoCuenta(@PathVariable Long id){
-        try {
-            this.tipoCuentaService.eliminarTipoCuenta(id);
-            return true;
-        } catch (Exception e) {
-            return false;
-        }
+        return this.tipoCuentaService.eliminarTipoCuenta(id);
+    }
+    
+    @GetMapping("/obtenerTipoCuentaPorId/{id}")
+    public Optional<TipoCuentaModel> obtenerTipoCuentaPorId(@PathVariable("id") Long id){
+        return this.tipoCuentaService.obtenerTipoCuentaPorId(id);
     }
 }

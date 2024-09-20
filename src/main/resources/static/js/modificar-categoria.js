@@ -30,6 +30,8 @@ function guardarCategoria() {
         .catch(error => {
             console.error('Error:', error);
         });
+        window.location.href='/registrarCategoria';
+
     });
 }
 
