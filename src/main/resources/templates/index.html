@@ -11,9 +11,8 @@
 </head>
 <body>
     <nav class="bg-black border-gray-200 dark:bg-black">
-        <div class="max-w-screen-xl flex flex-wrap Items-center justify-between mx-auto p-4">
+        <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
             <a href="../html/inicio.html" class="flex items-center space-x-3 rtl:space-x-reverse">
-               <!-- <img src="../../img/albahaca.png" class="h-8" alt="Albahaca Suplementos Logo" />-->
                 <span class="self-center text-2xl font-semibold whitespace-nowrap text-white">Albahaca Suplementos</span>
             </a>
             <div class="hidden w-full md:block md:w-auto" id="navbar-default">
@@ -36,7 +35,13 @@
     </nav>
     <main class="p-8">
         <h1 class="text-3xl text-center font-bold text-white mt-8 mb-6">Nuestros Productos</h1>
-        <div class="tarjeta-categoria"></div>
+        <div class="tarjeta-categoria">
+            <div class="max-w-screen-xl mx-auto">
+                <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-8 gap-y-12">
+                    <!-- Tarjetas generadas aquí -->
+                </div>
+            </div>
+        </div>
     </main>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script src="/js/index.js"></script>
