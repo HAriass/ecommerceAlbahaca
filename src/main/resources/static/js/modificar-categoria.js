@@ -25,12 +25,13 @@ function guardarCategoria() {
         })
         .then(response => {
             console.log('Éxito:', response.data);
-            // Opcional: redirigir a otra página o mostrar un mensaje de éxito
+            alert('Categoría Modificada exitosamente!');
+            window.location.href='/registrarCategoria';
         })
         .catch(error => {
             console.error('Error:', error);
         });
-        window.location.href='/registrarCategoria';
+        
 
     });
 }

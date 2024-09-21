@@ -24,6 +24,7 @@ const form = document.getElementById('addMarca');
                 })
                 .then(response => {
                     console.log('Éxito:', response.data);
+                    alert('Marca registrada exitosamente!');
                     window.location.href='/registrarMarca';
                 })
                 .catch(error => {

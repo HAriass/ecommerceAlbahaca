@@ -24,6 +24,7 @@
             axios.delete(`/categoria/eliminarCategoria/${id}`)
             .then(response => {
                 console.log('Éxito:', response.data);
+                alert('Categoría Eliminada exitosamente!');
                 window.location.href='/registrarCategoria';
             })
             .catch(error => {
