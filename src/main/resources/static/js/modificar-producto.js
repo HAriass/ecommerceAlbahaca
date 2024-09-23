@@ -35,11 +35,13 @@ function guardarProducto() {
         })
         .then(response => {
             console.log('Éxito:', response.data);
-            // Opcional: redirigir a otra página o mostrar un mensaje de éxito
+            alert('Producto Modificado exitosamente!');
+            window.location.href='/registrarProducto';
         })
         .catch(error => {
             console.error('Error:', error);
         });
+        
     });
 }
 

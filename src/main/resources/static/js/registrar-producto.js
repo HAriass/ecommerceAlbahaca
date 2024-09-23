@@ -36,10 +36,13 @@ const form = document.getElementById('addProducto');
                 })
                 .then(response => {
                     console.log('Éxito:', response.data);
+                    alert('Producto registrado exitosamente!');
+                    window.location.href='/registrarProducto';
                 })
                 .catch(error => {
                     console.error('Error:', error);
                 });
+                
             });
         }
         

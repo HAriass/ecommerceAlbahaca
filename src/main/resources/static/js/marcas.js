@@ -22,6 +22,8 @@
             axios.delete(`/marca/eliminarMarca/${id}`)
             .then(response => {
                 console.log('Éxito:', response.data);
+                alert('Marca Eliminada exitosamente!');
+                window.location.href='/registrarMarca';
             })
             .catch(error => {
                 console.error('Error:', error);

@@ -11,6 +11,7 @@
                             <tr>
                                 <td>${producto.nombre}</td>
                                 <td>${producto.descripcion}</td>
+                                <td><a href="${producto.imagen}" target="_blank">Ver imagen</a></td>
                                 <td>${producto.precio}</td>
                                 <td>
                                     ${producto.marca.nombre}
@@ -36,6 +37,8 @@
             axios.delete(`/producto/eliminarProducto/${id}`)
             .then(response => {
                 console.log('Éxito:', response.data);
+                alert('Producto Eliminado exitosamente!');
+                window.location.href='/registrarProducto';
             })
             .catch(error => {
                 console.error('Error:', error);
@@ -52,6 +55,7 @@
                         <tr>
                             <td>${producto.nombre}</td>
                             <td>${producto.descripcion}</td>
+                            <td><a href="${producto.imagen}" target="_blank">Ver imagen</a></td>
                             <td>${producto.precio}</td>
                             <td>
                                 <li>${producto.marca.nombre}</li>

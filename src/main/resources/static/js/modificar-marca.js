@@ -25,12 +25,15 @@ function guardarMarca() {
         })
         .then(response => {
             console.log('Éxito:', response.data);
-            // Opcional: redirigir a otra página o mostrar un mensaje de éxito
+            alert('Marca Modificado exitosamente!');
+            window.location.href='/registrarMarca';
         })
         .catch(error => {
             console.error('Error:', error);
         });
+        
     });
+    
 }
 
 document.addEventListener('DOMContentLoaded', function() {

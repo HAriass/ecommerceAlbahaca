@@ -26,10 +26,14 @@ function guardarEstado() {
         .then(response => {
             console.log('Éxito:', response.data);
             // Opcional: redirigir a otra página o mostrar un mensaje de éxito
+            alert('Estado Modificado exitosamente!');
+            window.location.href='/registrarEstado';
         })
         .catch(error => {
             console.error('Error:', error);
         });
+        
+        
     });
 }
 

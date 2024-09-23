@@ -12,7 +12,7 @@ body {
     display: flex;
     justify-content: center;
     align-items: flex-start;
-    padding: 20px;
+    padding: 50px;
     gap:25px;
 }
 
@@ -41,7 +41,7 @@ label {
     color: #bbb;
 }
 
-input[type="text"], select {
+input[type="password"],input[type="text"], select {
     padding: 10px;
     margin-bottom: 15px;
     border: 1px solid #555;
@@ -151,4 +151,26 @@ button {
 
 .btn-eliminar:hover {
     background-color: #c0392b;
+}
+
+.btn-ver {
+    background-color: #63cb5a;
+}
+
+.btn-ver:hover {
+    background-color: #46bb3c;
+}
+
+.boton{
+    border: none;
+    border-radius: 5px;
+    background-color: #6867bc;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.boton:hover{
+    background-color: #4d3697;
 }

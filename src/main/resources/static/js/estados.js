@@ -23,6 +23,8 @@
             axios.delete(`/estado/eliminarEstado/${id}`)
             .then(response => {
                 console.log('Éxito:', response.data);
+                alert('Estado Eliminado exitosamente!');
+                window.location.href='/registrarEstado';
             })
             .catch(error => {
                 console.error('Error:', error);
