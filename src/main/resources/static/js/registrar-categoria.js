@@ -1,39 +1,50 @@
 const form = document.getElementById('addCategoria');
 
-        function guardarCategoria() {
-            form.addEventListener('submit', function(event) {
-                event.preventDefault(); // Previene el comportamiento por defecto del formulario
+function extractDriveId(url) {
+    const regex = /\/d\/([a-zA-Z0-9_-]+)/;
+    const match = url.match(regex);
+    return match ? match[1] : null;
+}
 
-                // Captura los datos del formulario
-                const formData = new FormData(form);
+function guardarCategoria() {
+    form.addEventListener('submit', function(event) {
+        event.preventDefault(); // Previene el comportamiento por defecto del formulario
 
-                // Convierte los datos del formulario a un objeto
-                const data = {};
-                formData.forEach((value, key) => {
-                    data[key] = value;
-                });
+        // Captura los datos del formulario
+        const formData = new FormData(form);
 
-                // Convierte el objeto a JSON
-                const jsonData = JSON.stringify(data);
+        // Convierte los datos del formulario a un objeto
+        const data = {};
+        formData.forEach((value, key) => {
+            data[key] = value;
+        });
 
-                // Envía los datos JSON usando Axios
-                axios.post("/categoria/guardarCategoria", jsonData, {
-                    headers: {
-                        'Content-Type': 'application/json'
-                    }
-                })
-                .then(response => {
-                    console.log('Éxito:', response.data);
-                    alert('Categoría registrada exitosamente!');
-                    window.location.href='/registrarCategoria';
-                })
-                .catch(error => {
-                    console.error('Error:', error);
-                });
-                
-            });
+        // Extrae el ID de Google Drive si hay un campo 'imagen'
+        if (data['imagen']) {
+            const driveId = extractDriveId(data['imagen']); // Extrae el ID
+            data['imagen'] = driveId; // Reemplaza la URL completa con el ID
         }
 
-        // Llama a la función para añadir el listener
-        guardarCategoria();
+        // Convierte el objeto a JSON
+        const jsonData = JSON.stringify(data);
 
+        // Envía los datos JSON usando Axios
+        axios.post("/categoria/guardarCategoria", jsonData, {
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        })
+        .then(response => {
+            console.log('Éxito:', response.data);
+            alert('Categoría registrada exitosamente!');
+            window.location.href='/registrarCategoria';
+        })
+        .catch(error => {
+            console.error('Error:', error);
+        });
+        
+    });
+}
+
+// Llama a la función para añadir el listener
+guardarCategoria();

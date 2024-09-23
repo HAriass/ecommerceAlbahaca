@@ -8,6 +8,7 @@ function getCategorias() {
         let htmlContent = '';
         
         categorias.forEach(categoria => {
+            console.log("link a la img" + categoria.imagen);
             htmlContent += `
                 <div class="max-w-sm bg-gradient-to-r from-gray-900 to-gray-800 border border-gray-800 rounded-lg shadow flex flex-col justify-between">
                     <a href="#">
