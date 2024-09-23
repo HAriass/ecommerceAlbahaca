@@ -166,3 +166,11 @@ button {
 .boton:hover{
     background-color: #4d3697;
 }
+
+.btn-ver {
+    background-color: #63cb5a;
+}
+
+.btn-ver:hover {
+    background-color: #46bb3c;
+}
