@@ -41,6 +41,7 @@
                     htmlContent += `
                         <tr>
                             <td>${estado.nombre}</td>
+                            <td>${estado.descripcion}</td>
                             <td><a href="/modificarEstado/${estado.id}">Modificar</a></td>
                             <td><button onclick="eliminarEstado(${estado.id})">Eliminar</button></td>
                         </tr>
