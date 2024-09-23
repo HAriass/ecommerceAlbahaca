@@ -20,6 +20,15 @@ public class ProductoModel {
     
     private String nombre;
     private String descripcion;
+    private String imagen;
+
+    public String getImagen() {
+        return imagen;
+    }
+
+    public void setImagen(String imagen) {
+        this.imagen = imagen;
+    }
     private float precio;
     
     @ManyToOne

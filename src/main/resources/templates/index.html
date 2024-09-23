@@ -1,42 +1,52 @@
 <!DOCTYPE html>
-
 <html xmlns:th="http://www.thymeleaf.org">
-
 <head>
-    <title>Ecommerce Albahaca</title>
     <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/css/index.css" />
+    <title>Inicio</title>
+    <link href="https://cdn.jsdelivr.net/npm/flowbite@2.5.1/dist/flowbite.min.css" rel="stylesheet" />
+    <link href="/css/pagGenerico.css" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
 </head>
-
 <body>
-    <div class="containerIndex">
-        <div class="boxSection">
-            <a href="/registrarProducto">Productos</a>
+    <nav class="bg-black border-gray-200 dark:bg-black">
+        <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
+            <a href="../html/inicio.html" class="flex items-center space-x-3 rtl:space-x-reverse">
+                <span class="self-center text-2xl font-semibold whitespace-nowrap text-white">Albahaca Suplementos</span>
+            </a>
+            <div class="hidden w-full md:block md:w-auto" id="navbar-default">
+                <ul class="font-medium flex flex-col p-4 md:p-0 mt-4 border md:flex-row md:space-x-8 rtl:space-x-reverse md:mt-0 md:border-0 dark:bg-black md:dark:bg-black dark:border-gray-700">
+                    <li>
+                        <a href="#" class="block py-2 px-3 text-white rounded hover:bg-gray-700 md:hover:bg-transparent md:border-0 md:hover:text-blue-400 md:p-0" aria-current="page">Inicio</a>
+                    </li>
+                    <li>
+                        <a href="/menu" class="block py-2 px-3 text-white rounded hover:bg-gray-700 md:hover:bg-transparent md:border-0 md:hover:text-blue-400 md:p-0">Menu</a>
+                    </li>
+                    <li>
+                        <a href="/logout" class="block py-2 px-3 text-white rounded hover:bg-gray-700 md:hover:bg-transparent md:border-0 md:hover:text-blue-400 md:p-0">Cerrar Sesion</a>
+                    </li>
+                    <li>
+                        <a href="/login" class="block py-2 px-3 text-red-400 rounded hover:bg-gray-700 md:hover:bg-transparent md:border-0 md:hover:text-blue-400 md:p-0">Iniciar Sesion</a>
+                    </li>
+                    <li>
+                        <a href="/registrarCuenta" class="block py-2 px-3 text-red-400 rounded hover:bg-gray-700 md:hover:bg-transparent md:border-0 md:hover:text-blue-400 md:p-0">Registrarse</a>
+                    </li>
+                </ul>
+            </div>
         </div>
-
-        <div class="boxSection">
-            <a href="/registrarCategoria">Categorías</a>
+    </nav>
+    <main class="p-8">
+        <h1 class="text-3xl text-center font-bold text-white mt-8 mb-6">Nuestros Productos</h1>
+        <div class="tarjeta-categoria">
+            <div class="max-w-screen-xl mx-auto">
+                <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-8 gap-y-12">
+                    <!-- Tarjetas generadas aquí -->
+                </div>
+            </div>
         </div>
-
-        <div class="boxSection">
-            <a href="/registrarMarca">Marcas</a>
-        </div>
-
-        <div class="boxSection">
-            <a href="/registrarEstado">Estados</a>
-        </div>
-
-        <div class="boxSection">
-            <a href="/registrarTipoCuenta">Tipos de Cuenta</a>
-        </div>
-
-        <div class="boxSection">
-            <a href="/pedidos">Pedidos</a>
-        </div>
-
-    </div>
-
+    </main>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="/js/index.js"></script>
 </body>
-
 </html>

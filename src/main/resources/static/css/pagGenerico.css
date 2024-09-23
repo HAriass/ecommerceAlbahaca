@@ -1,0 +1,5 @@
+/* Archivo CSS o dentro de un <style> en el HTML */
+html, body {
+    height: 100%;
+    background-color: #000000; /* Fondo negro para el cuerpo de la página */
+}

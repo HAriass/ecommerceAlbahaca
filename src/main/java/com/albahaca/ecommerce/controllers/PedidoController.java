@@ -5,6 +5,7 @@ import com.albahaca.ecommerce.models.PedidoModel;
 import com.albahaca.ecommerce.services.PedidoService;
 import java.util.ArrayList;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -26,11 +27,13 @@ public class PedidoController {
     }
     
     @PostMapping("/guardarPedido")
+    @PreAuthorize("hasAuthority('ADMIN')")
     public PedidoModel guardarPedido(@RequestBody PedidoModel pedidoModel){
         return this.pedidoService.guardarPedido(pedidoModel);
     }
     
     @DeleteMapping("/eliminarPedido/{id}")
+    @PreAuthorize("hasAuthority('ADMIN')")
     public boolean eliminarPedido(@PathVariable("id") Long id){
         return this.pedidoService.eliminarPedido(id);
     }

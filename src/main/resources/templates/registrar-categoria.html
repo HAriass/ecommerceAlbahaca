@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="/css/registro-tabla.css" />
 </head>
 <body>
-    <button class="boton" style="position: absolute; top: 20px; left: 20px;" onclick="window.location.href='/'">Volver</button>
+    <button class="boton" style="position: absolute; top: 20px; left: 20px;" onclick="window.location.href='/menu'">Volver</button>
 
     <div class="main-container">
         <!-- Sección izquierda: Formulario de registro de categoría -->
@@ -18,6 +18,8 @@
                 <input type="text" id="nombre" name="nombre" />
                 <label for="descripcion">Descripción:</label>
                 <input type="text" id="descripcion" name="descripcion" />
+                <label for="imagen">Imagen:</label>
+                <input type="text" id="imagen" name="imagen" />
                 <input type="submit" value="Registrar" />
             </form>
         </div>
@@ -34,6 +36,7 @@
                     <tr>
                         <th>Nombre</th>
                         <th>Descripción</th>
+                        <th>Imagen</th>
                         <th>Modificar</th>
                         <th>Eliminar</th>
                     </tr>

@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <title>Gestion de Cuenta</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="/css/registro-tabla.css" />
+    </head>
+    <body>
+        <button class="boton" style="position: absolute; top: 20px; left: 20px;" onclick="window.location.href='/'">Volver</button>
+        <div class="form-container">
+            <h2>Cuenta</h2>
+            <form id="addCuenta">
+                <label for="nombre">Nombre:</label>
+                <input type="text" id="nombre" name="nombre" />
+
+                <label for="password">Contraseña:</label>
+                <input type="password" id="password" name="password" />
+                
+                <input type="submit" value="Registrar" />
+            </form>
+        </div>
+        
+            <!-- Script para Axios y para manejar productos -->
+        <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+        <script src="/js/registrar-cuenta.js"></script>
+    </body>
+</html>
