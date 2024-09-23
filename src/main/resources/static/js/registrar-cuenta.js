@@ -14,12 +14,7 @@ const form = document.getElementById('addCuenta');
                 });
                 
                 //para que funcione, el tipo de cuenta tiene que estar tal cual.. 
-                data['tipoCuentaModel'] =
-                {
-                    id: 2,
-                    nombre: "cliente",
-                    descripcion: "no tiene acceso a administracion del sistema"
-                };
+                data['rol'] = "USER";
 
                 // Convierte el objeto a JSON
                 const jsonData = JSON.stringify(data);

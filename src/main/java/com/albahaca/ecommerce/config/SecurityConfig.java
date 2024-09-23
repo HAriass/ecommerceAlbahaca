@@ -26,7 +26,8 @@ public class SecurityConfig {
                 .requestMatchers("/", 
                                  "/marca/listarMarcas", 
                                  "/categoria/listarCategorias", 
-                                 "/cuenta/listarCuentas", 
+                                 "/registrarCuenta", 
+                                 "/cuenta/guardarCuenta",
                                  "/estado/listarEstados", 
                                  "/pedido/listarPedidos", 
                                  "/producto/listarProductos", 
@@ -38,7 +39,7 @@ public class SecurityConfig {
                 .requestMatchers("/categoria/guardarCategoria", 
                                  "/categoria/eliminarCategoria/**", 
                                  "/categoria/obtenerCategoriaPorId/**").hasAuthority("ADMIN")  // ADMIN para categoria
-                .requestMatchers("/cuenta/guardarCuenta", 
+                .requestMatchers( 
                                  "/cuenta/eliminarCuenta/**", 
                                  "/cuenta/obtenerCuentaPorId/**").hasAuthority("ADMIN")  // ADMIN para cuenta
                 .requestMatchers("/estado/guardarEstado", 

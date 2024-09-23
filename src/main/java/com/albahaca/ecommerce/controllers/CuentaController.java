@@ -1,40 +1,50 @@
-
 package com.albahaca.ecommerce.controllers;
 
 import com.albahaca.ecommerce.models.CuentaModel;
 import com.albahaca.ecommerce.services.CuentaService;
-import java.util.ArrayList;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.web.bind.annotation.*;
+import java.util.ArrayList;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/cuenta")
 public class CuentaController {
-    
+
     @Autowired
     CuentaService cuentaService;
     
+    @Autowired
+    private PasswordEncoder passwordEncoder;  // Inyecta el encoder
+
     @GetMapping("/listarCuentas")
-    public ArrayList<CuentaModel> listarCuentas(){
+    public ArrayList<CuentaModel> listarCuentas() {
         return this.cuentaService.listarCuentas();
     }
-    
+
     @PostMapping("/guardarCuenta")
-    @PreAuthorize("hasAuthority('ADMIN')")
-    public CuentaModel guardarCuenta(@RequestBody CuentaModel cuentaModel){
-        return this.cuentaService.guardarCuenta(cuentaModel);
-    }
-    @DeleteMapping("/eliminarCuenta/{id}")
-    @PreAuthorize("hasAuthority('ADMIN')")
-    public boolean eliminarCuenta(@PathVariable("id") Long id){
-        return this.cuentaService.eliminarCuenta(id);
+    public ResponseEntity<?> guardarCuenta(@RequestBody CuentaModel cuentaModel) {
+        try {
+            // Encripta la contraseña antes de guardar la cuenta
+            String encodedPassword = passwordEncoder.encode(cuentaModel.getPassword());
+            cuentaModel.setPassword(encodedPassword);  // Establece la contraseña encriptada
+
+            // Guarda la cuenta con la contraseña encriptada
+            CuentaModel nuevaCuenta = this.cuentaService.guardarCuenta(cuentaModel);
+
+            return ResponseEntity.ok(nuevaCuenta);  // Devuelve la nueva cuenta creada
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                                 .body("Error al guardar la cuenta: " + e.getMessage());
+        }
     }
 
+    @DeleteMapping("/eliminarCuenta/{id}")
+    @PreAuthorize("hasAuthority('ADMIN')")
+    public boolean eliminarCuenta(@PathVariable("id") Long id) {
+        return this.cuentaService.eliminarCuenta(id);
+    }
 }
