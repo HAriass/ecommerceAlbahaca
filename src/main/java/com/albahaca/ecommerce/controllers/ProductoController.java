@@ -5,6 +5,7 @@ import com.albahaca.ecommerce.services.ProductoService;
 import java.util.ArrayList;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -26,16 +27,19 @@ public class ProductoController {
     }
     
     @PostMapping("/guardarProducto")
+    @PreAuthorize("hasAuthority('ADMIN')")
     public ProductoModel guardarProducto(@RequestBody ProductoModel producto){
         return this.productoService.guardarProducto(producto);
     }
     
     @DeleteMapping("/eliminarProducto/{id}")
+    @PreAuthorize("hasAuthority('ADMIN')")
     public boolean eliminaProducto(@PathVariable("id") Long id){
         return this.productoService.eliminarProducto(id);
     }
     
     @GetMapping("/obtenerProductoPorId/{id}")
+    @PreAuthorize("hasAuthority('ADMIN')")
     public Optional<ProductoModel> obtenerProductoPorId(@PathVariable("id") Long id){
         return this.productoService.obtenerProductoPorId(id);
     }
