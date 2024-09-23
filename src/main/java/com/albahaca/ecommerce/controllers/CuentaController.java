@@ -5,6 +5,7 @@ import com.albahaca.ecommerce.models.CuentaModel;
 import com.albahaca.ecommerce.services.CuentaService;
 import java.util.ArrayList;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -26,10 +27,12 @@ public class CuentaController {
     }
     
     @PostMapping("/guardarCuenta")
+    @PreAuthorize("hasAuthority('ADMIN')")
     public CuentaModel guardarCuenta(@RequestBody CuentaModel cuentaModel){
         return this.cuentaService.guardarCuenta(cuentaModel);
     }
     @DeleteMapping("/eliminarCuenta/{id}")
+    @PreAuthorize("hasAuthority('ADMIN')")
     public boolean eliminarCuenta(@PathVariable("id") Long id){
         return this.cuentaService.eliminarCuenta(id);
     }

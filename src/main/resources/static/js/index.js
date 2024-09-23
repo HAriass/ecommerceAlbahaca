@@ -1,5 +1,5 @@
 const tarjeta = document.querySelector(".tarjeta-categoria .grid"); // Selecciona el contenedor de grid
-
+console.log("entre a la funcion");
 function getCategorias() {
     console.log("entre a la funcion");
     axios.get("/categoria/listarCategorias")
