@@ -27,7 +27,8 @@ const form = document.getElementById('addCuenta');
                 })
                 .then(response => {
                     console.log('Éxito:', response.data);
-                    //window.location.href='/registrarEstado';
+                    alert('Cuenta registrada exitosamente!');
+                    window.location.href='/';
                 })
                 .catch(error => {
                     console.error('Error:', error);
