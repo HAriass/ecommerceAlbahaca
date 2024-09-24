@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="/css/modificar.css"/>
 </head>
 <body>
-    <div>
+    <div class="contenedor">
         <form id="updateEstado">
             <input type="hidden" id="id" name="id" th:value="${estado.id}" />
 
@@ -21,6 +21,7 @@
         </form>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-    <script src="/js/modificar-estado.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script type="module" src="/js/modificar-estado.js"></script>
 </body>
 </html>

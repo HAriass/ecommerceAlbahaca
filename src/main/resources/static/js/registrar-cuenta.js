@@ -1,3 +1,5 @@
+import {registrar} from './alertas.js';
+
 const form = document.getElementById('addCuenta');
 
         function guardarCuenta() {
@@ -27,8 +29,10 @@ const form = document.getElementById('addCuenta');
                 })
                 .then(response => {
                     console.log('Éxito:', response.data);
-                    alert('Cuenta registrada exitosamente!');
-                    window.location.href='/';
+                    registrar();
+                    setTimeout(() => {
+                        window.location.href = '/';
+                    }, 1500);
                 })
                 .catch(error => {
                     console.error('Error:', error);

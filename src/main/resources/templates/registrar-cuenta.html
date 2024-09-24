@@ -4,12 +4,12 @@
         <title>Gestion de Cuenta</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" href="/css/registro-tabla.css" />
+        <link rel="stylesheet" href="/css/modificar.css" />
     </head>
     <body>
-        <button class="boton" style="position: absolute; top: 20px; left: 20px;" onclick="window.location.href='/'">Volver</button>
-        <div class="form-container">
-            <h2>Cuenta</h2>
+        <button class="boton" style="position: absolute; top: 20px; left: 20px;" onclick="window.location.href='/menu'">Volver</button>
+        <div class="contenedor form-container">
+            <h2>Registrar Cuenta</h2>
             <form id="addCuenta">
                 <label for="nombre">Nombre:</label>
                 <input type="text" id="nombre" name="nombre" />
@@ -23,6 +23,7 @@
         
             <!-- Script para Axios y para manejar productos -->
         <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-        <script src="/js/registrar-cuenta.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+        <script type="module" src="/js/registrar-cuenta.js"></script>
     </body>
 </html>

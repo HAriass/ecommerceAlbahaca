@@ -22,8 +22,7 @@
             axios.delete(`/marca/eliminarMarca/${id}`)
             .then(response => {
                 console.log('Éxito:', response.data);
-                alert('Marca Eliminada exitosamente!');
-                window.location.href='/registrarMarca';
+                eliminar();
             })
             .catch(error => {
                 console.error('Error:', error);
@@ -66,3 +65,16 @@
                 }
             });
         });
+        
+        function eliminar(){ {
+              Swal.fire({
+                title: "Eliminado!",
+                text: "Registro eliminado correctamente.",
+                showConfirmButton: false,
+                icon: "success"
+              });
+              setTimeout(() => {
+                window.location.reload();
+            }, 1500);
+            }
+        }

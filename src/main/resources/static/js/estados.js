@@ -23,8 +23,7 @@
             axios.delete(`/estado/eliminarEstado/${id}`)
             .then(response => {
                 console.log('Éxito:', response.data);
-                alert('Estado Eliminado exitosamente!');
-                window.location.href='/registrarEstado';
+                eliminar();
             })
             .catch(error => {
                 console.error('Error:', error);
@@ -68,4 +67,17 @@
                 }
             });
         });
+        
+        function eliminar(){ {
+              Swal.fire({
+                title: "Eliminado!",
+                text: "Registro eliminado correctamente.",
+                showConfirmButton: false,
+                icon: "success"
+              });
+              setTimeout(() => {
+                window.location.reload();
+            }, 1500);
+            }
+        }
         

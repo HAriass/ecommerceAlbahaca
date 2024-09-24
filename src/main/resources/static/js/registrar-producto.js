@@ -1,3 +1,5 @@
+import {registrar} from './alertas.js';
+
 const form = document.getElementById('addProducto');
 
         function guardarProducto() {
@@ -36,8 +38,7 @@ const form = document.getElementById('addProducto');
                 })
                 .then(response => {
                     console.log('Éxito:', response.data);
-                    alert('Producto registrado exitosamente!');
-                    window.location.href='/registrarProducto';
+                    registrar();
                 })
                 .catch(error => {
                     console.error('Error:', error);

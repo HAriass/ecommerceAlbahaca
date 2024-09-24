@@ -37,8 +37,7 @@
             axios.delete(`/producto/eliminarProducto/${id}`)
             .then(response => {
                 console.log('Éxito:', response.data);
-                alert('Producto Eliminado exitosamente!');
-                window.location.href='/registrarProducto';
+                eliminar();
             })
             .catch(error => {
                 console.error('Error:', error);
@@ -91,3 +90,16 @@
                 }
             });
         });
+        
+        function eliminar(){ {
+              Swal.fire({
+                title: "Eliminado!",
+                text: "Registro eliminado correctamente.",
+                showConfirmButton: false,
+                icon: "success"
+              });
+              setTimeout(() => {
+                window.location.reload();
+            }, 1500);
+            }
+        }

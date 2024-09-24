@@ -24,8 +24,7 @@
             axios.delete(`/categoria/eliminarCategoria/${id}`)
             .then(response => {
                 console.log('Éxito:', response.data);
-                alert('Categoría Eliminada exitosamente!');
-                window.location.href='/registrarCategoria';
+                eliminar();
             })
             .catch(error => {
                 console.error('Error:', error);
@@ -70,3 +69,16 @@
                 }
             });
         });
+        
+        function eliminar(){ {
+              Swal.fire({
+                title: "Eliminado!",
+                text: "Registro eliminado correctamente.",
+                showConfirmButton: false,
+                icon: "success"
+              });
+              setTimeout(() => {
+                window.location.reload();
+            }, 1500);
+            }
+        }

@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="/css/modificar.css"/>
 </head>
 <body>
-    <div>
+    <div class="contenedor">
         <h2>Modificar Categoria</h2>
         <form id="updateCategoria">
             <input type="hidden" id="id" name="id" th:value="${categoria.id}" />
@@ -23,6 +23,7 @@
         </form>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-    <script src="/js/modificar-categoria.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script type="module" src="/js/modificar-categoria.js"></script>
 </body>
 </html>
