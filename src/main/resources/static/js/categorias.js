@@ -9,7 +9,7 @@
                         <tr>
                             <td>${categoria.nombre}</td>
                             <td>${categoria.descripcion}</td>
-                            <td><a href="https://drive.google.com/uc?export=view&id=${categoria.imagen}" target="_blank">Ver Imagen</a></td>
+                            <td><a class="btn-imagen" href="https://drive.google.com/uc?export=view&id=${categoria.imagen}" target="_blank">Ver Imagen</a></td>
                             <td><button class="btn-modificar" onclick="location.href='/modificarCategoria/${categoria.id}'">Modificar</button></td>
                             <td><button class="btn-eliminar" onclick="eliminarCategoria(${categoria.id})">Eliminar</button></td>
                         </tr>
@@ -41,9 +41,9 @@
                         <tr>
                             <td>${categoria.nombre}</td>
                             <td>${categoria.descripcion}</td>
-                            <td><a href="${categoria.imagen} target="_blank">Ver Imagen</a></td>
-                            <td><a href="/modificarMarca/${categoria.id}">Modificar</a></td>
-                            <td><button onclick="eliminarMarca(${categoria.id})">Eliminar</button></td>
+                            <td><a class="btn-imagen" href="${categoria.imagen} target="_blank">Ver Imagen</a></td>
+                            <td><button class="btn-modificar" onclick="location.href='/modificarCategoria/${categoria.id}'">Modificar</button></td>
+                            <td><button class="btn-eliminar" onclick="eliminarMarca(${categoria.id})">Eliminar</button></td>
                         </tr>
                     `;
                 }

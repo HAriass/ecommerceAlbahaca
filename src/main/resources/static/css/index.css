@@ -3,11 +3,15 @@ html, body {
     height: 100%;
     margin: 0;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background-color: #1a1a1a;
+    background-color: #2d3657;
     color: white;
+}
+
+/* Centrar el contenido horizontalmente sin centrar verticalmente */
+body {
     display: flex;
-    justify-content: center;
-    align-items: center;
+    flex-direction: column; /* Permite que los elementos se apilen verticalmente */
+    align-items: center;    /* Centra los elementos horizontalmente */
 }
 
 /* Contenedor principal */
@@ -18,11 +22,11 @@ html, body {
     gap: 50px;
     padding: 40px;
     border-radius: 15px;
-    background-color: #121212;
+    background-color: #20263d;
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.7);
     max-width: 800px;
+    margin-top: 20px; /* Añade espacio entre el título y el contenido */
 }
-
 /* Estilos de los enlaces */
 .boxSection {
     display: flex;
@@ -30,7 +34,7 @@ html, body {
     align-items: center;
     padding: 15px;
     border-radius: 10px;
-    background-color: #1e1e1e;
+    background-color: #33353a;
     box-shadow: 0 8px 15px rgba(0, 0, 0, 0.4);
     text-decoration: none;
     text-transform: uppercase;
@@ -65,3 +69,10 @@ html, body {
     align-items: center;
 }
 
+/* Estilos del título */
+.titulo {
+    width: 100%;
+    text-align: center;
+    margin-top: 50px; /* Espacio superior */
+    margin-bottom: 50px;
+}

@@ -38,8 +38,8 @@
                     htmlContent += `
                         <tr>
                             <td>${marca.nombre}</td>
-                            <td><a href="/modificarMarca/${marca.id}">Modificar</a></td>
-                            <td><button onclick="eliminarMarca(${marca.id})">Eliminar</button></td>
+                            <td><button class="btn-modificar" onclick="location.href='/modificarMarca/${marca.id}'">Modificar</button></td>
+                            <td><button class="btn-eliminar" onclick="eliminarMarca(${marca.id})">Eliminar</button></td>
                         </tr>
                     `;
                 }

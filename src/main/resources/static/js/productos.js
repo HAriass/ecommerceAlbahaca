@@ -11,7 +11,7 @@
                             <tr>
                                 <td>${producto.nombre}</td>
                                 <td>${producto.descripcion}</td>
-                                <td><a href="${producto.imagen}" target="_blank">Ver imagen</a></td>
+                                
                                 <td>${producto.precio}</td>
                                 <td>
                                     ${producto.marca.nombre}
@@ -19,6 +19,7 @@
                                 <td>
                                     ${producto.categoria.nombre}
                                 </td>
+                                <td><a class="btn-imagen" href="${producto.imagen}" target="_blank">Ver imagen</a></td>
                                 <td><button class="btn-modificar" onclick="location.href='/modificarProducto/${producto.id}'">Modificar</button></td>
                                 <td><button class="btn-eliminar" onclick="eliminarProducto(${producto.id})">Eliminar</button></td>
                             </tr>
@@ -54,17 +55,17 @@
                         <tr>
                             <td>${producto.nombre}</td>
                             <td>${producto.descripcion}</td>
-                            <td><a href="${producto.imagen}" target="_blank">Ver imagen</a></td>
+                            
                             <td>${producto.precio}</td>
                             <td>
-                                <li>${producto.marca.nombre}</li>
+                               ${producto.marca.nombre}
                             </td>
                             <td>
-                                <li>${producto.categoria.nombre}</li>
-                                <li>${producto.categoria.descripcion}</li>
+                               ${producto.categoria.nombre}
                             </td>
-                            <td><button onclick="location.href='/modificarProducto/${producto.id}'">Modificar</button></td>
-                            <td><button onclick="eliminarProducto(${producto.id})">Eliminar</button></td>
+                            <td><a class="btn-imagen" href="${producto.imagen}" target="_blank">Ver imagen</a></td>
+                            <td><button class="btn-modificar" onclick="location.href='/modificarProducto/${producto.id}'">Modificar</button></td>
+                            <td><button class="btn-eliminar" onclick="eliminarProducto(${producto.id})">Eliminar</button></td>
                         </tr>
                     `;
                 }

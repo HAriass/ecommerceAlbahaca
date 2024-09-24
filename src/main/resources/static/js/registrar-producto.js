@@ -85,4 +85,3 @@ const form = document.getElementById('addProducto');
         guardarProducto();
         getMarcas();
         getCategorias();
-
