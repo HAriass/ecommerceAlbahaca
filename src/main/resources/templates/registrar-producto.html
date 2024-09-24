@@ -15,13 +15,13 @@
             <h2>Registrar Producto</h2>
             <form id="addProducto">
                 <label for="nombre">Nombre:</label>
-                <input type="text" id="nombre" name="nombre" />
+                <input type="text" id="nombre" name="nombre" pattern="[A-Za-z0-9 ]+" title="Solo se permiten letras y números." required/>
                 <label for="descripcion">Descripción:</label>
-                <input type="text" id="descripcion" name="descripcion" />
+                <input type="text" id="descripcion" name="descripcion" pattern="[A-Za-z0-9 ]+" title="Solo se permiten letras y números." required/>
                 <label for="imagen">Imagen:</label>
                 <input type="text" id="imagen" name="imagen" />
                 <label for="precio">Precio:</label>
-                <input type="number" id="precio" name="precio" />
+                <input type="text" id="precio" name="precio" pattern="[0-9]+" title="Solo se permiten números." required/>
                 <label for="marcas">Elige una marca:</label>
                 <select id="marcas" name="marcas">
                     <!-- Cargo los datos desde el JS -->
@@ -46,10 +46,10 @@
                     <tr>
                         <th>Nombre</th>
                         <th>Descripción</th>
-                        <th>Imagen</th>
                         <th>Precio</th>
                         <th>Marca</th>
                         <th>Categoría</th>
+                        <th>Imagen</th>
                         <th>Modificar</th>
                         <th>Eliminar</th>
                     </tr>
@@ -64,7 +64,7 @@
     <!-- Script para Axios y para manejar productos -->
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <script src="/js/registrar-producto.js"></script>
+    <script type="module" src="/js/registrar-producto.js"></script>
     <script src="/js/productos.js"></script>
 </body>
 </html>

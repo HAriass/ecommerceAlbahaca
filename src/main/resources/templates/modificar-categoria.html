@@ -7,14 +7,14 @@
     <link rel="stylesheet" href="/css/modificar.css"/>
 </head>
 <body>
-    <div class="continerFormModificacion">
+    <div class="contenedor">
         <h2>Modificar Categoria</h2>
         <form id="updateCategoria">
             <input type="hidden" id="id" name="id" th:value="${categoria.id}" />
             <label for="nombre">Nombre:</label>
-            <input type="text" id="nombre" name="nombre" th:value="${categoria.nombre}" />
+            <input type="text" id="nombre" name="nombre" th:value="${categoria.nombre}" pattern="[A-Za-z0-9 ]+" title="Solo se permiten letras y números." required  />
             <label for="descripcion">Descripcion:</label>
-            <input type="text" id="descripcion" name="descripcion" th:value="${categoria.descripcion}" />
+            <input type="text" id="descripcion" name="descripcion" th:value="${categoria.descripcion}" pattern="[A-Za-z0-9 ]+" title="Solo se permiten letras y números." required />
             <label for="imagen">Imagen:</label>
             <input type="text" id="imagen" name="imagen" th:value="${categoria.imagen}"/>
             <input type="submit" value="Registrar" />
@@ -23,6 +23,7 @@
         </form>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-    <script src="/js/modificar-categoria.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script type="module" src="/js/modificar-categoria.js"></script>
 </body>
 </html>

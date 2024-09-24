@@ -1,3 +1,5 @@
+import {modificar} from './alertas.js';
+
 const form = document.getElementById('updateMarca');
 
 function guardarMarca() {
@@ -25,8 +27,10 @@ function guardarMarca() {
         })
         .then(response => {
             console.log('Éxito:', response.data);
-            alert('Marca Modificado exitosamente!');
-            window.location.href='/registrarMarca';
+            modificar();
+            setTimeout(() => {
+                window.location.href = '/registrarMarca';
+            }, 1500);
         })
         .catch(error => {
             console.error('Error:', error);

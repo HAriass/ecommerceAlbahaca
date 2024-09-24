@@ -15,9 +15,9 @@
             <h2>Registrar Estado</h2>
             <form id="addEstado">
                 <label for="nombre">Nombre:</label>
-                <input type="text" id="nombre" name="nombre" />
+                <input type="text" id="nombre" name="nombre" pattern="[A-Za-z0-9 ]+" title="Solo se permiten letras y números." required />
                 <label for="descripcion">Descripción:</label>
-                <input type="text" id="descripcion" name="descripcion" />
+                <input type="text" id="descripcion" name="descripcion" pattern="[A-Za-z0-9 ]+" title="Solo se permiten letras y números." required />
                 <input type="submit" value="Registrar" />
             </form>
         </div>
@@ -47,7 +47,8 @@
 
     <!-- Script para Axios y para manejar Estados -->
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-    <script src="/js/registrar-estado.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script type="module" src="/js/registrar-estado.js"></script>
     <script src="/js/estados.js"></script>
 </body>
 </html>

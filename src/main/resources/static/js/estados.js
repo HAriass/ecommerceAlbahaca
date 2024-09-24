@@ -23,8 +23,7 @@
             axios.delete(`/estado/eliminarEstado/${id}`)
             .then(response => {
                 console.log('Éxito:', response.data);
-                alert('Estado Eliminado exitosamente!');
-                window.location.href='/registrarEstado';
+                eliminar();
             })
             .catch(error => {
                 console.error('Error:', error);
@@ -41,8 +40,9 @@
                     htmlContent += `
                         <tr>
                             <td>${estado.nombre}</td>
-                            <td><a href="/modificarEstado/${estado.id}">Modificar</a></td>
-                            <td><button onclick="eliminarEstado(${estado.id})">Eliminar</button></td>
+                            <td>${estado.descripcion}</td>
+                            <td><button class="btn-modificar" onclick="location.href='/modificarEstado/${estado.id}'">Modificar</button></td>
+                            <td><button class="btn-eliminar" onclick="eliminarEstado(${estado.id})">Eliminar</button></td>
                         </tr>
                     `;
                 }
@@ -67,4 +67,17 @@
                 }
             });
         });
+        
+        function eliminar(){ {
+              Swal.fire({
+                title: "Eliminado!",
+                text: "Registro eliminado correctamente.",
+                showConfirmButton: false,
+                icon: "success"
+              });
+              setTimeout(() => {
+                window.location.reload();
+            }, 1500);
+            }
+        }
         
