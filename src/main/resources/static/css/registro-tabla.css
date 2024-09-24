@@ -14,7 +14,7 @@ body {
     align-items: flex-start;
     padding: 10px;
     margin-top: 70px;
-    gap:25px;
+    gap: 25px;
 }
 
 /* Contenedor del formulario (izquierda) */
@@ -42,7 +42,7 @@ label {
     color: #bbb;
 }
 
-input[type="password"],input[type="text"], select {
+input[type="password"], input[type="text"], select {
     padding: 10px;
     margin-bottom: 15px;
     border: 1px solid #555;
@@ -106,8 +106,19 @@ h1 {
 .table {
     width: 100%;
     border-collapse: collapse;
-    margin-bottom: 15px;
     background-color: #3a3a3a;
+}
+
+thead {
+    display: table;
+    width: 100%;
+    table-layout: fixed; /* Asegura que la tabla sea consistente */
+}
+
+tbody {
+    display: block; /* Permite que tbody pueda desplazarse */
+    max-height: 340px; /* Limita la altura del cuerpo de la tabla */
+    overflow-y: scroll; /* Activa el scroll en el cuerpo de la tabla */
 }
 
 .table thead th {
@@ -124,10 +135,17 @@ h1 {
     color: #bbb;
 }
 
+.table tbody tr {
+    display: table;
+    width: 100%;
+    table-layout: fixed;
+}
+
 .table tbody tr:nth-child(even) {
     background-color: #2f2f2f;
 }
 
+/* Botones */
 button {
     padding: 8px 12px;
     border: none;
@@ -158,10 +176,10 @@ button {
     display: inline-block;
     padding: 8px 5px;
     border-radius: 5px;
-    background-color: #299d39; /* Color de fondo */
-    color: white; /* Color del texto */
-    text-decoration: none; /* Elimina el subrayado del enlace */
-    font-size: 14px; /* Ajusta el tamaño de la fuente */
+    background-color: #299d39;
+    color: white;
+    text-decoration: none;
+    font-size: 14px;
     text-align: center;
     transition: background-color 0.3s ease;
 }
@@ -170,7 +188,7 @@ button {
     background-color: #1b6625;
 }
 
-.boton{
+.boton {
     border: none;
     border-radius: 5px;
     background-color: #6867bc;
@@ -180,18 +198,19 @@ button {
     transition: background-color 0.3s ease;
 }
 
-.boton:hover{
+.boton:hover {
     background-color: #4d3697;
 }
 
+/* Estilos para SweetAlert */
 .swal2-icon-warning,
 .swal2-icon-success,
 .swal2-icon-error,
 .swal2-modal {
-  position: fixed;
-  top: 100px;
-  background-color: rgb(0, 0, 0);
-  color: white;
-  border: 2px solid white;
-  border-radius: 20px;
+    position: fixed;
+    top: 100px;
+    background-color: rgb(0, 0, 0);
+    color: white;
+    border: 2px solid white;
+    border-radius: 20px;
 }
