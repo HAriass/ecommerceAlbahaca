@@ -15,9 +15,9 @@
             <h2>Registrar Categoría</h2>
             <form id="addCategoria">
                 <label for="nombre">Nombre:</label>
-                <input type="text" id="nombre" name="nombre" />
+                <input type="text" id="nombre" name="nombre" pattern="[A-Za-z0-9 ]+" title="Solo se permiten letras y números." required />
                 <label for="descripcion">Descripción:</label>
-                <input type="text" id="descripcion" name="descripcion" />
+                <input type="text" id="descripcion" name="descripcion" pattern="[A-Za-z0-9 ]+" title="Solo se permiten letras y números." required  />
                 <label for="imagen">Imagen:</label>
                 <input type="text" id="imagen" name="imagen" />
                 <input type="submit" value="Registrar" />
@@ -50,7 +50,8 @@
 
     <!-- Script para Axios y para manejar Categorías -->
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-    <script src="/js/registrar-categoria.js"></script>
-    <script src="/js/categorias.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script type="module" src="/js/registrar-categoria.js"></script>
+    <script src="/js/categorias.js"></script>  
 </body>
 </html>

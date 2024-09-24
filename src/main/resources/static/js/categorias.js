@@ -9,7 +9,7 @@
                         <tr>
                             <td>${categoria.nombre}</td>
                             <td>${categoria.descripcion}</td>
-                            <td><button class="btn-ver" onclick="window.open('https://drive.google.com/uc?export=view&id=${categoria.imagen}', '_blank')">Ver Imagen</button></td>
+                            <td><a class="btn-imagen" href="https://drive.google.com/uc?export=view&id=${categoria.imagen}" target="_blank">Ver Imagen</a></td>
                             <td><button class="btn-modificar" onclick="location.href='/modificarCategoria/${categoria.id}'">Modificar</button></td>
                             <td><button class="btn-eliminar" onclick="eliminarCategoria(${categoria.id})">Eliminar</button></td>
                         </tr>
@@ -24,8 +24,7 @@
             axios.delete(`/categoria/eliminarCategoria/${id}`)
             .then(response => {
                 console.log('Éxito:', response.data);
-                alert('Categoría Eliminada exitosamente!');
-                window.location.href='/registrarCategoria';
+                eliminar();
             })
             .catch(error => {
                 console.error('Error:', error);
@@ -42,9 +41,9 @@
                         <tr>
                             <td>${categoria.nombre}</td>
                             <td>${categoria.descripcion}</td>
-                            <td><a href="${categoria.imagen} target="_blank">Ver Imagen</a></td>
-                            <td><a href="/modificarMarca/${categoria.id}">Modificar</a></td>
-                            <td><button onclick="eliminarMarca(${categoria.id})">Eliminar</button></td>
+                            <td><a class="btn-imagen" href="${categoria.imagen} target="_blank">Ver Imagen</a></td>
+                            <td><button class="btn-modificar" onclick="location.href='/modificarCategoria/${categoria.id}'">Modificar</button></td>
+                            <td><button class="btn-eliminar" onclick="eliminarMarca(${categoria.id})">Eliminar</button></td>
                         </tr>
                     `;
                 }
@@ -70,3 +69,16 @@
                 }
             });
         });
+        
+        function eliminar(){ {
+              Swal.fire({
+                title: "Eliminado!",
+                text: "Registro eliminado correctamente.",
+                showConfirmButton: false,
+                icon: "success"
+              });
+              setTimeout(() => {
+                window.location.reload();
+            }, 1500);
+            }
+        }

@@ -1,5 +1,9 @@
 /* Archivo CSS o dentro de un <style> en el HTML */
 html, body {
     height: 100%;
-    background-color: #000000; /* Fondo negro para el cuerpo de la página */
+    background-color: #020a20; /* Fondo negro para el cuerpo de la página */
+}
+
+.navbar{
+    box-shadow: 0px 8px 12px rgba(0, 0, 0, 0.9);
 }

@@ -1,3 +1,5 @@
+import {modificar} from './alertas.js';
+
 const form = document.getElementById('updateCategoria');
 
 function extractDriveId(url) {
@@ -36,8 +38,10 @@ function guardarCategoria() {
         })
         .then(response => {
             console.log('Éxito:', response.data);
-            alert('Categoría registrada exitosamente!');
-            window.location.href='/registrarCategoria';
+            modificar();
+            setTimeout(() => {
+                window.location.href = '/registrarCategoria';
+            }, 1500);
         })
         .catch(error => {
             console.error('Error:', error);

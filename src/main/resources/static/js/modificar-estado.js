@@ -1,3 +1,5 @@
+import {modificar} from './alertas.js';
+
 const form = document.getElementById('updateEstado');
 
 function guardarEstado() {
@@ -25,9 +27,10 @@ function guardarEstado() {
         })
         .then(response => {
             console.log('Éxito:', response.data);
-            // Opcional: redirigir a otra página o mostrar un mensaje de éxito
-            alert('Estado Modificado exitosamente!');
-            window.location.href='/registrarEstado';
+            modificar();
+            setTimeout(() => {
+                window.location.href = '/registrarEstado';
+            }, 1500);
         })
         .catch(error => {
             console.error('Error:', error);

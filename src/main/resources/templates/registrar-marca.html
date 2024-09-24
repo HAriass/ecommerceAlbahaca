@@ -15,7 +15,7 @@
             <h2>Registrar Marca</h2>
             <form id="addMarca">
                 <label for="nombre">Nombre:</label>
-                <input type="text" id="nombre" name="nombre" />
+                <input type="text" id="nombre" name="nombre" pattern="[A-Za-z0-9 ]+" title="Solo se permiten letras y números." required />
                 <input type="submit" value="Registrar" />
             </form>
         </div>
@@ -44,7 +44,8 @@
 
     <!-- Script para Axios y para manejar marcas -->
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-    <script src="/js/registrar-marca.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script type="module" src="/js/registrar-marca.js"></script>
     <script src="/js/marcas.js"></script>
 </body>
 </html>

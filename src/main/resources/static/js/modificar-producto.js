@@ -1,3 +1,5 @@
+import {modificar} from './alertas.js';
+
 const form = document.getElementById('updateProducto');
 
 function guardarProducto() {
@@ -35,8 +37,10 @@ function guardarProducto() {
         })
         .then(response => {
             console.log('Éxito:', response.data);
-            alert('Producto Modificado exitosamente!');
-            window.location.href='/registrarProducto';
+            modificar();
+            setTimeout(() => {
+                window.location.href = '/registrarProducto';
+            }, 1500);
         })
         .catch(error => {
             console.error('Error:', error);
@@ -82,5 +86,7 @@ document.addEventListener('DOMContentLoaded', function() {
     getMarcas();
     getCategorias();
 });
+
+
 
 
