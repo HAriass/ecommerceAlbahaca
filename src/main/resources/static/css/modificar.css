@@ -5,9 +5,6 @@ body {
     font-family: Arial, sans-serif; /* fuente moderna y legible */
     margin: 0;
     padding: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
     height: 100vh; /* ajuste para centrar verticalmente */
 }
 
@@ -18,7 +15,10 @@ body {
     border-radius: 10px;
     box-shadow: 0 0 15px rgba(0, 0, 0, 0.5); /* sombra para dar profundidad */
     width: 30%; /* ancho según el contenido */
+    margin: auto;
+    margin-top: 50px;
 }
+
 
 h2 {
     color: #bbb; /* texto gris claro para los títulos */
@@ -30,6 +30,8 @@ form {
     display: flex;
     flex-direction: column;
     gap: 10px;
+    margin: auto;
+    margin-top: 50px;
 }
 
 label {
