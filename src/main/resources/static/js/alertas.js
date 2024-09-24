@@ -4,8 +4,6 @@ export function registrar(){
         title: "Registrado Correctamente",
         showConfirmButton: false,
         timer: 1500
-    }).then(() => {
-        window.location.reload();
     });
 }
 
@@ -15,7 +13,5 @@ export function modificar(){
         title: "Modificado Correctamente",
         showConfirmButton: false,
         timer: 1500
-    }).then(() => {
-        window.location.reload();
     });
 }
