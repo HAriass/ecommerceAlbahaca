@@ -14,7 +14,7 @@ body {
     padding: 20px;
     border-radius: 10px;
     box-shadow: 0 0 15px rgba(0, 0, 0, 0.5); /* sombra para dar profundidad */
-    width: 30%; /* ancho según el contenido */
+    width: 70%; /* ancho según el contenido */
     margin: auto;
     margin-top: 50px;
 }
@@ -39,21 +39,21 @@ label {
 }
 
 input[type="text"], select {
-    background-color: #444; /* color de fondo para inputs */
-    border: 1px solid #555; /* borde sutil */
-    border-radius: 5px;
-    padding: 10px;
-    color: #fff; /* texto en blanco */
-    margin-bottom: 10px;
+    background-color: #444 !important; /* color de fondo para inputs */
+    border: 1px solid #555 !important; /* borde sutil */
+    border-radius: 5px !important;
+    padding: 10px !important;
+    color: #fff !important; /* texto en blanco */
+    margin-bottom: 10px !important;
 }
 
 input[type="password"], select {
-    background-color: #444; /* color de fondo para inputs */
-    border: 1px solid #555; /* borde sutil */
-    border-radius: 5px;
-    padding: 10px;
-    color: #fff; /* texto en blanco */
-    margin-bottom: 10px;
+    background-color: #444 !important; /* color de fondo para inputs */
+    border: 1px solid #555 !important; /* borde sutil */
+    border-radius: 5px !important;
+    padding: 10px !important;
+    color: #fff !important; /* texto en blanco */
+    margin-bottom: 10px !important;
 }
 
 

@@ -42,13 +42,13 @@ label {
 }
 
 input[type="password"], input[type="text"], select {
-    padding: 10px;
-    margin-bottom: 15px;
-    border: 1px solid #555;
-    border-radius: 5px;
-    background-color: #444;
-    color: #fff;
-    font-size: 14px;
+    padding: 10px !important;
+    margin-bottom: 15px !important;
+    border: 1px solid #555 !important;
+    border-radius: 5px !important;
+    background-color: #444 !important;
+    color: #fff !important;
+    font-size: 14px !important;
 }
 
 input[type="submit"] {
@@ -163,6 +163,17 @@ button {
     background-color: #2980b9;
 }
 
+.btnTabla{
+    display: inline-block !important;
+    padding: 8px 5px !important;
+    border-radius: 5px !important;
+    color: white !important;
+    text-decoration: none !important;
+    font-size: 14px !important;
+    text-align: center !important;
+    transition: background-color 0.3s ease !important;
+}
+
 .btn-eliminar {
     background-color: #e74c3c;
 }
@@ -172,15 +183,7 @@ button {
 }
 
 .btn-imagen {
-    display: inline-block;
-    padding: 8px 5px;
-    border-radius: 5px;
     background-color: #299d39;
-    color: white;
-    text-decoration: none;
-    font-size: 14px;
-    text-align: center;
-    transition: background-color 0.3s ease;
 }
 
 .btn-imagen:hover {

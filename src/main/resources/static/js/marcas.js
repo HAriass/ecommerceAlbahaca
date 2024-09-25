@@ -8,8 +8,8 @@
                     htmlContent += `
                         <tr>
                             <td>${marca.nombre}</td>
-                            <td><button class="btn-modificar" onclick="location.href='/modificarMarca/${marca.id}'">Modificar</button></td>
-                            <td><button class="btn-eliminar" onclick="eliminarMarca(${marca.id})">Eliminar</button></td>
+                            <td><button class="btnTabla btn-modificar" onclick="location.href='/modificarMarca/${marca.id}'">Modificar</button></td>
+                            <td><button class="btnTabla btn-eliminar" onclick="eliminarMarca(${marca.id})">Eliminar</button></td>
                         </tr>
                     `;
                 });
@@ -38,8 +38,8 @@
                     htmlContent += `
                         <tr>
                             <td>${marca.nombre}</td>
-                            <td><button class="btn-modificar" onclick="location.href='/modificarMarca/${marca.id}'">Modificar</button></td>
-                            <td><button class="btn-eliminar" onclick="eliminarMarca(${marca.id})">Eliminar</button></td>
+                            <td><button class="btnTabla btn-modificar" onclick="location.href='/modificarMarca/${marca.id}'">Modificar</button></td>
+                            <td><button class="btnTabla btn-eliminar" onclick="eliminarMarca(${marca.id})">Eliminar</button></td>
                         </tr>
                     `;
                 }
