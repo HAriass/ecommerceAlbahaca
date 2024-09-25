@@ -3,7 +3,7 @@ html, body {
     height: 100%;
     margin: 0;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background-color: #303030;
+    background-color: #2d3657;
     color: white;
 }
 
@@ -22,7 +22,7 @@ body {
     gap: 50px;
     padding: 40px;
     border-radius: 15px;
-    background-color: #20263d;
+    background-color: #303030;
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.7);
     max-width: 800px;
     margin-top: 20px; /* Añade espacio entre el título y el contenido */
@@ -34,7 +34,7 @@ body {
     align-items: center;
     padding: 15px;
     border-radius: 10px;
-    background-color: #33353a;
+    background-color: #8d8d8d;
     box-shadow: 0 8px 15px rgba(0, 0, 0, 0.4);
     text-decoration: none;
     text-transform: uppercase;
@@ -42,8 +42,7 @@ body {
     width: 180px;
     height: 100px;
     text-align: center;
-    font-size: 1rem;
-    letter-spacing: 1px;
+    letter-spacing: 4px;
     transition: transform 0.3s ease, background-color 0.3s ease;
     cursor: pointer;
 }
