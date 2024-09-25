@@ -12,19 +12,19 @@
         <form id="updateProducto">
             <input type="hidden" id="id" name="id" th:value="${producto.id}" />
             <label for="nombre">Nombre:</label>
-            <input type="text" id="nombre" name="nombre" th:value="${producto.nombre}" pattern="[A-Za-z0-9 ]+" title="Solo se permiten letras y números." required/>
+            <input type="text" id="nombre" name="nombre" th:value="${producto.nombre}" pattern="[A-Za-z0-9 .,-_]+" title="Solo se permiten letras, números, puntos y comas." required/>
             <label for="descripcion">Descripcion:</label>
-            <input type="text" id="descripcion" name="descripcion" th:value="${producto.descripcion}" pattern="[A-Za-z0-9 ]+" title="Solo se permiten letras y números." required/>
+            <input type="text" id="descripcion" name="descripcion" th:value="${producto.descripcion}" pattern="[A-Za-z0-9 .,-_]+" title="Solo se permiten letras, números, puntos y comas." required/>
             <label for="descripcion">Precio:</label>
-            <input type="text" id="precio" name="precio" th:value="${producto.precio}" pattern="[0-9]+" title="Solo se permiten números." required/>
+            <input type="text" id="precio" name="precio" th:value="${producto.precio}" pattern="[0-9.,]+" title="Solo se permiten números." required/>
             
             <label for="marcas">Elige una marca:</label>
-            <select id="marcas" name="marcas">
+            <select id="marcas" name="marcas" required>
                 <!--Cargo los datos desde el js-->
             </select>
             
             <label for="categorias">Elige una categoria:</label>
-            <select id="categorias" name="categorias">
+            <select id="categorias" name="categorias" required>
                 <!--Cargo los datos desde el js-->
             </select>
             <input type="submit" value="Guardar Cambios" />
