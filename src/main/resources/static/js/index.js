@@ -10,7 +10,7 @@ function getCategorias() {
         categorias.forEach(categoria => {
             console.log("link a la img" + categoria.imagen);
             htmlContent += `
-                <div class="max-w-sm bg-gradient-to-r from-gray-900 to-gray-800 border border-gray-800 rounded-lg shadow flex flex-col justify-between">
+                <div class="max-w-sm bg-gradient-to-b from-black via-black via-80% to-neutral-800 to-100% border border-gray-900 rounded-lg shadow flex flex-col justify-between">
                     <a href="#">
                         <img style="width:100%" class="rounded-t-lg" src="https://drive.google.com/thumbnail?id=${categoria.imagen}" alt="${categoria.nombre}" />
                     </a>
