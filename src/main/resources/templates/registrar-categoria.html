@@ -15,9 +15,9 @@
             <h2>Registrar Categoría</h2>
             <form id="addCategoria">
                 <label for="nombre">Nombre:</label>
-                <input type="text" id="nombre" name="nombre" pattern="[A-Za-z0-9 ]+" title="Solo se permiten letras y números." required />
+                <input type="text" id="nombre" name="nombre" pattern="[A-Za-z0-9 .,-_]+" title="Solo se permiten letras, números, puntos y comas." required />
                 <label for="descripcion">Descripción:</label>
-                <input type="text" id="descripcion" name="descripcion" pattern="[A-Za-z0-9 ]+" title="Solo se permiten letras y números." required  />
+                <input type="text" id="descripcion" name="descripcion" pattern="[A-Za-z0-9 .,-_]+" title="Solo se permiten letras, números, puntos y comas." required  />
                 <label for="imagen">Imagen:</label>
                 <input type="text" id="imagen" name="imagen" />
                 <input type="submit" value="Registrar" />
