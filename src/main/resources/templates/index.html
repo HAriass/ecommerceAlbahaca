@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
-      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+      xmlns:sec="https://www.thymeleaf.org/extras/spring-security">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -13,32 +13,50 @@
 <body>
     <nav class="navbar bg-black border-gray-200 dark:bg-black">
         <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
-            <a href="../html/inicio.html" class="flex items-center space-x-3 rtl:space-x-reverse">
+            <a href="/" class="flex items-center space-x-3 rtl:space-x-reverse">
                 <span class="self-center text-2xl font-semibold whitespace-nowrap text-white">Albahaca Suplementos</span>
             </a>
             <div class="hidden w-full md:block md:w-auto" id="navbar-default">
                 <ul class="font-medium flex flex-col p-4 md:p-0 mt-4 border md:flex-row md:space-x-8 rtl:space-x-reverse md:mt-0 md:border-0 dark:bg-black md:dark:bg-black dark:border-gray-700">
+                    <!-- Siempre visible -->
                     <li>
-                        <a href="#" class="block py-2 px-3 text-white rounded hover:bg-gray-700 md:hover:bg-transparent md:border-0 md:hover:text-blue-400 md:p-0" aria-current="page">Inicio</a>
+                        <a href="/" class="block py-2 px-3 text-white rounded hover:bg-gray-700 md:hover:bg-transparent md:border-0 md:hover:text-blue-400" aria-current="page">Inicio</a>
                     </li>
-                    <li>
-                        <a href="/menu" class="block py-2 px-3 text-white rounded hover:bg-gray-700 md:hover:bg-transparent md:border-0 md:hover:text-blue-400 md:p-0">Menu</a>
+                    
+                    <!-- Visible solo para ADMIN -->
+                    <li sec:authorize="hasAuthority('ADMIN')">
+                        <a href="/menu" class="block py-2 px-3 text-white rounded hover:bg-gray-700 md:hover:bg-transparent md:border-0 md:hover:text-blue-400">Menu</a>
                     </li>
-                   
-                    <li>
-                        <a href="/login" class="block py-2 px-3 text-red-400 rounded hover:bg-gray-700 md:hover:bg-transparent md:border-0 md:hover:text-blue-400 md:p-0">Iniciar Sesion</a>
-                    </li>
-                    <li>
-                        <a href="/registrarCuenta" class="block py-2 px-3 text-red-400 rounded hover:bg-gray-700 md:hover:bg-transparent md:border-0 md:hover:text-blue-400 md:p-0">Registrarse</a>
-                    </li>
-                    <li>
-                        <a href="/logout" class="block py-2 px-3 text-white rounded hover:bg-gray-700 md:hover:bg-transparent md:border-0 md:hover:text-blue-400 md:p-0">Cerrar Sesion</a>
+
+                    <!-- Icono de usuario con menú desplegable -->
+                    <li class="relative">
+                        <button id="userMenuButton" data-dropdown-toggle="userMenu" class="block py-2 px-3 text-white rounded hover:bg-gray-700">
+                            <img src="https://cdn-icons-png.flaticon.com/512/747/747376.png" class="w-6 h-6 rounded-full filter invert" alt="User icon">
+                        </button>
+                        
+                        <!-- Menú desplegable -->
+                        <div id="userMenu" class="hidden absolute right-0 mt-2 w-48 bg-black text-center rounded-md shadow-lg">
+                            <ul class="py-2">
+                                <!-- Visible solo para usuarios no autenticados -->
+                                <li sec:authorize="isAnonymous()">
+                                    <a href="/login" class="block px-2 py-2 text-white">Iniciar Sesion</a>
+                                </li>
+                                <li sec:authorize="isAnonymous()">
+                                    <a href="/registrarCuenta" class="block px-4 py-2 text-white">Registrarse</a>
+                                </li>
+                                
+                                <!-- Visible solo para usuarios autenticados -->
+                                <li sec:authorize="isAuthenticated()">
+                                    <a href="/logout" class="block px-4 py-2 text-red-400">Cerrar Sesion</a>
+                                </li>
+                            </ul>
+                        </div>
                     </li>
                 </ul>
             </div>
         </div>
-        
     </nav>
+
     <main class="p-8">
         <h1 class="text-3xl text-center font-bold text-white mt-8 mb-6">Nuestros Productos</h1>
         
@@ -50,7 +68,19 @@
             </div>
         </div>
     </main>
+
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script src="/js/index.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/flowbite@2.5.1/dist/flowbite.min.js"></script>
+
+    <script>
+        // Script para mostrar el menú desplegable
+        const userMenuButton = document.getElementById('userMenuButton');
+        const userMenu = document.getElementById('userMenu');
+
+        userMenuButton.addEventListener('click', () => {
+            userMenu.classList.toggle('hidden');
+        });
+    </script>
 </body>
 </html>
