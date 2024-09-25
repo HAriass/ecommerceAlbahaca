@@ -3,43 +3,72 @@
 <html xmlns:th="http://www.thymeleaf.org">
 
 <head>
-    <title>Ecommerce Albahaca</title>
+    <title>Ecommerce Albahaca - Admin Panel</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/css/index.css" />
 </head>
 
 <body>
-    <div>
-        <h1 class="titulo">Panel de Administración</h1>
-    </div>
-    <div class="containerIndex">
-        <div class="boxSection">
-            <a href="/registrarProducto">Productos</a>
-        </div>
 
-        <div class="boxSection">
-            <a href="/registrarCategoria">Categorías</a>
-        </div>
-
-        <div class="boxSection">
-            <a href="/registrarMarca">Marcas</a>
-        </div>
-
-        <div class="boxSection">
-            <a href="/registrarEstado">Estados</a>
-        </div>
-        
-        <div class="boxSection">
-            <a href="/registrarCuenta">Cuenta</a>
-        </div>
-
-        <div class="boxSection">
-            <a href="/pedidos">Pedidos</a>
-        </div>
-
+    <!-- Banner de bienvenida -->
+    <div class="banner">
+        <h2>Bienvenido al Panel de Administración</h2>
+        <p>Aquí puedes gestionar productos, categorías, marcas, pedidos y cuentas de usuario.</p>
     </div>
 
+    <main class="containerIndex">
+        <div class="boxSection">
+            <a href="/registrarProducto">
+                <i class="fas fa-box"></i>
+                <span>Productos</span>
+                <p>Gestiona el inventario de productos y añade nuevos artículos.</p>
+            </a>
+        </div>
+
+        <div class="boxSection">
+            <a href="/registrarCategoria">
+                <i class="fas fa-tags"></i>
+                <span>Categorías</span>
+                <p>Crea y organiza las diferentes categorías de tus productos.</p>
+            </a>
+        </div>
+
+        <div class="boxSection">
+            <a href="/registrarMarca">
+                <i class="fas fa-industry"></i>
+                <span>Marcas</span>
+                <p>Registra y gestiona las marcas de tus productos.</p>
+            </a>
+        </div>
+
+        <div class="boxSection">
+            <a href="/registrarEstado">
+                <i class="fas fa-flag"></i>
+                <span>Estados</span>
+                <p>Administra los estados de los pedidos de tu e-commerce.</p>
+            </a>
+        </div>
+
+        <div class="boxSection">
+            <a href="/registrarCuenta">
+                <i class="fas fa-user"></i>
+                <span>Cuenta</span>
+                <p>Gestiona las cuentas de los usuarios y administradores.</p>
+            </a>
+        </div>
+
+        <div class="boxSection">
+            <a href="/pedidos">
+                <i class="fas fa-shopping-cart"></i>
+                <span>Pedidos</span>
+                <p>Revisa y gestiona los pedidos realizados por los clientes.</p>
+            </a>
+        </div>
+    </main>
+
+    <!-- Incluye font-awesome para los iconos -->
+    <script src="https://kit.fontawesome.com/a076d05399.js"></script>
 </body>
 
 </html>
