@@ -1,7 +1,7 @@
 /* Archivo CSS o dentro de un <style> en el HTML */
 html, body {
-    /* height: 100%; */
-    background-color: #020a20 !important; /* Fondo negro para el cuerpo de la página */
+    height: 100%;
+    background-color: #020a20; /* Fondo negro para el cuerpo de la página */
 }
 
 .navbar{

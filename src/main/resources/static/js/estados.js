@@ -9,8 +9,8 @@
                         <tr>
                             <td>${estado.nombre}</td>
                             <td>${estado.descripcion}</td>
-                            <td><button class="btnTabla btn-modificar" onclick="location.href='/modificarEstado/${estado.id}'">Modificar</button></td>
-                            <td><button class="btnTabla btn-eliminar" onclick="eliminarEstado(${estado.id})">Eliminar</button></td>
+                            <td><button class="btn-modificar" onclick="location.href='/modificarEstado/${estado.id}'">Modificar</button></td>
+                            <td><button class="btn-eliminar" onclick="eliminarEstado(${estado.id})">Eliminar</button></td>
                         </tr>
                     `;
                 });
@@ -41,8 +41,8 @@
                         <tr>
                             <td>${estado.nombre}</td>
                             <td>${estado.descripcion}</td>
-                            <td><button class="btnTabla btn-modificar" onclick="location.href='/modificarEstado/${estado.id}'">Modificar</button></td>
-                            <td><button class="btnTabla btn-eliminar" onclick="eliminarEstado(${estado.id})">Eliminar</button></td>
+                            <td><button class="btn-modificar" onclick="location.href='/modificarEstado/${estado.id}'">Modificar</button></td>
+                            <td><button class="btn-eliminar" onclick="eliminarEstado(${estado.id})">Eliminar</button></td>
                         </tr>
                     `;
                 }
