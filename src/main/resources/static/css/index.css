@@ -19,12 +19,12 @@ html, body {
 
 /* Banner de bienvenida */
 .banner {
-    margin-top: 40px;
+    margin-top: 25px;
     background: linear-gradient(135deg, #1a1a1a 25%, #2c2c2c 100%); /* Degradado oscuro */
     padding: 20px;
     border-radius: 10px;
     text-align: center;
-    margin-bottom: 30px;
+    margin-bottom: 0px;
     color: #f4f4f9;
 }
 

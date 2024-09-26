@@ -1,13 +1,17 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Gestión de Productos</title>
     <link rel="stylesheet" href="/css/registro-tabla.css" />
+
 </head>
+
 <body>
-    <button class="boton" style="position: absolute; top: 20px; left: 20px;" onclick="window.location.href='/menu'">Volver</button>
+    <button class="boton" style="position: absolute; top: 20px; left: 20px;"
+        onclick="window.location.href='/menu'">Volver</button>
 
     <div class="main-container">
         <!-- Sección izquierda: Formulario de registro de producto -->
@@ -15,13 +19,16 @@
             <h2>Registrar Producto</h2>
             <form id="addProducto">
                 <label for="nombre">Nombre:</label>
-                <input type="text" id="nombre" name="nombre" pattern="[A-Za-z0-9 .,-_]+" title="Solo se permiten letras, números, puntos y comas." required/>
+                <input type="text" id="nombre" name="nombre" pattern="[A-Za-z0-9 .,-_]+"
+                    title="Solo se permiten letras, números, puntos y comas." required />
                 <label for="descripcion">Descripción:</label>
-                <input type="text" id="descripcion" name="descripcion" pattern="[A-Za-z0-9 .,-_]+" title="Solo se permiten letras, números, puntos y comas." required/>
+                <input type="text" id="descripcion" name="descripcion" pattern="[A-Za-z0-9 .,-_]+"
+                    title="Solo se permiten letras, números, puntos y comas." required />
                 <label for="imagen">Imagen:</label>
                 <input type="text" id="imagen" name="imagen" />
                 <label for="precio">Precio:</label>
-                <input type="text" id="precio" name="precio" pattern="[0-9.,]+" title="Solo se permiten números, puntos y comas." required/>
+                <input type="text" id="precio" name="precio" pattern="[0-9.,]+"
+                    title="Solo se permiten números, puntos y comas." required />
                 <label for="marcas">Elige una marca:</label>
                 <select id="marcas" name="marcas" required>
                     <!-- Cargo los datos desde el JS -->
@@ -37,9 +44,19 @@
         <!-- Sección derecha: Tabla de productos -->
         <div class="table-container">
             <h1>Productos</h1>
-            <div class="filtro-container">
-                <label for="filtro" class="filtro-label">Filtrar por ID:</label>
-                <input type="text" class="filtro-input" id="filtro" name="filtro">
+            <div class="containerFiltros">
+                <div class="filtro-container">
+                    <label for="filtro" class="filtro-label">Filtrar por ID:</label>
+                    <input type="text" class="filtro-input" id="filtro" name="filtro">
+                </div>
+                <div class="filtro-container">
+                    <label for="filtroName" class="filtro-label">Filtrar por Nombre:</label>
+                    <input type="text" class="filtro-input" id="filtroName" name="filtroName">
+                </div>
+                <div class="filtro-container">
+                    <label for="filtroMarca" class="filtro-label">Filtrar por Marca/Categoría:</label>
+                    <input type="text" class="filtro-input" id="filtroMarca" name="filtroMarca">
+                </div>
             </div>
             <table class="table">
                 <thead>
@@ -67,4 +84,5 @@
     <script type="module" src="/js/registrar-producto.js"></script>
     <script src="/js/productos.js"></script>
 </body>
+
 </html>
