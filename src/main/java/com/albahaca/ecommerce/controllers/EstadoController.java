@@ -1,7 +1,6 @@
 
 package com.albahaca.ecommerce.controllers;
 
-import com.albahaca.ecommerce.models.CategoriaModel;
 import com.albahaca.ecommerce.models.EstadoModel;
 import com.albahaca.ecommerce.services.EstadoService;
 import java.util.ArrayList;
