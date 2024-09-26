@@ -1,13 +1,16 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Gestión de Categorías</title>
     <link rel="stylesheet" href="/css/registro-tabla.css" />
 </head>
+
 <body>
-    <button class="boton" style="position: absolute; top: 20px; left: 20px;" onclick="window.location.href='/menu'">Volver</button>
+    <button class="boton" style="position: absolute; top: 20px; left: 20px;"
+        onclick="window.location.href='/menu'">Volver</button>
 
     <div class="main-container">
         <!-- Sección izquierda: Formulario de registro de categoría -->
@@ -15,9 +18,11 @@
             <h2>Registrar Categoría</h2>
             <form id="addCategoria">
                 <label for="nombre">Nombre:</label>
-                <input type="text" id="nombre" name="nombre" pattern="[A-Za-z0-9 .,-_]+" title="Solo se permiten letras, números, puntos y comas." required />
+                <input type="text" id="nombre" name="nombre" pattern="[A-Za-z0-9 .,-_]+"
+                    title="Solo se permiten letras, números, puntos y comas." required />
                 <label for="descripcion">Descripción:</label>
-                <input type="text" id="descripcion" name="descripcion" pattern="[A-Za-z0-9 .,-_]+" title="Solo se permiten letras, números, puntos y comas." required  />
+                <input type="text" id="descripcion" name="descripcion" pattern="[A-Za-z0-9 .,-_]+"
+                    title="Solo se permiten letras, números, puntos y comas." required />
                 <label for="imagen">Imagen:</label>
                 <input type="text" id="imagen" name="imagen" />
                 <input type="submit" value="Registrar" />
@@ -27,9 +32,15 @@
         <!-- Sección derecha: Tabla de categorías -->
         <div class="table-container">
             <h1>Categorías</h1>
-            <div class="filtro-container">
-                <label for="filtro" class="filtro-label">Filtrar por ID:</label>
-                <input type="text" class="filtro-input" id="filtro" name="filtro">
+            <div class="containerFiltros">
+                <div class="filtro-container">
+                    <label for="filtro" class="filtro-label">Filtrar por ID:</label>
+                    <input type="text" class="filtro-input" id="filtro" name="filtro">
+                </div>
+                <div class="filtro-container">
+                    <label for="filtroName" class="filtro-label">Filtrar por Nombre:</label>
+                    <input type="text" class="filtro-input" id="filtroName" name="filtroName">
+                </div>
             </div>
             <table class="table">
                 <thead>
@@ -52,6 +63,7 @@
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script type="module" src="/js/registrar-categoria.js"></script>
-    <script src="/js/categorias.js"></script>  
+    <script src="/js/categorias.js"></script>
 </body>
+
 </html>
