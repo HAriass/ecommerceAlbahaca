@@ -1,45 +1,129 @@
 <!DOCTYPE html>
 
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" 
+      xmlns:sec="https://www.thymeleaf.org/extras/spring-security">
 
 <head>
-    <title>Ecommerce Albahaca</title>
+    <title>Ecommerce Albahaca - Admin Panel</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/css/index.css" />
+    <link href="https://cdn.jsdelivr.net/npm/flowbite@2.5.1/dist/flowbite.min.css" rel="stylesheet" />
+    
 </head>
 
 <body>
-    <div>
-        <h1 class="titulo">Panel de Administración</h1>
+    <div class="divNavBar">
+        <nav class="navbar bg-black border-gray-200 bg-black">
+            <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
+                <a href="/" class="flex items-center space-x-2 rtl:space-x-reverse">
+                    <img src="/imgs/albahaca.png" class="w-8 h-8" alt="Logo Albahaca">
+                    <span class="self-center text-2xl font-semibold whitespace-nowrap text-white">Albahaca Suplementos</span>
+                </a>
+                <div class="hidden w-full md:block md:w-auto" id="navbar-default">
+                    <ul class="font-medium flex flex-col p-4 md:p-0 mt-4 border md:flex-row md:space-x-8 rtl:space-x-reverse md:mt-0 md:border-0 dark:bg-black md:dark:bg-black dark:border-gray-700">
+                        <!-- Siempre visible -->
+                        <li>
+                            <a href="/" class="block py-2 px-3 text-white rounded hover:bg-gray-700 md:hover:bg-transparent md:border-0 md:hover:text-blue-400" aria-current="page">Inicio</a>
+                        </li>
+
+                        <!-- Visible solo para ADMIN -->
+                        <li sec:authorize="hasAuthority('ADMIN')">
+                            <a href="/menu" class="block py-2 px-3 text-white rounded hover:bg-gray-700 md:hover:bg-transparent md:border-0 md:hover:text-blue-400">Menu</a>
+                        </li>
+
+                        <!-- Icono de usuario con menú desplegable -->
+                        <li class="relative">
+                            <button id="userMenuButton" data-dropdown-toggle="userMenu" class="block py-2 px-3 text-white rounded hover:bg-gray-700">
+                                <img src="https://cdn-icons-png.flaticon.com/512/747/747376.png" class="w-6 h-6 rounded-full filter invert" alt="User icon">
+                            </button>
+
+                            <!-- Menú desplegable -->
+                            <div id="userMenu" class="hidden absolute right-0 mt-2 w-48 bg-black text-center rounded-md shadow-lg">
+                                <ul class="py-2">
+                                    <!-- Visible solo para usuarios no autenticados -->
+                                    <li sec:authorize="isAnonymous()">
+                                        <a href="/login" class="block px-2 py-2 text-white">Iniciar Sesion</a>
+                                    </li>
+                                    <li sec:authorize="isAnonymous()">
+                                        <a href="/registrarCuenta" class="block px-4 py-2 text-white">Registrarse</a>
+                                    </li>
+
+                                    <!-- Visible solo para usuarios autenticados -->
+                                    <li sec:authorize="isAuthenticated()">
+                                        <a href="/logout" class="block px-4 py-2 text-red-400">Cerrar Sesion</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
     </div>
-    <div class="containerIndex">
-        <div class="boxSection">
-            <a href="/registrarProducto">Productos</a>
-        </div>
+        <div class="conteiner">
+            <div class="banner">
+            <h2>Bienvenido al Panel de Administración</h2>
+            <p>Aquí puedes gestionar productos, categorías, marcas, pedidos y cuentas de usuario.</p>
+            </div>
 
-        <div class="boxSection">
-            <a href="/registrarCategoria">Categorías</a>
-        </div>
+            <main class="containerIndex">
+                <div class="boxSection">
+                    <a href="/registrarProducto">
+                        <i class="fas fa-box"></i>
+                        <span>Productos</span>
+                        <p>Gestiona el inventario de productos y añade nuevos artículos.</p>
+                    </a>
+                </div>
 
-        <div class="boxSection">
-            <a href="/registrarMarca">Marcas</a>
-        </div>
+                <div class="boxSection">
+                    <a href="/registrarCategoria">
+                        <i class="fas fa-tags"></i>
+                        <span>Categorías</span>
+                        <p>Crea y organiza las diferentes categorías de tus productos.</p>
+                    </a>
+                </div>
 
-        <div class="boxSection">
-            <a href="/registrarEstado">Estados</a>
-        </div>
-        
-        <div class="boxSection">
-            <a href="/registrarCuenta">Cuenta</a>
-        </div>
+                <div class="boxSection">
+                    <a href="/registrarMarca">
+                        <i class="fas fa-industry"></i>
+                        <span>Marcas</span>
+                        <p>Registra y gestiona las marcas de tus productos.</p>
+                    </a>
+                </div>
 
-        <div class="boxSection">
-            <a href="/pedidos">Pedidos</a>
+                <div class="boxSection">
+                    <a href="/registrarEstado">
+                        <i class="fas fa-flag"></i>
+                        <span>Estados</span>
+                        <p>Administra los estados de los pedidos de tu e-commerce.</p>
+                    </a>
+                </div>
+
+                <div class="boxSection">
+                    <a href="/registrarCuenta">
+                        <i class="fas fa-user"></i>
+                        <span>Cuenta</span>
+                        <p>Gestiona las cuentas de los usuarios y administradores.</p>
+                    </a>
+                </div>
+
+                <div class="boxSection">
+                    <a href="/pedidos">
+                        <i class="fas fa-shopping-cart"></i>
+                        <span>Pedidos</span>
+                        <p>Revisa y gestiona los pedidos realizados por los clientes.</p>
+                    </a>
+                </div>
+            </main>
         </div>
+    <!-- Banner de bienvenida -->
+    
 
-    </div>
-
+    <!-- Incluye font-awesome para los iconos -->
+    <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/flowbite@2.5.1/dist/flowbite.min.js"></script>
 </body>
 
 </html>
