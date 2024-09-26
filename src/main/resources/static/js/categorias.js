@@ -46,6 +46,8 @@ function getCategoriaById(id) {
                             <td><button class="btn-eliminar" onclick="eliminarMarca(${categoria.id})">Eliminar</button></td>
                         </tr>
                     `;
+            } else {
+                htmlContent = '<tr><td colspan="5">No se encontraron categorías.</td></tr>';
             }
             tbody.innerHTML = htmlContent;
         })
@@ -58,17 +60,22 @@ function getCategoriaByName(filtroName) {
             const categorias = response.data;
             const tbody = document.querySelector("tbody");
             let htmlContent = '';
-            categorias.forEach(categoria => {
-                htmlContent += `
-                    <tr>
-                        <td>${categoria.nombre}</td>
-                        <td>${categoria.descripcion}</td>
-                        <td><a class="btn-imagen" href="https://drive.google.com/uc?export=view&id=${categoria.imagen}" target="_blank">Ver Imagen</a></td>
-                        <td><button class="btn-modificar" onclick="location.href='/modificarCategoria/${categoria.id}'">Modificar</button></td>
-                        <td><button class="btn-eliminar" onclick="eliminarCategoria(${categoria.id})">Eliminar</button></td>
-                    </tr>
-                `;
-            });
+            if (categorias && categorias.length > 0) {
+                categorias.forEach(categoria => {
+                    htmlContent += `
+                        <tr>
+                            <td>${categoria.nombre}</td>
+                            <td>${categoria.descripcion}</td>
+                            <td><a class="btn-imagen" href="https://drive.google.com/uc?export=view&id=${categoria.imagen}" target="_blank">Ver Imagen</a></td>
+                            <td><button class="btn-modificar" onclick="location.href='/modificarCategoria/${categoria.id}'">Modificar</button></td>
+                            <td><button class="btn-eliminar" onclick="eliminarCategoria(${categoria.id})">Eliminar</button></td>
+                        </tr>
+                    `;
+                });
+            } else {
+                htmlContent = '<tr><td colspan="5">No se encontraron categorías.</td></tr>';
+            }
+
             tbody.innerHTML = htmlContent;
         })
         .catch((err) => console.error(err));
