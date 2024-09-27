@@ -1,3 +1,6 @@
+import {confirmarOperacion} from './alertas.js';
+import {modificar} from './alertas.js';
+
 const form = document.getElementById('updateProducto');
 
 form.addEventListener('submit', function (event) {
@@ -48,28 +51,27 @@ form.addEventListener('submit', function (event) {
     const jsonData = JSON.stringify(data);
     // console.log('JSON enviado:', jsonData);
 
-    // Envía los datos JSON usando Axios
-    axios.post("/producto/guardarProducto", jsonData, {
-        headers: {
-            'Content-Type': 'application/json'
-        }
-    })
-        .then(response => {
-            Swal.fire({
-                position: "top-center",
-                icon: "success",
-                title: "Producto modificado correctamente!",
-                showConfirmButton: false,
-                timer: 1500
+    confirmarOperacion('modificar', () => {
+            // Si el usuario confirma, se procede con el envío de los datos
+            axios.post("/producto/guardarProducto", jsonData, {
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            })
+            .then(response => {
+                console.log('Éxito:', response.data);
+                // Redirige después del registro exitoso
+                setTimeout(() => {
+                    window.location.href = '/registrarProducto';
+                }, 1500);
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                setTimeout(() => {
+                            window.location.href = '/registrarProducto';
+                        }, 1500);
+
             });
-
-            setTimeout(function () {
-                window.location.href = '/registrarProducto';
-            }, 1500);
-
-        })
-        .catch(error => {
-            console.error('Error:', error);
         });
 });
 
