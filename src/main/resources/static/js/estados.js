@@ -1,3 +1,6 @@
+import {confirmarOperacion} from './alertas.js';
+import {eliminar} from './alertas.js';
+
 function getEstados() {
     axios.get("/estado/listarEstados")
         .then(function (response) {
@@ -10,24 +13,36 @@ function getEstados() {
                             <td>${estado.nombre}</td>
                             <td>${estado.descripcion}</td>
                             <td><button class="btn-modificar" onclick="location.href='/modificarEstado/${estado.id}'">Modificar</button></td>
-                            <td><button class="btn-eliminar" onclick="eliminarEstado(${estado.id})">Eliminar</button></td>
+                            <td><button class="btn-eliminar" data-id="${estado.id}">Eliminar</button></td>
                         </tr>
                     `;
             });
             tbody.innerHTML = htmlContent;
+
+            // Agregar event listeners a los botones de eliminar
+            const eliminarButtons = document.querySelectorAll('.btn-eliminar');
+            eliminarButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    const id = button.getAttribute('data-id');
+                    eliminarEstado(id); // Llama a la función eliminarProducto con el ID
+                });
+            });
         })
         .catch((err) => console.error(err));
 }
 
 function eliminarEstado(id) {
+    confirmarOperacion('eliminar', () => {
     axios.delete(`/estado/eliminarEstado/${id}`)
         .then(response => {
             console.log('Éxito:', response.data);
             eliminar();
+            getEstados();
         })
         .catch(error => {
             console.error('Error:', error);
         });
+    });
 }
 
 function getEstadoById(id) {
@@ -106,17 +121,3 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 
 });
-
-function eliminar() {
-    {
-        Swal.fire({
-            title: "Eliminado!",
-            text: "Registro eliminado correctamente.",
-            showConfirmButton: false,
-            icon: "success"
-        });
-        setTimeout(() => {
-            window.location.reload();
-        }, 1500);
-    }
-}

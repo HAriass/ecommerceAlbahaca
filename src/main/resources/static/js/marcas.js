@@ -1,3 +1,6 @@
+import {confirmarOperacion} from './alertas.js';
+import {eliminar} from './alertas.js';
+
 function getMarcas() {
     axios.get("/marca/listarMarcas")
         .then(function (response) {
@@ -9,24 +12,35 @@ function getMarcas() {
                         <tr>
                             <td>${marca.nombre}</td>
                             <td><button class="btn-modificar" onclick="location.href='/modificarMarca/${marca.id}'">Modificar</button></td>
-                            <td><button class="btn-eliminar" onclick="eliminarMarca(${marca.id})">Eliminar</button></td>
+                            <td><button class="btn-eliminar" data-id="${marca.id}">Eliminar</button></td>
                         </tr>
                     `;
             });
             tbody.innerHTML = htmlContent;
+            
+            const eliminarButtons = document.querySelectorAll('.btn-eliminar');
+            eliminarButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    const id = button.getAttribute('data-id');
+                    eliminarMarca(id); // Llama a la función eliminarCategoria con el ID
+                });
+            });
         })
         .catch((err) => console.error(err));
 }
 
 function eliminarMarca(id) {
-    axios.delete(`/marca/eliminarMarca/${id}`)
-        .then(response => {
-            console.log('Éxito:', response.data);
-            eliminar();
-        })
-        .catch(error => {
-            console.error('Error:', error);
-        });
+    confirmarOperacion('eliminar', () => {
+        axios.delete(`/marca/eliminarMarca/${id}`)
+            .then(response => {
+                console.log('Éxito:', response.data);
+                eliminar();
+                getMarcas(); // Vuelve a cargar los productos después de eliminar
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+    });
 }
 function getMarcaById(id) {
     axios.get(`/marca/obtenerMarcaPorId/${id}`)
@@ -101,17 +115,3 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     });
 });
-
-function eliminar() {
-    {
-        Swal.fire({
-            title: "Eliminado!",
-            text: "Registro eliminado correctamente.",
-            showConfirmButton: false,
-            icon: "success"
-        });
-        setTimeout(() => {
-            window.location.reload();
-        }, 1500);
-    }
-}

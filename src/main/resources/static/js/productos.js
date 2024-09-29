@@ -1,43 +1,59 @@
+import {confirmarOperacion} from './alertas.js';
+import {eliminar} from './alertas.js';
+
 function getProductos() {
     axios.get("/producto/listarProductos")
         .then(function (response) {
             const productos = response.data;
             const tbody = document.querySelector("tbody");
             let htmlContent = '';
+
             productos.forEach(producto => {
                 // Comprobar que producto, marca y categoría existen
                 if (producto && producto.marca && producto.categoria) {
                     htmlContent += `
-                                <tr>
-                                    <td title="${producto.nombre}">${producto.nombre}</td>
-                                    <td title="${producto.descripcion}">${producto.descripcion}</td>
-                                    <td title="${producto.precio}">${producto.precio}</td>
-                                    <td title="${producto.marca.nombre}">${producto.marca.nombre}</td>
-                                    <td title="${producto.categoria.nombre}">${producto.categoria.nombre}</td>
-                                    <td><a class="btn-imagen" href="${producto.imagen}" target="_blank">Ver imagen</a></td>
-                                    <td><button class="btn-modificar" onclick="location.href='/modificarProducto/${producto.id}'">Modificar</button></td>
-                                    <td><button class="btn-eliminar" onclick="eliminarProducto(${producto.id})">Eliminar</button></td>
-                                </tr>
-                            `;
+                        <tr>
+                            <td title="${producto.nombre}">${producto.nombre}</td>
+                            <td title="${producto.descripcion}">${producto.descripcion}</td>
+                            <td title="${producto.precio}">${producto.precio}</td>
+                            <td title="${producto.marca.nombre}">${producto.marca.nombre}</td>
+                            <td title="${producto.categoria.nombre}">${producto.categoria.nombre}</td>
+                            <td><a class="btn-imagen" href="${producto.imagen}" target="_blank">Ver imagen</a></td>
+                            <td><button class="btn-modificar" onclick="location.href='/modificarProducto/${producto.id}'">Modificar</button></td>
+                            <td><button class="btn-eliminar" data-id="${producto.id}">Eliminar</button></td>
+                        </tr>
+                    `;
                 } else {
                     console.warn('Producto o propiedades faltantes:', producto);
                 }
             });
 
             tbody.innerHTML = htmlContent;
+
+            // Agregar event listeners a los botones de eliminar
+            const eliminarButtons = document.querySelectorAll('.btn-eliminar');
+            eliminarButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    const id = button.getAttribute('data-id');
+                    eliminarProducto(id); // Llama a la función eliminarProducto con el ID
+                });
+            });
         })
         .catch((err) => console.error(err));
 }
 
 function eliminarProducto(id) {
-    axios.delete(`/producto/eliminarProducto/${id}`)
-        .then(response => {
-            console.log('Éxito:', response.data);
-            eliminar();
-        })
-        .catch(error => {
-            console.error('Error:', error);
-        });
+    confirmarOperacion('eliminar', () => {
+        axios.delete(`/producto/eliminarProducto/${id}`)
+            .then(response => {
+                console.log('Éxito:', response.data);
+                eliminar();
+                getProductos(); // Vuelve a cargar los productos después de eliminar
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+    });
 }
 function getProductoById(id) {
     axios.get(`/producto/obtenerProductoPorId/${id}`)
@@ -176,16 +192,3 @@ document.addEventListener("DOMContentLoaded", function () {
 
 });
 
-function eliminar() {
-    {
-        Swal.fire({
-            title: "Eliminado!",
-            text: "Registro eliminado correctamente.",
-            showConfirmButton: false,
-            icon: "success"
-        });
-        setTimeout(() => {
-            window.location.reload();
-        }, 1500);
-    }
-}
