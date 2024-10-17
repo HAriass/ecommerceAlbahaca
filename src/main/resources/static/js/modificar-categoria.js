@@ -41,6 +41,7 @@ function guardarCategoria() {
             })
             .then(response => {
                 console.log('Éxito:', response.data);
+                modificar();
                 // Redirige después del registro exitoso
                 setTimeout(() => {
                     window.location.href = '/registrarCategoria';
