@@ -39,7 +39,10 @@ public class ProductoService {
     private void validarProducto(ProductoModel producto) {
         if (producto.getPrecio() < 0) {
             throw new IllegalArgumentException("El precio no puede ser negativo.");
-        }   
+        }
+        if (producto.getNombre()== null){
+            throw new IllegalArgumentException("El nombre no puede ser nulo.");
+        }
     }
     
 }

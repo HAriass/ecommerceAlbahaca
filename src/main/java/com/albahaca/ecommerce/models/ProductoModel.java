@@ -21,14 +21,6 @@ public class ProductoModel {
     private String nombre;
     private String descripcion;
     private String imagen;
-
-    public String getImagen() {
-        return imagen;
-    }
-
-    public void setImagen(String imagen) {
-        this.imagen = imagen;
-    }
     private float precio;
     
     @ManyToOne
@@ -63,6 +55,14 @@ public class ProductoModel {
         this.descripcion = descripcion;
     }
 
+    public String getImagen() {
+        return imagen;
+    }
+
+    public void setImagen(String imagen) {
+        this.imagen = imagen;
+    }
+
     public float getPrecio() {
         return precio;
     }
@@ -86,6 +86,9 @@ public class ProductoModel {
     public void setCategoria(CategoriaModel categoria) {
         this.categoria = categoria;
     }
+
+    
+    
     
     
 }
