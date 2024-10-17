@@ -3,6 +3,7 @@ package com.albahaca.ecommerce.controllers;
 
 import com.albahaca.ecommerce.models.ProductoModel;
 import com.albahaca.ecommerce.services.ProductoService;
+import java.util.ArrayList;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -34,5 +35,12 @@ public class ViewControllerProducto {
             model.addAttribute("producto", producto.get());
         }
         return "modificar-producto"; 
+    }
+    
+    @GetMapping("/mostrarProductosCategoria/{id}")
+    public String mostrarProductosCategoria(@PathVariable("id") Long id, Model model){
+        ArrayList<ProductoModel> productos = productoService.obtenerProductoPorCategoria(id);
+        model.addAttribute("productos", productos);
+        return "productos";
     }
 }

@@ -21,15 +21,8 @@ public class ProductoModel {
     private String nombre;
     private String descripcion;
     private String imagen;
-
-    public String getImagen() {
-        return imagen;
-    }
-
-    public void setImagen(String imagen) {
-        this.imagen = imagen;
-    }
     private float precio;
+    private int stock;
     
     @ManyToOne
     @JoinColumn(name = "marca_id")
@@ -38,6 +31,8 @@ public class ProductoModel {
     @ManyToOne
     @JoinColumn(name = "categoria_id")
     private CategoriaModel categoria;
+    
+    
 
     public Long getId() {
         return id;
@@ -63,12 +58,28 @@ public class ProductoModel {
         this.descripcion = descripcion;
     }
 
+    public String getImagen() {
+        return imagen;
+    }
+
+    public void setImagen(String imagen) {
+        this.imagen = imagen;
+    }
+
     public float getPrecio() {
         return precio;
     }
 
     public void setPrecio(float precio) {
         this.precio = precio;
+    }
+
+    public int getStock() {
+        return stock;
+    }
+
+    public void setStock(int stock) {
+        this.stock = stock;
     }
 
     public MarcaModel getMarca() {
@@ -86,6 +97,5 @@ public class ProductoModel {
     public void setCategoria(CategoriaModel categoria) {
         this.categoria = categoria;
     }
-    
-    
+   
 }

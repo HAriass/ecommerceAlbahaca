@@ -37,6 +37,9 @@
                 <select id="categorias" name="categorias" required>
                     <!-- Cargo los datos desde el JS -->
                 </select>
+                <label for="stock">Stock</label>
+                <input type="text" id="stock" name="stock" pattern="[0-9]+"
+                    title="Solo se permiten números" required />
                 <input type="submit" value="Registrar" />
             </form>
         </div>
@@ -64,6 +67,7 @@
                         <th>Nombre</th>
                         <th>Descripción</th>
                         <th>Precio</th>
+                        <th>Stock</th>
                         <th>Marca</th>
                         <th>Categoría</th>
                         <th>Imagen</th>
