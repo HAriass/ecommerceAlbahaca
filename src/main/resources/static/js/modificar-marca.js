@@ -1,3 +1,4 @@
+import {confirmarOperacion} from './alertas.js';
 import {modificar} from './alertas.js';
 
 const form = document.getElementById('updateMarca');
@@ -19,6 +20,8 @@ function guardarMarca() {
         // Convierte el objeto a JSON
         const jsonData = JSON.stringify(data);
         console.log(jsonData); // Añade esta línea
+        
+        confirmarOperacion('modificar', () => {
         // Envía los datos JSON usando Axios
         axios.post("/marca/guardarMarca", jsonData, {
             headers: {
@@ -34,6 +37,10 @@ function guardarMarca() {
         })
         .catch(error => {
             console.error('Error:', error);
+            setTimeout(() => {
+                        window.location.href = '/registrarMarca';
+                      }, 1500);
+        });
         });
         
     });

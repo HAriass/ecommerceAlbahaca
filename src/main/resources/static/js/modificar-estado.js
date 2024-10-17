@@ -1,3 +1,4 @@
+import {confirmarOperacion} from './alertas.js';
 import {modificar} from './alertas.js';
 
 const form = document.getElementById('updateEstado');
@@ -19,7 +20,9 @@ function guardarEstado() {
         // Convierte el objeto a JSON
         const jsonData = JSON.stringify(data);
         console.log(jsonData); // Añade esta línea
+        
         // Envía los datos JSON usando Axios
+        confirmarOperacion('modificar', () => {
         axios.post("/estado/guardarEstado", jsonData, {
             headers: {
                 'Content-Type': 'application/json'
@@ -34,8 +37,11 @@ function guardarEstado() {
         })
         .catch(error => {
             console.error('Error:', error);
+            setTimeout(() => {
+                            window.location.href = '/registrarProducto';
+                        }, 1500);
+            });
         });
-        
         
     });
 }

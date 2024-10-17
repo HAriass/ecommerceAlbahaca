@@ -1,3 +1,4 @@
+import {confirmarOperacion} from './alertas.js';
 import {modificar} from './alertas.js';
 
 const form = document.getElementById('updateCategoria');
@@ -30,23 +31,30 @@ function guardarCategoria() {
         // Convierte el objeto a JSON
         const jsonData = JSON.stringify(data);
 
-        // Envía los datos JSON usando Axios
-        axios.post("/categoria/guardarCategoria", jsonData, {
-            headers: {
-                'Content-Type': 'application/json'
-            }
-        })
-        .then(response => {
-            console.log('Éxito:', response.data);
-            modificar();
-            setTimeout(() => {
-                window.location.href = '/registrarCategoria';
-            }, 1500);
-        })
-        .catch(error => {
-            console.error('Error:', error);
+        // Llamar a confirmarOperacion para la alerta
+        confirmarOperacion('modificar', () => {
+            // Si el usuario confirma, se procede con el envío de los datos
+            axios.post("/categoria/guardarCategoria", jsonData, {
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            })
+            .then(response => {
+                console.log('Éxito:', response.data);
+                modificar();
+                // Redirige después del registro exitoso
+                setTimeout(() => {
+                    window.location.href = '/registrarCategoria';
+                }, 1500);
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                setTimeout(() => {
+                            window.location.href = '/registrarCategoria';
+                        }, 1500);
+
+            });
         });
-        
     });
 }
 
