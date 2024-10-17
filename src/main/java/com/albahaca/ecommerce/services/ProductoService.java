@@ -19,6 +19,7 @@ public class ProductoService {
     }
     
     public ProductoModel guardarProducto(ProductoModel producto){
+        validarProducto(producto);
         return productoRepository.save(producto);
     }
     
@@ -34,5 +35,14 @@ public class ProductoService {
     public Optional<ProductoModel> obtenerProductoPorId(Long id){
         return productoRepository.findById(id);
     } 
+    
+    private void validarProducto(ProductoModel producto) {
+        if (producto.getPrecio() < 0) {
+            throw new IllegalArgumentException("El precio no puede ser negativo.");
+        }
+        if (producto.getNombre()== null){
+            throw new IllegalArgumentException("El nombre no puede ser nulo.");
+        }
+    }
     
 }
