@@ -31,7 +31,7 @@ public class PERegistroProductoUnitTest {
         ",'Proteina', '1', 100.50, 'proteic', 'http://imagen1.com'",
         "'creatina', 'suplemento', '2', 80.75, 'proteic', 'http://imagen2.com'",
         "'prote', 'suplemento', '3', 1000, 'proteicus', 'http://imagen2.com'",
-        "'creatina', 'suplemento', '2', -2, 'proteicus', 'http://imagen2.com'",
+        "'ganador de peso', 'suplemento', '4', -2, 'proteicus', 'http://imagen2.com'",
         
 
     })

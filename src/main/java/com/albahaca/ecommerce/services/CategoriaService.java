@@ -19,6 +19,7 @@ public class CategoriaService {
     }
     
     public CategoriaModel guardarCategoria(CategoriaModel categoria){
+        validarCategoria(categoria);
         return categoriaRepository.save(categoria);
     }
 
@@ -33,5 +34,15 @@ public class CategoriaService {
     
     public Optional<CategoriaModel> obtenerCategoriaPorId(Long id){
         return categoriaRepository.findById(id);
+    }
+    
+    private void validarCategoria(CategoriaModel categoria) {
+       if (categoria.getNombre() == null || categoria.getNombre().isEmpty()) {
+            throw new IllegalArgumentException("El nombre no puede estar vacío");
+        }
+
+        if (categoria.getDescripcion() == null || categoria.getDescripcion().isEmpty()) {
+            throw new IllegalArgumentException("La descripción no puede estar vacía");
+        }
     }
 }
