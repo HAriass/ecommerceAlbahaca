@@ -44,8 +44,10 @@ label {
     color: #bbb;
 }
 
+
 input[type="password"],
 input[type="text"],
+input[type="number"],
 select {
     padding: 10px;
     margin-bottom: 15px;
