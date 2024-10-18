@@ -56,7 +56,7 @@ function guardarProducto() {
                 console.error('Error:', error);
             });
 
-    });
+         });
 }
 
 function getMarcas() {

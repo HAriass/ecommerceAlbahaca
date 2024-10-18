@@ -30,4 +30,8 @@ public class CuentaService {
         }
     }
     
+    public CuentaModel findById(Long id) {
+        return cuentaRepository.findById(id).orElse(null);
+    }
+    
 }

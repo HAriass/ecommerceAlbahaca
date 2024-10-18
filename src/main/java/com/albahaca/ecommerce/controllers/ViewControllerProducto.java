@@ -43,4 +43,18 @@ public class ViewControllerProducto {
         model.addAttribute("productos", productos);
         return "productos";
     }
+    
+    @GetMapping("/mostrarProducto/{id}")
+    public String mostrarProductoPorId(@PathVariable("id") Long id, Model model) {
+        Optional<ProductoModel> producto = productoService.obtenerProductoPorId(id);
+        if (producto.isPresent()) {
+            model.addAttribute("producto", producto.get());
+            System.out.println("super objeto" + producto.get());
+        } else {
+            System.out.println("Producto no encontrado");
+        }
+
+        return "mostrarProducto";
+    }
+
 }

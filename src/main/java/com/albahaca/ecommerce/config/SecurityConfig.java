@@ -31,7 +31,11 @@ public class SecurityConfig {
                                  "/estado/listarEstados", 
                                  "/pedido/listarPedidos", 
                                  "/producto/listarProductos", 
-                                 "/tipoCuenta/listarTipoCuentas").permitAll()  // Acceso público a los listados
+                                 "/producto/mostrarProducto/**",
+                                 "/tipoCuenta/listarTipoCuentas",
+                                 "/mostrarProductosCategoria/**",
+                                 "/mostrarProducto/**",
+                "/addToCart").permitAll()  // Acceso público a los listados
                 .requestMatchers("/menu").hasAuthority("ADMIN")  // Solo administradores pueden acceder a "/menu"
                 .requestMatchers("/marca/guardarMarca", 
                                  "/marca/eliminarMarca/**", 
