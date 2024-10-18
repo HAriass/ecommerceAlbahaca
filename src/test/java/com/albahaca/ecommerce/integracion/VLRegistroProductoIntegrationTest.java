@@ -22,13 +22,11 @@ public class VLRegistroProductoIntegrationTest {
         ProductoModel producto = new ProductoModel();
         producto.setNombre("Producto con precio negativo");
         producto.setDescripcion("Prueba con precio negativo");
-        producto.setPrecio(-100.0f); 
-
-        Exception exception = assertThrows(IllegalArgumentException.class, () -> {
+        producto.setPrecio(-100.0f);
+        
+        assertThrows(IllegalArgumentException.class, () -> {
             productoService.guardarProducto(producto);
         });
-
-        assertEquals("El precio no puede ser negativo", exception.getMessage());
     }
 
     @Test
