@@ -37,8 +37,12 @@ public class VLRegistroProductoIntegrationTest {
         producto.setPrecio(0.0f); // valor límite
 
         ProductoModel resultado = productoService.guardarProducto(producto);
-        assertNotNull(resultado);
-        assertEquals(0.0f, resultado.getPrecio());
+        
+        // Verifica que se ha guardado correctamente
+        assertNotNull(resultado.getId());
+        assertEquals("Producto con precio 0", resultado.getNombre());
+        assertEquals("Prueba con precio 0", resultado.getDescripcion());
+        assertEquals(0, resultado.getPrecio());
     }
 
     @Test
@@ -49,7 +53,10 @@ public class VLRegistroProductoIntegrationTest {
         producto.setPrecio(1000.01f); // valor límite
 
         ProductoModel resultado = productoService.guardarProducto(producto);
-        assertNotNull(resultado);
+        
+        assertNotNull(resultado.getId());
+        assertEquals("Producto con precio positivo", resultado.getNombre());
+        assertEquals("Prueba con precio positivo", resultado.getDescripcion());
         assertEquals(1000.01f, resultado.getPrecio());
     }
 }
