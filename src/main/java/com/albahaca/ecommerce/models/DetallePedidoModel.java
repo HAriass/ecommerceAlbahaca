@@ -12,7 +12,8 @@ import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "detallepedido")
-public class DetallerPedidoModel {
+public class DetallePedidoModel {
+    
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -64,11 +65,13 @@ public class DetallerPedidoModel {
     }
 
     public float getSubtotal() {
-        return subtotal;
+        return this.subtotal;
     }
 
     public void setSubtotal(float subtotal) {
-        this.subtotal = subtotal;
+        this.subtotal = this.cantidad * this.producto.getPrecio();
     }
+
+    
     
 }
