@@ -22,9 +22,9 @@ public class PERegistroCategoriaIntegracionTest {
     public void testGuardarCategoria_NombreValido() {
         // Crea una categoría válida
         CategoriaModel categoria = new CategoriaModel();
-        categoria.setNombre("Ropa"); // Nombre válido
-        categoria.setDescripcion("Categoría de ropa");
-        categoria.setImagen("imagen_ropa.jpg");
+        categoria.setNombre("nombre valido"); // Nombre válido
+        categoria.setDescripcion("Categoría nombre valida");
+        categoria.setImagen("imagen_nombreValido.jpg");
 
         // Guarda la categoría
         CategoriaModel categoriaGuardada = categoriaService.guardarCategoria(categoria);
@@ -42,7 +42,7 @@ public class PERegistroCategoriaIntegracionTest {
         CategoriaModel categoria = new CategoriaModel();
         categoria.setNombre(""); // Nombre inválido
         categoria.setDescripcion("Categoría sin nombre");
-        categoria.setImagen("imagen_generica.jpg");
+        categoria.setImagen("imagen_nombreInvalido.jpg");
 
         // Intenta guardar la categoría
         assertThrows(IllegalArgumentException.class, () -> {
