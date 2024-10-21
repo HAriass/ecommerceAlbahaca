@@ -2,6 +2,7 @@ package com.albahaca.ecommerce.controllers;
 
 import com.albahaca.ecommerce.models.CartItem;
 import com.albahaca.ecommerce.models.DetallePedidoModel;
+import com.albahaca.ecommerce.models.EstadoModel;
 import com.albahaca.ecommerce.models.PedidoModel;
 import com.albahaca.ecommerce.models.ProductoModel;
 import com.albahaca.ecommerce.services.CartService;
@@ -53,6 +54,13 @@ public class CartController {
         cartService.addToCart(producto, cantidad);
         return "redirect:/";
     }
+    
+    @PostMapping("/delItemToCart")
+    public String delItemToCart(@RequestParam("productoId") Long productoId) {
+        cartService.delItemToCart(productoId);
+        return "redirect:/carrito";
+    }
+
 
     @GetMapping("/carrito")
     public String viewCart(Model model) {
@@ -66,6 +74,10 @@ public class CartController {
         PedidoModel pedido = new PedidoModel();
         // Establecer la cuenta en el pedido
         pedido.setCuenta(cuentaDetailsService.getCuentaLogueada());
+        
+        EstadoModel estado = estadoService.obtenerEstadoPorId(1L)
+                                   .orElseThrow(() -> new RuntimeException("Estado no encontrado"));
+        pedido.setEstado(estado);
 
         // Guardar el pedido usando tu PedidoService
         pedidoService.guardarPedido(pedido);
@@ -80,9 +92,7 @@ public class CartController {
     private void crearDetallePedido(PedidoModel pedido) {
         List<CartItem> cartItems = cartService.getCartItems();
         float subTotal = 0;
-        
-        long idPedido = pedido.getId();
-        
+
         for (CartItem item : cartItems) {
             DetallePedidoModel detallePedido = new DetallePedidoModel();
             detallePedido.setProducto(item.getProducto());

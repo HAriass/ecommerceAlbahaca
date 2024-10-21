@@ -86,12 +86,18 @@
             <p><strong>Descripción:</strong> <span th:text="${producto.descripcion}"></span></p>
             <p><strong>Precio:</strong> <span th:text="${producto.precio}"></span></p>
 
-            <form id="addToCartForm" th:action="@{/addToCart}" method="post">
+            <form id="addToCartForm" th:action="@{/addToCart}" method="post" sec:authorize="hasAuthority('USER')">
                 <input type="hidden" name="productoId" th:value="${producto.id}" id="productoId" />
                 <label>Cantidad:</label> 
                 <input type="number" name="cantidad" min="1" value="1" id="cantidad">
                 <input type="submit" value="Agregar al Carrito">
             </form>
+
+            <!-- Mostrar mensaje si no es usuario autenticado -->
+            <div th:if="${!#authorization.expression('hasAuthority(''USER'')')}">
+                <p class="text-red-500">Debes iniciar sesión como cliente para agregar productos al carrito.</p>
+            </div>
+
 
         </div>
 

@@ -30,7 +30,7 @@
                              <a href="/menu" class="block py-2 px-3 text-white rounded hover:bg-gray-700 md:hover:bg-transparent md:border-0 md:hover:text-blue-400">Menu</a>
                          </li>
                           <!-- Visible solo para ADMIN -->
-                         <li>
+                         <li sec:authorize="hasAuthority('USER')">
                              <a href="/carrito" class="block py-2 px-3 text-white rounded hover:bg-gray-700 md:hover:bg-transparent md:border-0 md:hover:text-blue-400">Recontra carro con ruedas</a>
                          </li>
 

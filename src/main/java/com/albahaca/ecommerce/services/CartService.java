@@ -24,6 +24,12 @@ public class CartService {
     public List<CartItem> getCartItems() {
         return items;
     }
+    
+    public void delItemToCart(Long idProducto) {
+        // Buscar el producto en la lista de items
+        items.removeIf(item -> item.getProducto().getId().equals(idProducto));
+    }
+
 
     public void clearCart() {
         items.clear();

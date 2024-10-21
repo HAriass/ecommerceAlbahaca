@@ -1,5 +1,9 @@
 package com.albahaca.ecommerce.config;
 
+import com.albahaca.ecommerce.services.CartService;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+import java.io.IOException;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
@@ -10,12 +14,17 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.web.authentication.logout.LogoutSuccessHandler;
 
 @Configuration
 @EnableWebSecurity
 @EnableMethodSecurity
 @RequiredArgsConstructor
 public class SecurityConfig {
+    
+    @Autowired
+    private CartService cartService;
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
@@ -34,8 +43,7 @@ public class SecurityConfig {
                                  "/producto/mostrarProducto/**",
                                  "/tipoCuenta/listarTipoCuentas",
                                  "/mostrarProductosCategoria/**",
-                                 "/mostrarProducto/**",
-                "/addToCart").permitAll()  // Acceso público a los listados
+                                 "/mostrarProducto/**").permitAll()  // Acceso público a los listados
                 .requestMatchers("/menu").hasAuthority("ADMIN")  // Solo administradores pueden acceder a "/menu"
                 .requestMatchers("/marca/guardarMarca", 
                                  "/marca/eliminarMarca/**", 
@@ -66,11 +74,26 @@ public class SecurityConfig {
             )
             .logout(logout -> logout
                 .logoutUrl("/logout")  // URL para la solicitud de logout
+                .logoutSuccessHandler(customLogoutSuccessHandler())  // Limpia el carrito al cerrar sesión
                 .logoutSuccessUrl("/")  // Redirige a "/" tras logout exitoso
                 .invalidateHttpSession(true)  // Invalida la sesión
                 .deleteCookies("JSESSIONID")  // Elimina las cookies de sesión
             )
             .build();
+    }
+    // Implementación de LogoutSuccessHandler para limpiar el carrito
+    @Bean
+    public LogoutSuccessHandler customLogoutSuccessHandler() {
+        return new LogoutSuccessHandler() {
+            @Override
+            public void onLogoutSuccess(HttpServletRequest request, HttpServletResponse response, 
+                                        org.springframework.security.core.Authentication authentication) 
+                                        throws IOException {
+                // Limpiar el carrito cuando se cierra la sesión
+                cartService.clearCart();
+                response.sendRedirect("/");  // Redirigir al usuario después de limpiar el carrito
+            }
+        };
     }
 
 
