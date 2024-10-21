@@ -31,9 +31,9 @@ public class PERegistroCategoriaIntegracionTest {
 
         // Verifica que se ha guardado correctamente
         assertNotNull(categoriaGuardada.getId());
-        assertEquals("Ropa", categoriaGuardada.getNombre());
-        assertEquals("Categoría de ropa", categoriaGuardada.getDescripcion());
-        assertEquals("imagen_ropa.jpg", categoriaGuardada.getImagen());
+        assertEquals("nombre valido", categoriaGuardada.getNombre());
+        assertEquals("Categoría nombre valida", categoriaGuardada.getDescripcion());
+        assertEquals("imagen_nombreValido.jpg", categoriaGuardada.getImagen());
     }
 
     @Test
