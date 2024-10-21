@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Productos</title>
+    <link href="https://cdn.jsdelivr.net/npm/flowbite@2.5.1/dist/flowbite.min.css" rel="stylesheet" />
+    <link href="/css/pagGenerico.css" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body>
+    <div class="divNavBar">
+        <nav class="navbar bg-black border-gray-200 bg-black">
+            <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
+                <a href="/" class="flex items-center space-x-2 rtl:space-x-reverse">
+                    <img src="/imgs/albahaca.png" class="w-8 h-8" alt="Logo Albahaca">
+                    <span class="self-center text-2xl font-semibold whitespace-nowrap text-white">Albahaca Suplementos</span>
+                </a>
+                <div class="hidden w-full md:block md:w-auto" id="navbar-default">
+                    <ul class="font-medium flex flex-col p-4 md:p-0 mt-4 border md:flex-row md:space-x-8 rtl:space-x-reverse md:mt-0 md:border-0 dark:bg-black md:dark:bg-black dark:border-gray-700">
+                        <li>
+                            <a href="/" class="block py-2 px-3 text-white rounded hover:bg-gray-700 md:hover:bg-transparent md:border-0 md:hover:text-blue-400" aria-current="page">Inicio</a>
+                        </li>
+                        <li sec:authorize="hasAuthority('USER')">
+                            <a href="/menu" class="block py-2 px-3 text-white rounded hover:bg-gray-700 md:hover:bg-transparent md:border-0 md:hover:text-blue-400">Menu</a>
+                        </li>
+                        <li class="relative">
+                            <button id="userMenuButton" data-dropdown-toggle="userMenu" class="block py-2 px-3 text-white rounded hover:bg-gray-700">
+                                <img src="https://cdn-icons-png.flaticon.com/512/747/747376.png" class="w-6 h-6 rounded-full filter invert" alt="User icon">
+                            </button>
+                            <div id="userMenu" class="hidden absolute right-0 mt-2 w-48 bg-black text-center rounded-md shadow-lg">
+                                <ul class="py-2">
+                                    <li sec:authorize="isAnonymous()">
+                                        <a href="/login" class="block px-2 py-2 text-white">Iniciar Sesion</a>
+                                    </li>
+                                    <li sec:authorize="isAuthenticated()">
+                                        <a href="/logout" class="block px-4 py-2 text-red-400">Cerrar Sesion</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </div>
+
+    <main class="p-8 pt-2">
+        <h1 class="text-3xl text-center font-bold text-white mt-8 mb-10">Nuestros Productos</h1>
+        
+        <div class="tarjeta-categoria">
+            <div class="max-w-screen-xl mx-auto">
+                <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-8 gap-y-12">
+                    <!-- Tarjetas generadas aquí usando Thymeleaf -->
+                    <div th:each="producto : ${productos}">
+                        <div class="max-w-sm bg-gradient-to-b from-black via-black via-80% to-neutral-800 to-100% border border-gray-900 rounded-lg shadow flex flex-col justify-between">
+                            <a href="#">
+                                <img th:src="'https://drive.google.com/thumbnail?id=' + ${producto.imagen}" alt="${producto.nombre}" style="width:100%" class="rounded-t-lg" />
+                            </a>
+                            <div class="p-5 flex flex-col flex-grow">
+                                <a href="#">
+                                    <h5 class="mb-2 text-2xl font-bold tracking-tight text-white" th:text="${producto.nombre}"></h5>
+                                </a>
+                                <p class="mb-3 font-normal text-white dark:text-gray-400" th:text="${producto.descripcion}"></p>
+                                <p class="mb-3 font-normal text-white dark:text-gray-400" th:text="${producto.stock}"></p>
+                                <!-- Accede a la propiedad 'nombre' de la categoria -->
+                                <p class="mb-3 font-normal text-white dark:text-gray-400" th:text="${producto.categoria.nombre}"></p>
+                                <!-- Accede a la propiedad 'nombre' de la marca -->
+                                <p class="mb-3 font-normal text-white dark:text-gray-400" th:text="${producto.marca.nombre}"></p>
+                                <p class="mb-3 font-normal text-white dark:text-gray-400" th:text="${producto.precio}"></p>
+                                <div class="mt-auto">
+                                    <a th:href="@{/mostrarProducto/{id}(id=${producto.id})}" class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300">
+                                        Ver Producto
+                                    </a>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/flowbite@2.5.1/dist/flowbite.min.js"></script>
+
+    <script>
+        // Script para mostrar el menú desplegable
+        const userMenuButton = document.getElementById('userMenuButton');
+        const userMenu = document.getElementById('userMenu');
+
+        userMenuButton.addEventListener('click', () => {
+            userMenu.classList.toggle('hidden');
+        });
+    </script>
+</body>
+</html>

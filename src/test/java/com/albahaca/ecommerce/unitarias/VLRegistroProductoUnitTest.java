@@ -10,6 +10,8 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import org.junit.jupiter.api.Test;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 
@@ -25,10 +27,25 @@ public class VLRegistroProductoUnitTest {
     public void setUp() {
         MockitoAnnotations.openMocks(this); // Inicializa los mocks
     }
+    
+    @Test
+    public void testGuardarProductoPrecioNegativo() {
+        // Asegurarse de que se lance IllegalArgumentException cuando el precio es negativo
+        ProductoModel producto = new ProductoModel();
+        producto.setId(1L);
+        producto.setNombre("Prueba Unitaria 1");
+        producto.setDescripcion("Precio Negativo");
+        producto.setPrecio(-100.0f); // Precio negativo
+
+        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> {
+            productoService.guardarProducto(producto);
+        });
+
+        assertEquals("El precio no puede ser negativo.", exception.getMessage());
+    }
 
     @ParameterizedTest
     @CsvSource({
-        "1, 'Prueba Unitaria 1', 'Precio Negativo', -100.0",
         "2, 'Prueba Unitaria 3', 'Precio 0', 0.0",
         "3, 'Prueba Unitaria 4', 'Precio Positivo', 1000.01",
         "4, 'Prueba Unitaria 5', 'Precio positivo', 999999.99"

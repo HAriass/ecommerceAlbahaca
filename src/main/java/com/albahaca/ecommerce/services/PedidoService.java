@@ -3,6 +3,7 @@ package com.albahaca.ecommerce.services;
 
 import com.albahaca.ecommerce.models.PedidoModel;
 import com.albahaca.ecommerce.repositories.PedidoRepository;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -18,6 +19,7 @@ public class PedidoService {
     }
     
     public PedidoModel guardarPedido(PedidoModel pedidoModel){
+        pedidoModel.setFechaHora(LocalDateTime.now());
         return pedidoRepository.save(pedidoModel);
     }
     

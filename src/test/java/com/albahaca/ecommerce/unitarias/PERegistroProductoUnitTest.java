@@ -7,6 +7,7 @@ import static org.mockito.Mockito.*;
 import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.mockito.InjectMocks;
@@ -26,16 +27,48 @@ public class PERegistroProductoUnitTest {
         MockitoAnnotations.openMocks(this);
     }
 
+    @Test
+    public void testGuardarProductoNombreNulo() {
+        // Asegurarse de que se lance IllegalArgumentException cuando el nombre es nulo
+        ProductoModel producto = new ProductoModel();
+        producto.setNombre(null);
+        producto.setDescripcion("Descripción");
+        producto.setCategoria(null);
+        producto.setPrecio(100.0f);
+        producto.setMarca(null);
+        producto.setImagen("http://imagen.com");
+
+        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> {
+            productoService.guardarProducto(producto);
+        });
+
+        assertEquals("El nombre no puede ser nulo.", exception.getMessage());
+    }
+    
+    @Test
+    public void testGuardarProductoPrecioNegativo() {
+        // Asegurarse de que se lance IllegalArgumentException cuando el precio es negativo
+        ProductoModel producto = new ProductoModel();
+        producto.setNombre("Producto");
+        producto.setDescripcion("Descripción");
+        producto.setCategoria(null);
+        producto.setPrecio(-50.0f); // Precio negativo
+        producto.setMarca(null);
+        producto.setImagen("http://imagen.com");
+
+        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> {
+            productoService.guardarProducto(producto);
+        });
+
+        assertEquals("El precio no puede ser negativo.", exception.getMessage());
+    }
+    
     @ParameterizedTest
     @CsvSource({
-        ",'Proteina', '1', 100.50, 'proteic', 'http://imagen1.com'",
         "'creatina', 'suplemento', '2', 80.75, 'proteic', 'http://imagen2.com'",
         "'prote', 'suplemento', '3', 1000, 'proteicus', 'http://imagen2.com'",
-        "'ganador de peso', 'suplemento', '4', -2, 'proteicus', 'http://imagen2.com'",
-        
-
     })
-    public void testGuardarProducto(String nombre, String descripcion, String categoria, float precio, String marca, String imagen) {
+    public void testGuardarProductoValidos(String nombre, String descripcion, float precio, String imagen) {
         // Creamos el producto con los valores parametrizados
         ProductoModel producto = new ProductoModel();
         producto.setNombre(nombre);

@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Producto</title>
+    <link href="https://cdn.jsdelivr.net/npm/flowbite@2.5.1/dist/flowbite.min.css" rel="stylesheet" />
+    <link href="/css/pagGenerico.css" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script> <!-- Agregar Axios -->
+    <style>
+        body {
+            background-color: black;
+            color: white;
+        }
+        .content {
+            max-width: 600px;
+            margin: auto;
+            padding: 20px;
+            text-align: center;
+        }
+        input[type="number"] {
+            width: 50px;
+            margin: 10px 0;
+            color: black; /* Color del texto */
+            background-color: white; /* Color de fondo */
+            border: 1px solid gray; /* Borde */
+            border-radius: 5px; /* Bordes redondeados */
+            padding: 5px; /* Espaciado interno */
+        }
+        input[type="submit"] {
+            background-color: green;
+            color: white;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="divNavBar">
+        <nav class="navbar bg-black border-gray-200">
+            <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
+                <a href="/" class="flex items-center space-x-2 rtl:space-x-reverse">
+                    <img src="/imgs/albahaca.png" class="w-8 h-8" alt="Logo Albahaca">
+                    <span class="self-center text-2xl font-semibold whitespace-nowrap text-white">Albahaca Suplementos</span>
+                </a>
+                <div class="hidden w-full md:block md:w-auto" id="navbar-default">
+                    <ul class="font-medium flex flex-col p-4 md:p-0 mt-4 border md:flex-row md:space-x-8 rtl:space-x-reverse md:mt-0 md:border-0 dark:bg-black md:dark:bg-black dark:border-gray-700">
+                        <li>
+                            <a href="/" class="block py-2 px-3 text-white rounded hover:bg-gray-700 md:hover:bg-transparent md:border-0 md:hover:text-blue-400" aria-current="page">Inicio</a>
+                        </li>
+                        <li sec:authorize="hasAuthority('USER')">
+                            <a href="/menu" class="block py-2 px-3 text-white rounded hover:bg-gray-700 md:hover:bg-transparent md:border-0 md:hover:text-blue-400">Menú</a>
+                        </li>
+                        <li class="relative">
+                            <button id="userMenuButton" data-dropdown-toggle="userMenu" class="block py-2 px-3 text-white rounded hover:bg-gray-700">
+                                <img src="https://cdn-icons-png.flaticon.com/512/747/747376.png" class="w-6 h-6 rounded-full filter invert" alt="User icon">
+                            </button>
+                            <div id="userMenu" class="hidden absolute right-0 mt-2 w-48 bg-black text-center rounded-md shadow-lg">
+                                <ul class="py-2">
+                                    <li sec:authorize="isAnonymous()">
+                                        <a href="/login" class="block px-2 py-2 text-white">Iniciar Sesión</a>
+                                    </li>
+                                    <li sec:authorize="isAuthenticated()">
+                                        <a href="/logout" class="block px-4 py-2 text-red-400">Cerrar Sesión</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </div>
+
+    <div class="content">
+    <h1 class="text-3xl font-bold mb-4">Detalles del Producto</h1>
+
+        <div th:if="${producto != null}">
+            <img th:src="'https://drive.google.com/thumbnail?id=' + ${producto.imagen}" alt="${producto.nombre}" style="width:150px" class="rounded-t-lg mb-4" />
+            <p><strong>Nombre:</strong> <span th:text="${producto.nombre}"></span></p>
+            <p><strong>Descripción:</strong> <span th:text="${producto.descripcion}"></span></p>
+            <p><strong>Precio:</strong> <span th:text="${producto.precio}"></span></p>
+
+            <form id="addToCartForm" th:action="@{/addToCart}" method="post" sec:authorize="hasAuthority('USER')">
+                <input type="hidden" name="productoId" th:value="${producto.id}" id="productoId" />
+                <label>Cantidad:</label> 
+                <input type="number" name="cantidad" min="1" value="1" id="cantidad">
+                <input type="submit" value="Agregar al Carrito">
+            </form>
+
+            <!-- Mostrar mensaje si no es usuario autenticado -->
+            <div th:if="${!#authorization.expression('hasAuthority(''USER'')')}">
+                <p class="text-red-500">Debes iniciar sesión como cliente para agregar productos al carrito.</p>
+            </div>
+
+
+        </div>
+
+        <div th:if="${producto == null}">
+            <p>No se encontró el producto.</p>
+        </div>
+    </div>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/flowbite@2.5.1/dist/flowbite.min.js"></script>
+    
+</body>
+</html>

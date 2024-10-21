@@ -22,6 +22,7 @@ public class ProductoModel {
     private String descripcion;
     private String imagen;
     private float precio;
+    private int stock;
     
     @ManyToOne
     @JoinColumn(name = "marca_id")
@@ -30,6 +31,8 @@ public class ProductoModel {
     @ManyToOne
     @JoinColumn(name = "categoria_id")
     private CategoriaModel categoria;
+    
+    
 
     public Long getId() {
         return id;
@@ -69,6 +72,14 @@ public class ProductoModel {
 
     public void setPrecio(float precio) {
         this.precio = precio;
+    }
+
+    public int getStock() {
+        return stock;
+    }
+
+    public void setStock(int stock) {
+        this.stock = stock;
     }
 
     public MarcaModel getMarca() {

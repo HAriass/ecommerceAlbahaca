@@ -2,6 +2,12 @@ import { registrar } from './alertas.js';
 
 const form = document.getElementById('addProducto');
 
+function extractDriveId(url) {
+    const regex = /\/d\/([a-zA-Z0-9_-]+)/;
+    const match = url.match(regex);
+    return match ? match[1] : null;
+}
+
 function guardarProducto() {
     form.addEventListener('submit', function (event) {
         event.preventDefault(); // Previene el comportamiento por defecto del formulario
@@ -25,6 +31,12 @@ function guardarProducto() {
 
         delete data["marcas"]; // Elimina la propiedad original
         delete data["categorias"]; // Elimina la propiedad original
+        
+        // Extrae el ID de Google Drive si hay un campo 'imagen'
+        if (data['imagen']) {
+            const driveId = extractDriveId(data['imagen']); // Extrae el ID
+            data['imagen'] = driveId; // Reemplaza la URL completa con el ID
+        }
 
         // Convierte el objeto a JSON
         const jsonData = JSON.stringify(data);
@@ -44,7 +56,7 @@ function guardarProducto() {
                 console.error('Error:', error);
             });
 
-    });
+         });
 }
 
 function getMarcas() {

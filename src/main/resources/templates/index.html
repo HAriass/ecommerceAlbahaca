@@ -21,13 +21,17 @@
                  <div class="hidden w-full md:block md:w-auto" id="navbar-default">
                      <ul class="font-medium flex flex-col p-4 md:p-0 mt-4 border md:flex-row md:space-x-8 rtl:space-x-reverse md:mt-0 md:border-0 dark:bg-black md:dark:bg-black dark:border-gray-700">
                          <!-- Siempre visible -->
-                         <li>
+                         <li sec:authorize="hasAuthority('ADMIN')">
                              <a href="/" class="block py-2 px-3 text-white rounded hover:bg-gray-700 md:hover:bg-transparent md:border-0 md:hover:text-blue-400" aria-current="page">Inicio</a>
                          </li>
 
                          <!-- Visible solo para ADMIN -->
                          <li sec:authorize="hasAuthority('ADMIN')">
                              <a href="/menu" class="block py-2 px-3 text-white rounded hover:bg-gray-700 md:hover:bg-transparent md:border-0 md:hover:text-blue-400">Menu</a>
+                         </li>
+                          <!-- Visible solo para ADMIN -->
+                         <li sec:authorize="hasAuthority('USER')">
+                             <a href="/carrito" class="block py-2 px-3 text-white rounded hover:bg-gray-700 md:hover:bg-transparent md:border-0 md:hover:text-blue-400">Recontra carro con ruedas</a>
                          </li>
 
                          <!-- Icono de usuario con menú desplegable -->

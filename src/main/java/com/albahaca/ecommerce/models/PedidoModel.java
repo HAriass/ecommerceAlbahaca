@@ -21,16 +21,11 @@ public class PedidoModel {
     @Column(unique = true, nullable = false)
     private Long id;
     
-    private int cantidad;
     private LocalDateTime fechaHora;
     
     @ManyToOne
     @JoinColumn(name = "cuenta_id")
     private CuentaModel cuenta;
-    
-    @ManyToOne
-    @JoinColumn(name = "producto_id")
-    private ProductoModel producto;
     
     @ManyToOne
     @JoinColumn(name = "estado_id")
@@ -42,14 +37,6 @@ public class PedidoModel {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public int getCantidad() {
-        return cantidad;
-    }
-
-    public void setCantidad(int cantidad) {
-        this.cantidad = cantidad;
     }
 
     public LocalDateTime getFechaHora() {
@@ -66,14 +53,6 @@ public class PedidoModel {
 
     public void setCuenta(CuentaModel cuenta) {
         this.cuenta = cuenta;
-    }
-
-    public ProductoModel getProducto() {
-        return producto;
-    }
-
-    public void setProducto(ProductoModel producto) {
-        this.producto = producto;
     }
 
     public EstadoModel getEstado() {

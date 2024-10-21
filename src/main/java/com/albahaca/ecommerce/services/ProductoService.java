@@ -45,4 +45,8 @@ public class ProductoService {
         }
     }
     
+    public ArrayList<ProductoModel> obtenerProductoPorCategoria(Long categoriaId) {
+        return productoRepository.findByCategoriaId(categoriaId);
+    }
+    
 }

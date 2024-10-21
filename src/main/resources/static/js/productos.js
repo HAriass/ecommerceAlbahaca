@@ -16,6 +16,7 @@ function getProductos() {
                             <td title="${producto.nombre}">${producto.nombre}</td>
                             <td title="${producto.descripcion}">${producto.descripcion}</td>
                             <td title="${producto.precio}">${producto.precio}</td>
+                            <td title="${producto.stock}">${producto.stock}</td>
                             <td title="${producto.marca.nombre}">${producto.marca.nombre}</td>
                             <td title="${producto.categoria.nombre}">${producto.categoria.nombre}</td>
                             <td><a class="btn-imagen" href="${producto.imagen}" target="_blank">Ver imagen</a></td>
