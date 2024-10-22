@@ -53,7 +53,7 @@
                         <li>
                             <a href="/" class="block py-2 px-3 text-white rounded hover:bg-gray-700 md:hover:bg-transparent md:border-0 md:hover:text-blue-400" aria-current="page">Inicio</a>
                         </li>
-                        <li sec:authorize="hasAuthority('USER')">
+                        <li sec:authorize="hasAuthority('ADMIN')">
                             <a href="/menu" class="block py-2 px-3 text-white rounded hover:bg-gray-700 md:hover:bg-transparent md:border-0 md:hover:text-blue-400">Menú</a>
                         </li>
                         <li class="relative">
@@ -84,20 +84,30 @@
             <img th:src="'https://drive.google.com/thumbnail?id=' + ${producto.imagen}" alt="${producto.nombre}" style="width:150px" class="rounded-t-lg mb-4" />
             <p><strong>Nombre:</strong> <span th:text="${producto.nombre}"></span></p>
             <p><strong>Descripción:</strong> <span th:text="${producto.descripcion}"></span></p>
+            <p><strong>Stock</strong> <span th:text="${producto.stock}"></span></p>
             <p><strong>Precio:</strong> <span th:text="${producto.precio}"></span></p>
 
-            <form id="addToCartForm" th:action="@{/addToCart}" method="post" sec:authorize="hasAuthority('USER')">
+           <form id="addToCartForm" th:action="@{/addToCart}" method="post" sec:authorize="hasAuthority('USER')">
                 <input type="hidden" name="productoId" th:value="${producto.id}" id="productoId" />
-                <label>Cantidad:</label> 
-                <input type="number" name="cantidad" min="1" value="1" id="cantidad">
-                <input type="submit" value="Agregar al Carrito">
+                <!-- Mueve el botón dentro de un bloque th:if -->
+                <div th:if="${producto.stock > 0}">
+                    <label>Cantidad:</label> 
+                    <input type="number" name="cantidad" min="1" value="1" id="cantidad" th:disabled="${producto.stock == 0}">
+                    <input type="submit" value="Agregar al Carrito" th:disabled="${producto.stock == 0}">
+                </div>
             </form>
+
+
 
             <!-- Mostrar mensaje si no es usuario autenticado -->
             <div th:if="${!#authorization.expression('hasAuthority(''USER'')')}">
                 <p class="text-red-500">Debes iniciar sesión como cliente para agregar productos al carrito.</p>
             </div>
 
+            <!--Control de Stock-->
+            <div th:if="${producto.stock == 0}">
+                <p class="text-red-500">Producto Agotado</p>
+            </div>
 
         </div>
 
@@ -108,6 +118,7 @@
 
 
     <script src="https://cdn.jsdelivr.net/npm/flowbite@2.5.1/dist/flowbite.min.js"></script>
+
     
 </body>
 </html>

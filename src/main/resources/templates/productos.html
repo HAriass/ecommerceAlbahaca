@@ -53,7 +53,6 @@
         <div class="tarjeta-categoria">
             <div class="max-w-screen-xl mx-auto">
                 <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-8 gap-y-12">
-                    <!-- Tarjetas generadas aquí usando Thymeleaf -->
                     <div th:each="producto : ${productos}">
                         <div class="max-w-sm bg-gradient-to-b from-black via-black via-80% to-neutral-800 to-100% border border-gray-900 rounded-lg shadow flex flex-col justify-between">
                             <a href="#">
@@ -63,22 +62,41 @@
                                 <a href="#">
                                     <h5 class="mb-2 text-2xl font-bold tracking-tight text-white" th:text="${producto.nombre}"></h5>
                                 </a>
-                                <p class="mb-3 font-normal text-white dark:text-gray-400" th:text="${producto.descripcion}"></p>
-                                <p class="mb-3 font-normal text-white dark:text-gray-400" th:text="${producto.stock}"></p>
-                                <!-- Accede a la propiedad 'nombre' de la categoria -->
-                                <p class="mb-3 font-normal text-white dark:text-gray-400" th:text="${producto.categoria.nombre}"></p>
-                                <!-- Accede a la propiedad 'nombre' de la marca -->
-                                <p class="mb-3 font-normal text-white dark:text-gray-400" th:text="${producto.marca.nombre}"></p>
-                                <p class="mb-3 font-normal text-white dark:text-gray-400" th:text="${producto.precio}"></p>
+                                <!-- Labels y valores de los atributos -->
+                                <p class="mb-3 font-normal text-white dark:text-gray-400">
+                                    <label class="font-semibold"></label> 
+                                    <span th:text="${producto.descripcion}"></span>
+                                </p>
+                                <p class="mb-3 font-normal text-white dark:text-gray-400">
+                                    <label class="font-semibold">Marca:</label> 
+                                    <span th:text="${producto.marca.nombre}"></span>
+                                </p>
+                                <p class="mb-3 font-normal text-white dark:text-gray-400">
+                                    <label class="font-semibold">Precio:</label> 
+                                    <span th:text="${producto.precio}"></span>
+                                </p>
+                                <div th:if="${producto.stock > 0}">
+                                    <p class="mb-3 font-normal text-white dark:text-gray-400">
+                                        <label class="font-semibold">Stock:</label> 
+                                        <span th:text="${producto.stock}"></span>
+                                    </p>
+                                </div>
+                                <div th:if="${producto.stock == 0}">
+                                    <p class="mb-3 font-normal text-white dark:text-gray-400">
+                                        <label class="font-semibold">Stock:</label> 
+                                        <span>Producto Agotado</span>
+                                    </p>
+                                </div>
+                                <!-- Botón Ver Producto -->
                                 <div class="mt-auto">
                                     <a th:href="@{/mostrarProducto/{id}(id=${producto.id})}" class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300">
                                         Ver Producto
                                     </a>
-
                                 </div>
                             </div>
                         </div>
                     </div>
+
 
                 </div>
             </div>
