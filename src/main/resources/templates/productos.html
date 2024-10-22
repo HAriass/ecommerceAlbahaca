@@ -56,25 +56,19 @@
                     <div th:each="producto : ${productos}">
                         <div class="max-w-sm bg-gradient-to-b from-black via-black via-80% to-neutral-800 to-100% border border-gray-900 rounded-lg shadow flex flex-col justify-between">
                             <a href="#">
-                                <img th:src="'https://drive.google.com/thumbnail?id=' + ${producto.imagen}" alt="${producto.nombre}" style="width:100%" class="rounded-t-lg" />
+                                <img th:src="'https://drive.google.com/thumbnail?id=' + ${producto.imagen}" alt="${producto.nombre}" class="w-full rounded-t-lg" />
                             </a>
                             <div class="p-5 flex flex-col flex-grow">
                                 <a href="#">
                                     <h5 class="mb-2 text-2xl font-bold tracking-tight text-white" th:text="${producto.nombre}"></h5>
                                 </a>
-                                <!-- Labels y valores de los atributos -->
+
+                                <!-- Descripción del producto -->
                                 <p class="mb-3 font-normal text-white dark:text-gray-400">
-                                    <label class="font-semibold"></label> 
-                                    <span th:text="${producto.descripcion}"></span>
+                                    <strong>Descripción:</strong> <span th:text="${producto.descripcion}"></span>
                                 </p>
-                                <p class="mb-3 font-normal text-white dark:text-gray-400">
-                                    <label class="font-semibold">Marca:</label> 
-                                    <span th:text="${producto.marca.nombre}"></span>
-                                </p>
-                                <p class="mb-3 font-normal text-white dark:text-gray-400">
-                                    <label class="font-semibold">Precio:</label> 
-                                    <span th:text="${producto.precio}"></span>
-                                </p>
+                                
+                                <!-- Stock del producto -->
                                 <div th:if="${producto.stock > 0}">
                                     <p class="mb-3 font-normal text-white dark:text-gray-400">
                                         <label class="font-semibold">Stock:</label> 
@@ -87,8 +81,24 @@
                                         <span>Producto Agotado</span>
                                     </p>
                                 </div>
-                                <!-- Botón Ver Producto -->
-                                <div class="mt-auto">
+                                
+
+                                <!-- Nombre de la categoría del producto -->
+                                <p class="mb-3 font-normal text-white dark:text-gray-400">
+                                    <strong>Categoría:</strong> <span th:text="${producto.categoria.nombre}"></span>
+                                </p>
+
+                                <!-- Nombre de la marca del producto -->
+                                <p class="mb-3 font-normal text-white dark:text-gray-400">
+                                    <strong>Marca:</strong> <span th:text="${producto.marca.nombre}"></span>
+                                </p>
+
+                                <!-- Precio del producto, destacado -->
+                                <p class="mb-3 font-bold text-2xl text-yellow-400 dark:text-green-300">
+                                    <strong>Precio:</strong> <span th:text="${producto.precio}"></span>
+                                </p>
+
+                                <div class="mt-auto flex justify-center">
                                     <a th:href="@{/mostrarProducto/{id}(id=${producto.id})}" class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300">
                                         Ver Producto
                                     </a>
@@ -96,11 +106,11 @@
                             </div>
                         </div>
                     </div>
-
-
                 </div>
             </div>
         </div>
+
+
     </main>
 
     <script src="https://cdn.jsdelivr.net/npm/flowbite@2.5.1/dist/flowbite.min.js"></script>

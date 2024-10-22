@@ -6,53 +6,92 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Carrito de Compras</title>
     <link href="https://cdn.jsdelivr.net/npm/flowbite@2.5.1/dist/flowbite.min.css" rel="stylesheet" />
+    <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body>
-    <h1>Carrito de Compras</h1>
-    <div>
-        <table>
+<body class="bg-gradient-to-b from-black via-black via-80% to-neutral-800 to-100% min-h-screen">
+    <div class="divNavBar">
+        <nav class="navbar bg-black border-gray-200">
+            <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
+                <a href="/" class="flex items-center space-x-2 rtl:space-x-reverse">
+                    <img src="/imgs/albahaca.png" class="w-8 h-8" alt="Logo Albahaca">
+                    <span class="self-center text-2xl font-semibold whitespace-nowrap text-white">Albahaca Suplementos</span>
+                </a>
+                <div class="hidden w-full md:block md:w-auto" id="navbar-default">
+                    <ul class="font-medium flex flex-col p-4 md:p-0 mt-4 border md:flex-row md:space-x-8 rtl:space-x-reverse md:mt-0 md:border-0 dark:bg-black md:dark:bg-black dark:border-gray-700">
+                        <li>
+                            <a href="/" class="block py-2 px-3 text-white rounded hover:bg-gray-700 md:hover:bg-transparent md:border-0 md:hover:text-blue-400" aria-current="page">Inicio</a>
+                        </li>
+                        <li sec:authorize="hasAuthority('ADMIN')">
+                            <a href="/menu" class="block py-2 px-3 text-white rounded hover:bg-gray-700 md:hover:bg-transparent md:border-0 md:hover:text-blue-400">Menú</a>
+                        </li>
+                        <li class="relative">
+                            <button id="userMenuButton" data-dropdown-toggle="userMenu" class="block py-2 px-3 text-white rounded hover:bg-gray-700">
+                                <img src="https://cdn-icons-png.flaticon.com/512/747/747376.png" class="w-6 h-6 rounded-full filter invert" alt="User icon">
+                            </button>
+                            <div id="userMenu" class="hidden absolute right-0 mt-2 w-48 bg-black text-center rounded-md shadow-lg">
+                                <ul class="py-2">
+                                    <li sec:authorize="isAnonymous()">
+                                        <a href="/login" class="block px-2 py-2 text-white">Iniciar Sesión</a>
+                                    </li>
+                                    <li sec:authorize="isAuthenticated()">
+                                        <a href="/logout" class="block px-4 py-2 text-red-400">Cerrar Sesión</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </div>
+    
+    <h1 class="text-3xl font-bold text-center mt-6">Carrito de Compras</h1>
+    
+    <div class="container mx-auto my-6">
+        <table class="min-w-full bg-black text-white border border-gray-700">
             <thead>
-                <tr>
-                    <th>Producto</th>
-                    <th>Cantidad</th>
-                    <th>Precio</th>
-                    <th>Subtotal</th>
-                    <th>Acciones</th>
+                <tr class="bg-gray-800 text-center">
+                    <th class="py-3 px-4 border-b text-left">Producto</th>
+                    <th class="py-3 px-4 border-b text-center">Cantidad</th>
+                    <th class="py-3 px-4 border-b text-center">Precio</th>
+                    <th class="py-3 px-4 border-b text-center">Subtotal</th>
+                    <th class="py-3 px-4 border-b text-center">Acciones</th>
                 </tr>
             </thead>
             <tbody>
-                <tr th:each="item : ${items}">
-                    <td th:text="${item.producto.nombre}"></td>
-                    <td th:text="${item.cantidad}"></td>
-                    <td th:text="${item.producto.precio}"></td>
-                    <td th:text="${item.producto.precio * item.cantidad}"></td>
-                    <td>
+                <tr th:each="item : ${items}" class="hover:bg-gray-700">
+                    <td class="py-3 px-4 border-b text-left" th:text="${item.producto.nombre}"></td>
+                    <td class="py-3 px-4 border-b text-center" th:text="${item.cantidad}"></td>
+                    <td class="py-3 px-4 border-b text-center" th:text="${item.producto.precio}"></td>
+                    <td class="py-3 px-4 border-b text-center" th:text="${item.producto.precio * item.cantidad}"></td>
+                    <td class="py-3 px-4 border-b text-center">
                         <!-- Formulario para eliminar el producto -->
                         <form th:action="@{/delItemToCart}" method="post">
                             <input type="hidden" name="productoId" th:value="${item.producto.id}" />
-                            <button type="submit">Quitar</button>
+                            <button type="submit" class="text-red-500 hover:text-red-700">Quitar</button>
                         </form>
                     </td>
                 </tr>
                 <!-- Fila para el total -->
                 <tr>
-                    <td colspan="3" style="text-align:right;">Total:</td>
-                    <td th:text="${total}"></td>
-                    <td></td>
+                    <td colspan="3" class="text-right py-3 px-4 border-t">Total:</td>
+                    <td class="py-3 px-4 border-t text-center" th:text="${total}"></td>
+                    <td class="py-3 px-4 border-t"></td>
                 </tr>
             </tbody>
-
         </table>
     </div>
-    <div th:if="${carritoVacio}">
-    <p>El carrito está vacío, no puedes finalizar la compra.</p>
+
+    <div th:if="${carritoVacio}" class="text-center text-red-500">
+        <p>El carrito está vacío, no puedes finalizar la compra.</p>
     </div>
 
-    <div th:if="${!carritoVacio}">
+    <div th:if="${!carritoVacio}" class="text-center mt-4">
         <form action="/finalizarCompra" method="post">
-            <button type="submit">Finalizar Compra</button>
+            <button type="submit" class="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700">Finalizar Compra</button>
         </form>
     </div>
     
+    <script src="https://cdn.jsdelivr.net/npm/flowbite@2.5.1/dist/flowbite.min.js"></script>
 </body>
 </html>
