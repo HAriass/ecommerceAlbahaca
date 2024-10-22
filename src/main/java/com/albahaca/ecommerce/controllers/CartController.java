@@ -123,6 +123,13 @@ public class CartController {
             detallePedidoService.guardarDetallePedido(detallePedido);
             total += item.getCantidad() * item.getProducto().getPrecio();
             pedido.setTotal(total);
+            
+            //Calculo stock
+            ProductoModel producto = item.getProducto();
+            int stockActual = producto.getStock();
+            int stockDecrementado = stockActual - item.getCantidad();
+            producto.setStock(stockDecrementado);
+            productoService.guardarProducto(producto);
 
         }
         pedidoService.guardarPedido(pedido);

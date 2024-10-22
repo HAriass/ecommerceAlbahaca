@@ -9,6 +9,7 @@
     <link href="https://cdn.jsdelivr.net/npm/flowbite@2.5.1/dist/flowbite.min.css" rel="stylesheet" />
     <link href="/css/pagGenerico.css" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
     <div class="divNavBar">
@@ -31,8 +32,11 @@
                          </li>
                           <!-- Visible solo para ADMIN -->
                          <li sec:authorize="hasAuthority('USER')">
-                             <a href="/carrito" class="block py-2 px-3 text-white rounded hover:bg-gray-700 md:hover:bg-transparent md:border-0 md:hover:text-blue-400">Recontra carro con ruedas</a>
+                             <a href="/carrito" class="block py-2 px-3 text-white rounded hover:bg-gray-700 md:hover:bg-transparent md:border-0 md:hover:text-blue-400">
+                                <i class="fas fa-shopping-cart"></i> <!-- Icono de carrito de compras -->
+                             </a>
                          </li>
+
 
                          <!-- Icono de usuario con menú desplegable -->
                          <li class="relative">
