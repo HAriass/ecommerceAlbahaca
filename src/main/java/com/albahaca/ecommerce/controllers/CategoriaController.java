@@ -9,6 +9,7 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -30,10 +31,15 @@ public class CategoriaController {
         return categoriaService.listarCategorias();
     }
 
-    @PostMapping("/guardarCategoria")
+   @PostMapping("/guardarCategoria")
     @PreAuthorize("hasAuthority('ADMIN')")
-    public CategoriaModel guardarCategoria(@RequestBody CategoriaModel categoria) {
-        return this.categoriaService.guardarCategoria(categoria);
+    public ResponseEntity<CategoriaModel> guardarCategoria(@RequestBody CategoriaModel categoria) {
+        try {
+            CategoriaModel categoriaGuardada = this.categoriaService.guardarCategoria(categoria);
+            return ResponseEntity.ok(categoriaGuardada);
+        } catch (IllegalArgumentException e) {
+            return ResponseEntity.badRequest().body(null); // Aquí se devuelve un 400 Bad Request
+        }
     }
 
     @DeleteMapping("/eliminarCategoria/{id}")

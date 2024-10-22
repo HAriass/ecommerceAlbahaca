@@ -1,62 +1,83 @@
 package com.albahaca.ecommerce.integracion;
 
 import com.albahaca.ecommerce.models.ProductoModel;
-import com.albahaca.ecommerce.services.ProductoService;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.http.MediaType;
 import org.springframework.test.annotation.Rollback;
+import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.transaction.annotation.Transactional;
-import static org.junit.jupiter.api.Assertions.*;
+import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
+import static org.hamcrest.Matchers.*;
+import org.springframework.security.test.context.support.WithMockUser;
 
 @SpringBootTest
+@AutoConfigureMockMvc
 @Transactional
 @Rollback
 public class VLRegistroProductoIntegrationTest {
 
     @Autowired
-    private ProductoService productoService;
+    private MockMvc mockMvc;
+
+    @Autowired
+    private ObjectMapper objectMapper;
 
     @Test
-    public void testRegistrarProductoConPrecioNegativo() {
+    @WithMockUser(authorities = "ADMIN")
+    public void testRegistrarProductoConPrecioNegativo() throws Exception {
         ProductoModel producto = new ProductoModel();
         producto.setNombre("Producto con precio negativo");
         producto.setDescripcion("Prueba con precio negativo");
-        producto.setPrecio(-100.0f);
-        
-        assertThrows(IllegalArgumentException.class, () -> {
-            productoService.guardarProducto(producto);
-        });
+        producto.setPrecio(-100.0f); // Precio negativo
+
+        // Realiza la solicitud POST al controlador
+        mockMvc.perform(post("/producto/guardarProducto")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(objectMapper.writeValueAsString(producto)))
+                .andExpect(status().isBadRequest());
     }
 
     @Test
-    public void testRegistrarProductoConPrecioCero() {
+    @WithMockUser(authorities = "ADMIN")
+    public void testRegistrarProductoConPrecioCero() throws Exception {
         ProductoModel producto = new ProductoModel();
         producto.setNombre("Producto con precio 0");
         producto.setDescripcion("Prueba con precio 0");
         producto.setPrecio(0.0f); // valor límite
 
-        ProductoModel resultado = productoService.guardarProducto(producto);
-        
-        // Verifica que se ha guardado correctamente
-        assertNotNull(resultado.getId());
-        assertEquals("Producto con precio 0", resultado.getNombre());
-        assertEquals("Prueba con precio 0", resultado.getDescripcion());
-        assertEquals(0, resultado.getPrecio());
+        // Realiza la solicitud POST al controlador
+        mockMvc.perform(post("/producto/guardarProducto")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(objectMapper.writeValueAsString(producto)))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.id", notNullValue()))
+                .andExpect(jsonPath("$.nombre", is("Producto con precio 0")))
+                .andExpect(jsonPath("$.descripcion", is("Prueba con precio 0")))
+                .andExpect(jsonPath("$.precio", is(0.0)));
     }
 
     @Test
-    public void testRegistrarProductoConPrecioPositivo() {
+    @WithMockUser(authorities = "ADMIN")
+    public void testRegistrarProductoConPrecioPositivo() throws Exception {
         ProductoModel producto = new ProductoModel();
         producto.setNombre("Producto con precio positivo");
         producto.setDescripcion("Prueba con precio positivo");
-        producto.setPrecio(1000.01f); // valor límite
+        producto.setPrecio(1000.01f); // Precio positivo
 
-        ProductoModel resultado = productoService.guardarProducto(producto);
-        
-        assertNotNull(resultado.getId());
-        assertEquals("Producto con precio positivo", resultado.getNombre());
-        assertEquals("Prueba con precio positivo", resultado.getDescripcion());
-        assertEquals(1000.01f, resultado.getPrecio());
+        // Realiza la solicitud POST al controlador
+        mockMvc.perform(post("/producto/guardarProducto")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(objectMapper.writeValueAsString(producto)))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.id", notNullValue()))
+                .andExpect(jsonPath("$.nombre", is("Producto con precio positivo")))
+                .andExpect(jsonPath("$.descripcion", is("Prueba con precio positivo")))
+                .andExpect(jsonPath("$.precio", is(1000.01)));
     }
 }

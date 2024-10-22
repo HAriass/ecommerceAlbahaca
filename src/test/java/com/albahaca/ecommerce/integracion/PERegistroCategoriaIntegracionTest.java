@@ -1,84 +1,103 @@
 package com.albahaca.ecommerce.integracion;
 
 import com.albahaca.ecommerce.models.CategoriaModel;
-import com.albahaca.ecommerce.services.CategoriaService;
-import jakarta.transaction.Transactional;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-
-import static org.junit.jupiter.api.Assertions.*;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.http.MediaType;
 import org.springframework.test.annotation.Rollback;
+import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
+
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
+import static org.hamcrest.Matchers.*;
+import org.springframework.security.test.context.support.WithMockUser;
 
 @SpringBootTest
+@AutoConfigureMockMvc
 @Transactional
 @Rollback
 public class PERegistroCategoriaIntegracionTest {
 
     @Autowired
-    private CategoriaService categoriaService;
+    private MockMvc mockMvc;
+
+    @Autowired
+    private ObjectMapper objectMapper;
 
     @Test
-    public void testGuardarCategoria_NombreValido() {
+    @WithMockUser(authorities  = "ADMIN")
+    public void testGuardarCategoria_NombreValido() throws Exception {
         // Crea una categoría válida
         CategoriaModel categoria = new CategoriaModel();
-        categoria.setNombre("nombre valido"); // Nombre válido
+        categoria.setNombre("nombre valido");
         categoria.setDescripcion("Categoría nombre valida");
         categoria.setImagen("imagen_nombreValido.jpg");
 
-        // Guarda la categoría
-        CategoriaModel categoriaGuardada = categoriaService.guardarCategoria(categoria);
-
-        // Verifica que se ha guardado correctamente
-        assertNotNull(categoriaGuardada.getId());
-        assertEquals("nombre valido", categoriaGuardada.getNombre());
-        assertEquals("Categoría nombre valida", categoriaGuardada.getDescripcion());
-        assertEquals("imagen_nombreValido.jpg", categoriaGuardada.getImagen());
+        // Realiza la solicitud POST al controlador
+        mockMvc.perform(post("/categoria/guardarCategoria")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(objectMapper.writeValueAsString(categoria)))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.id", notNullValue()))
+                .andExpect(jsonPath("$.nombre", is("nombre valido")))
+                .andExpect(jsonPath("$.descripcion", is("Categoría nombre valida")))
+                .andExpect(jsonPath("$.imagen", is("imagen_nombreValido.jpg")));
     }
 
     @Test
-    public void testGuardarCategoria_NombreInvalido() {
-        // Partición de equivalencias: Nombre inválido (nulo o vacío)
+    @WithMockUser(authorities  = "ADMIN")
+    public void testGuardarCategoria_NombreInvalido() throws Exception {
+        // Crea una categoría con nombre inválido
         CategoriaModel categoria = new CategoriaModel();
         categoria.setNombre(""); // Nombre inválido
         categoria.setDescripcion("Categoría sin nombre");
         categoria.setImagen("imagen_nombreInvalido.jpg");
 
-        // Intenta guardar la categoría
-        assertThrows(IllegalArgumentException.class, () -> {
-            categoriaService.guardarCategoria(categoria);
-        });
+        // Realiza la solicitud POST al controlador
+        mockMvc.perform(post("/categoria/guardarCategoria")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(objectMapper.writeValueAsString(categoria)))
+                .andExpect(status().isBadRequest());
     }
-    
+
     @Test
-    public void testGuardarCategoria_DescripcionInvalida() {
-        // Partición de equivalencias: Descripción inválida (nulo o vacía)
+    @WithMockUser(authorities  = "ADMIN")
+    public void testGuardarCategoria_DescripcionInvalida() throws Exception {
+        // Crea una categoría con descripción inválida
         CategoriaModel categoria = new CategoriaModel();
         categoria.setNombre("Electrónica");
         categoria.setDescripcion(""); // Descripción inválida
         categoria.setImagen("imagen_electronica.jpg");
 
-        // Intenta guardar la categoría
-        assertThrows(IllegalArgumentException.class, () -> {
-            categoriaService.guardarCategoria(categoria);
-        });
+        // Realiza la solicitud POST al controlador
+        mockMvc.perform(post("/categoria/guardarCategoria")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(objectMapper.writeValueAsString(categoria)))
+                .andExpect(status().isBadRequest());
     }
-    
+
     @Test
-    public void testGuardarCategoria_DescripcionValida() {
+    @WithMockUser(authorities  = "ADMIN")
+    public void testGuardarCategoria_DescripcionValida() throws Exception {
         // Crea una categoría válida
         CategoriaModel categoria = new CategoriaModel();
         categoria.setNombre("Creatina");
         categoria.setDescripcion("Descripción válida");
         categoria.setImagen("imagen_creatina.jpg");
 
-        // Guarda la categoría
-        CategoriaModel categoriaGuardada = categoriaService.guardarCategoria(categoria);
-
-        // Verifica que se ha guardado correctamente
-        assertNotNull(categoriaGuardada.getId());
-        assertEquals("Creatina", categoriaGuardada.getNombre());
-        assertEquals("Descripción válida", categoriaGuardada.getDescripcion());
-        assertEquals("imagen_creatina.jpg", categoriaGuardada.getImagen());
+        // Realiza la solicitud POST al controlador
+        mockMvc.perform(post("/categoria/guardarCategoria")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(objectMapper.writeValueAsString(categoria)))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.id", notNullValue()))
+                .andExpect(jsonPath("$.nombre", is("Creatina")))
+                .andExpect(jsonPath("$.descripcion", is("Descripción válida")))
+                .andExpect(jsonPath("$.imagen", is("imagen_creatina.jpg")));
     }
 }

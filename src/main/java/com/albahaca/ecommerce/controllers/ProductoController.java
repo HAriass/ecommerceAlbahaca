@@ -8,6 +8,7 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -31,8 +32,13 @@ public class ProductoController {
 
     @PostMapping("/guardarProducto")
     @PreAuthorize("hasAuthority('ADMIN')")
-    public ProductoModel guardarProducto(@RequestBody ProductoModel producto) {
-        return this.productoService.guardarProducto(producto);
+    public ResponseEntity<ProductoModel> guardarProducto(@RequestBody ProductoModel producto) {
+        try {
+            ProductoModel productoGuardado = this.productoService.guardarProducto(producto);
+            return ResponseEntity.ok(productoGuardado);
+        } catch (IllegalArgumentException e) {
+            return ResponseEntity.badRequest().body(null); // Aquí se devuelve un 400 Bad Request
+        }
     }
 
     @DeleteMapping("/eliminarProducto/{id}")
