@@ -30,6 +30,16 @@ public class PedidoModel {
     @ManyToOne
     @JoinColumn(name = "estado_id")
     private EstadoModel estado;
+    
+    private float total;
+
+    public float getTotal() {
+        return total;
+    }
+
+    public void setTotal(float total) {
+        this.total = total;
+    }
 
     public Long getId() {
         return id;

@@ -16,6 +16,7 @@
                     <th>Producto</th>
                     <th>Cantidad</th>
                     <th>Precio</th>
+                    <th>Subtotal</th>
                     <th>Acciones</th>
                 </tr>
             </thead>
@@ -23,6 +24,7 @@
                 <tr th:each="item : ${items}">
                     <td th:text="${item.producto.nombre}"></td>
                     <td th:text="${item.cantidad}"></td>
+                    <td th:text="${item.producto.precio}"></td>
                     <td th:text="${item.producto.precio * item.cantidad}"></td>
                     <td>
                         <!-- Formulario para eliminar el producto -->
@@ -32,14 +34,25 @@
                         </form>
                     </td>
                 </tr>
+                <!-- Fila para el total -->
+                <tr>
+                    <td colspan="3" style="text-align:right;">Total:</td>
+                    <td th:text="${total}"></td>
+                    <td></td>
+                </tr>
             </tbody>
+
         </table>
     </div>
-    <div>
+    <div th:if="${carritoVacio}">
+    <p>El carrito está vacío, no puedes finalizar la compra.</p>
+    </div>
+
+    <div th:if="${!carritoVacio}">
         <form action="/finalizarCompra" method="post">
             <button type="submit">Finalizar Compra</button>
         </form>
     </div>
-
+    
 </body>
 </html>

@@ -31,7 +31,7 @@ public class CartController {
     private ProductoService productoService;
 
     @Autowired
-    private PedidoService pedidoService; // Inyectar el servicio de Pedido
+    private PedidoService pedidoService;
     
     @Autowired 
     private CuentaDetailsService cuentaDetailsService;
@@ -61,38 +61,59 @@ public class CartController {
         return "redirect:/carrito";
     }
 
-
     @GetMapping("/carrito")
     public String viewCart(Model model) {
-        model.addAttribute("items", cartService.getCartItems());
+        List<CartItem> items = cartService.getCartItems();
+        float total = 0;
+        for (CartItem item : items) {
+            total += item.getCantidad() * item.getProducto().getPrecio();
+        }
+        
+        model.addAttribute("items", items);
+        model.addAttribute("total", total);
+
+
+        // Agregar atributo para comprobar si el carrito está vacío
+        boolean carritoVacio = items.isEmpty();
+        model.addAttribute("carritoVacio", carritoVacio);
+
         return "carrito"; 
     }
 
     @PostMapping("/finalizarCompra")
-    public String finalizarCompra() {
-        // Aquí deberías crear tu objeto PedidoModel
+    public String finalizarCompra(Model model) {
+        List<CartItem> items = cartService.getCartItems();
+        
+        // Validar si el carrito está vacío
+        if (items.isEmpty()) {
+            model.addAttribute("error", "El carrito está vacío. Agrega productos antes de finalizar la compra.");
+            return "redirect:/carrito";
+        }
+
+        // Crear el objeto PedidoModel
         PedidoModel pedido = new PedidoModel();
-        // Establecer la cuenta en el pedido
         pedido.setCuenta(cuentaDetailsService.getCuentaLogueada());
         
         EstadoModel estado = estadoService.obtenerEstadoPorId(1L)
                                    .orElseThrow(() -> new RuntimeException("Estado no encontrado"));
         pedido.setEstado(estado);
 
-        // Guardar el pedido usando tu PedidoService
         pedidoService.guardarPedido(pedido);
+        // Limpiar el carrito
         
+        // Crear detalles del pedido
         this.crearDetallePedido(pedido);
+        // Guardar el pedido usando PedidoService
         
         cartService.clearCart();
-        return "redirect:/"; // Redirige a la vista de confirmación o a la página deseada
-    }
 
+        return "redirect:/"; // Redirige a la vista de confirmación
+    }
 
     private void crearDetallePedido(PedidoModel pedido) {
         List<CartItem> cartItems = cartService.getCartItems();
         float subTotal = 0;
-
+        float total = 0;
         for (CartItem item : cartItems) {
             DetallePedidoModel detallePedido = new DetallePedidoModel();
             detallePedido.setProducto(item.getProducto());
@@ -100,11 +121,11 @@ public class CartController {
             detallePedido.setCantidad(item.getCantidad());
             detallePedido.setSubtotal(subTotal);
             detallePedidoService.guardarDetallePedido(detallePedido);
-            
+            total += item.getCantidad() * item.getProducto().getPrecio();
+            pedido.setTotal(total);
+
         }
-        
+        pedidoService.guardarPedido(pedido);
+        // Limpiar el carrito
     }
-
-
-    
 }
