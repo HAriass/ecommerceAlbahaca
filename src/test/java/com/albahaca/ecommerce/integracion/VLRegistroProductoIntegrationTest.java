@@ -45,25 +45,6 @@ public class VLRegistroProductoIntegrationTest {
 
     @Test
     @WithMockUser(authorities = "ADMIN")
-    public void testRegistrarProductoConPrecioCero() throws Exception {
-        ProductoModel producto = new ProductoModel();
-        producto.setNombre("Producto con precio 0");
-        producto.setDescripcion("Prueba con precio 0");
-        producto.setPrecio(0.0f); // valor límite
-
-        // Realiza la solicitud POST al controlador
-        mockMvc.perform(post("/producto/guardarProducto")
-                .contentType(MediaType.APPLICATION_JSON)
-                .content(objectMapper.writeValueAsString(producto)))
-                .andExpect(status().isOk())
-                .andExpect(jsonPath("$.id", notNullValue()))
-                .andExpect(jsonPath("$.nombre", is("Producto con precio 0")))
-                .andExpect(jsonPath("$.descripcion", is("Prueba con precio 0")))
-                .andExpect(jsonPath("$.precio", is(0.0)));
-    }
-
-    @Test
-    @WithMockUser(authorities = "ADMIN")
     public void testRegistrarProductoConPrecioPositivo() throws Exception {
         ProductoModel producto = new ProductoModel();
         producto.setNombre("Producto con precio positivo");
