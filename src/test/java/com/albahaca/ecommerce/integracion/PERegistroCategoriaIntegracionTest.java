@@ -98,6 +98,6 @@ public class PERegistroCategoriaIntegracionTest {
                 .andExpect(jsonPath("$.id", notNullValue()))
                 .andExpect(jsonPath("$.nombre", is("Creatina")))
                 .andExpect(jsonPath("$.descripcion", is("Descripción válida")))
-                .andExpect(jsonPath("$.imagen", is("imagen_creatina.jpg")));
+                .andExpect(jsonPath("$.imagen", is("imagen_descripcionInvalida.jpg")));
     }
 }

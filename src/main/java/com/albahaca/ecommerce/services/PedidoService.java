@@ -20,7 +20,9 @@ public class PedidoService {
     
     public PedidoModel guardarPedido(PedidoModel pedidoModel){
         pedidoModel.setFechaHora(LocalDateTime.now());
+        validarPedido(pedidoModel);
         return pedidoRepository.save(pedidoModel);
+        
     }
     
     public boolean eliminarPedido(Long id){
@@ -29,6 +31,18 @@ public class PedidoService {
             return true;
         } catch (Exception e) {
             return false;
+        }
+    }
+    
+    public void validarPedido(PedidoModel pedidoModel){
+        // Validar el total del pedido
+        if (pedidoModel.getTotal() <0) {
+            throw new IllegalArgumentException("El total del pedido debe ser mayor a cero.");
+        }
+
+        // Validar el estado del pedido
+        if (pedidoModel.getEstado() == null) {
+            throw new IllegalArgumentException("El estado del pedido no puede ser nulo.");
         }
     }
 }
