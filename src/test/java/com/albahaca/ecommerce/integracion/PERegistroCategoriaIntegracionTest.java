@@ -70,9 +70,9 @@ public class PERegistroCategoriaIntegracionTest {
     public void testGuardarCategoria_DescripcionInvalida() throws Exception {
         // Crea una categoría con descripción inválida
         CategoriaModel categoria = new CategoriaModel();
-        categoria.setNombre("Electrónica");
+        categoria.setNombre("creatina");
         categoria.setDescripcion(""); // Descripción inválida
-        categoria.setImagen("imagen_electronica.jpg");
+        categoria.setImagen("imagen_descripcionInvalida.jpg");
 
         // Realiza la solicitud POST al controlador
         mockMvc.perform(post("/categoria/guardarCategoria")
@@ -88,7 +88,7 @@ public class PERegistroCategoriaIntegracionTest {
         CategoriaModel categoria = new CategoriaModel();
         categoria.setNombre("Creatina");
         categoria.setDescripcion("Descripción válida");
-        categoria.setImagen("imagen_creatina.jpg");
+        categoria.setImagen("imagen_descripcionInvalida.jpg");
 
         // Realiza la solicitud POST al controlador
         mockMvc.perform(post("/categoria/guardarCategoria")
