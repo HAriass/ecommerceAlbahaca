@@ -1,4 +1,3 @@
-
 package com.albahaca.ecommerce.controllers;
 
 import com.albahaca.ecommerce.models.CuentaModel;
@@ -6,6 +5,7 @@ import com.albahaca.ecommerce.models.PedidoModel;
 import com.albahaca.ecommerce.services.CuentaDetailsService;
 import com.albahaca.ecommerce.services.PedidoService;
 import java.util.ArrayList;
+import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -35,7 +35,9 @@ public class PedidoController {
     @PostMapping("/guardarPedido")
     @PreAuthorize("hasAuthority('ADMIN')")
     public PedidoModel guardarPedido(@RequestBody PedidoModel pedidoModel){
-        return this.pedidoService.guardarPedido(pedidoModel);
+        PedidoModel pedido = this.pedidoService.guardarPedido(pedidoModel);
+        this.pedidoService.cambiarEstadoPedidos();
+        return pedido;
     }
     
     @DeleteMapping("/eliminarPedido/{id}")
@@ -47,11 +49,19 @@ public class PedidoController {
     @GetMapping("/listarPedidosCliente")
     @PreAuthorize("hasAuthority('USER')")
     public ArrayList<PedidoModel> listarPedidosCliente(){
-        
-        CuentaModel cuenta= cuentaDetailsService.getCuentaLogueada();
+        CuentaModel cuenta = cuentaDetailsService.getCuentaLogueada();
         long id = cuenta.getId();
-        
         return this.pedidoService.listarPedidosCliente(id);
     }
     
+    @PostMapping("/cancelarPedido/{id}")
+    @PreAuthorize("hasAuthority('USER')")
+    public void cancelarPedido(@PathVariable("id") long id){
+        Optional<PedidoModel> pedido = pedidoService.obtenerPedidoPorId(id);
+        if (pedido.isPresent()) {
+            pedidoService.cancelarPedido(pedido);
+        } else {
+            System.err.println("El pedido no existe");
+        }
+    }
 }

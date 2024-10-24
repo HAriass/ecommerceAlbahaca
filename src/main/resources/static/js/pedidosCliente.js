@@ -23,6 +23,10 @@ function getPedidos() {
             pedidos.forEach(pedido => {
                 // Llama a getDetallesPedido para cada pedido y pasa el id
                 getDetallesPedido(pedido.id).then(detallesHtml => {
+                    const botonCancelar = pedido.estado.nombre === 'enPreparacion'
+                        ? `<button onclick="cancelarPedido(${pedido.id})">Cancelar</button>`
+                        : ''; // Solo mostrar botón si está en estado "enPreparacion"
+                    
                     htmlContent += `
                         <tr>
                             <td>${pedido.id}</td>
@@ -32,6 +36,7 @@ function getPedidos() {
                             </td>
                             <td>${pedido.estado.nombre}</td> 
                             <td>${pedido.total}</td>
+                            <td>${botonCancelar}</td> <!-- Botón para cancelar el pedido -->
                         </tr>
                     `;
                     tbody.innerHTML = htmlContent; // Actualiza el contenido de la tabla
@@ -56,6 +61,18 @@ function getDetallesPedido(pedidoId) {
             return htmlContent; // Devuelve el contenido de los detalles
         })
         .catch((err) => console.error(err));
+}
+
+// Función para cancelar un pedido
+function cancelarPedido(pedidoId) {
+    axios.post(`/pedido/cancelarPedido/${pedidoId}`)
+        .then(function(response) {
+            console.log(`Pedido ${pedidoId} cancelado exitosamente`);
+            getPedidos(); // Actualizar la lista de pedidos después de la cancelación
+        })
+        .catch(function(error) {
+            console.error(`Error al cancelar el pedido ${pedidoId}`, error);
+        });
 }
 
 // Llama solo a getPedidos, que manejará los detalles
