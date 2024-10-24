@@ -1,6 +1,7 @@
 
 package com.albahaca.ecommerce.services;
 
+import com.albahaca.ecommerce.models.CuentaModel;
 import com.albahaca.ecommerce.models.PedidoModel;
 import com.albahaca.ecommerce.repositories.PedidoRepository;
 import java.time.LocalDateTime;
@@ -16,6 +17,10 @@ public class PedidoService {
     
     public ArrayList<PedidoModel> listarPedidos(){
         return (ArrayList<PedidoModel>) pedidoRepository.findAll();
+    }
+    
+    public ArrayList<PedidoModel> listarPedidosCliente(Long cuentaId){
+        return (ArrayList<PedidoModel>) pedidoRepository.findByCuentaId(cuentaId);
     }
     
     public PedidoModel guardarPedido(PedidoModel pedidoModel){

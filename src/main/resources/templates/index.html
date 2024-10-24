@@ -47,11 +47,16 @@
                                      <li sec:authorize="isAnonymous()">
                                          <a href="/login" class="block px-2 py-2 text-white">Iniciar Sesion</a>
                                      </li>
-
+                                    <!-- Visible solo para usuarios autenticados -->
+                                     <li sec:authorize="isAuthenticated() and hasAuthority('USER')">
+                                         <a href="/pedidosCliente" class="block px-4 py-2 text-white">Pedidos</a>
+                                     </li>
                                      <!-- Visible solo para usuarios autenticados -->
                                      <li sec:authorize="isAuthenticated()">
                                          <a href="/logout" class="block px-4 py-2 text-red-400">Cerrar Sesion</a>
                                      </li>
+                                     
+
                                  </ul>
                              </div>
                          </li>

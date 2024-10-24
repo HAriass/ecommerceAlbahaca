@@ -1,7 +1,9 @@
 
 package com.albahaca.ecommerce.controllers;
 
+import com.albahaca.ecommerce.models.CuentaModel;
 import com.albahaca.ecommerce.models.PedidoModel;
+import com.albahaca.ecommerce.services.CuentaDetailsService;
 import com.albahaca.ecommerce.services.PedidoService;
 import java.util.ArrayList;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,7 +23,11 @@ public class PedidoController {
     @Autowired
     PedidoService pedidoService;
     
+    @Autowired
+    CuentaDetailsService cuentaDetailsService;
+    
     @GetMapping("/listarPedidos")
+    @PreAuthorize("hasAuthority('ADMIN')")
     public ArrayList<PedidoModel> listarPedidos(){
         return this.pedidoService.listarPedidos();
     }
@@ -36,6 +42,16 @@ public class PedidoController {
     @PreAuthorize("hasAuthority('ADMIN')")
     public boolean eliminarPedido(@PathVariable("id") Long id){
         return this.pedidoService.eliminarPedido(id);
+    }
+    
+    @GetMapping("/listarPedidosCliente")
+    @PreAuthorize("hasAuthority('USER')")
+    public ArrayList<PedidoModel> listarPedidosCliente(){
+        
+        CuentaModel cuenta= cuentaDetailsService.getCuentaLogueada();
+        long id = cuenta.getId();
+        
+        return this.pedidoService.listarPedidosCliente(id);
     }
     
 }
