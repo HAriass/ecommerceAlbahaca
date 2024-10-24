@@ -93,6 +93,17 @@
 
     <script src="https://cdn.jsdelivr.net/npm/flowbite@2.5.1/dist/flowbite.min.js"></script>
 
-    
+    <script>
+        document.getElementById("addToCartForm").addEventListener("submit", function(event) {
+            const cantidad = parseInt(document.getElementById("cantidad").value);
+            const stock = parseInt(/* Inserta el valor de stock */ [[${producto.stock}]]);
+
+            if (cantidad > stock) {
+                event.preventDefault(); // Evita el envío del formulario
+                alert("La cantidad no puede exceder el stock disponible.");
+            }
+        });
+    </script>
+
 </body>
 </html>
