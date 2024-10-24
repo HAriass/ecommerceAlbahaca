@@ -21,4 +21,5 @@ public class DetallePedidoController {
     public ArrayList<DetallePedidoModel> listarDetallesPedidoPorPedido(@PathVariable("pedidoId") long pedidoId){
         return this.detallePedidoService.listaDetallePedidoPorPedido(pedidoId);
     }
+
 }

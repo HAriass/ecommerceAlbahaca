@@ -11,4 +11,9 @@ public class ViewControllerPedido {
     public String pedidosCliente(){
         return "pedidosCliente";
     }
+    
+    @GetMapping("/pedidos")
+    public String pedidos(){
+        return "pedidosAdministracion";
+    }
 }
