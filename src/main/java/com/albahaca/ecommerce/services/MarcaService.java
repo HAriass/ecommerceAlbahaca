@@ -1,8 +1,8 @@
-
 package com.albahaca.ecommerce.services;
 
 import com.albahaca.ecommerce.models.MarcaModel;
 import com.albahaca.ecommerce.repositories.MarcaRepository;
+import com.albahaca.ecommerce.repositories.ProductoRepository;
 import java.util.ArrayList;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +14,9 @@ public class MarcaService {
     @Autowired
     MarcaRepository marcaRepository;
     
+    @Autowired
+    ProductoRepository productoRepository; // Repositorio de productos para verificar asociaciones
+    
     public ArrayList<MarcaModel> listarMarcas(){
         return (ArrayList<MarcaModel>) marcaRepository.findAll();
     }
@@ -23,6 +26,10 @@ public class MarcaService {
     }
     
     public boolean eliminarMarca(Long id){
+        // Verifica si existen productos asociados a la marca
+        if (productoRepository.countByMarcaId(id) > 0) {
+            return false; // No elimina si hay productos asociados
+        }
         try {
             marcaRepository.deleteById(id);
             return true;
@@ -33,5 +40,5 @@ public class MarcaService {
     
     public Optional<MarcaModel> obtenerMarcaPorId(Long id){
         return marcaRepository.findById(id);
-    }   
+    }
 }

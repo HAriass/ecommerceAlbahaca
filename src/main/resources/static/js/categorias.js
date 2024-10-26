@@ -34,18 +34,21 @@ function getCategorias() {
 
 function eliminarCategoria(id) {
     confirmarOperacion('eliminar', () => {
-        // Si el usuario confirma, se procede con la eliminación
         axios.delete(`/categoria/eliminarCategoria/${id}`)
             .then(response => {
-                console.log('Éxito:', response.data);
-                eliminar();
+                alert(response.data); // Muestra mensaje de éxito
                 getCategorias(); // Vuelve a cargar las categorías después de eliminar
             })
             .catch(error => {
-                console.error('Error:', error);
+                if (error.response && error.response.status === 400) {
+                    alert(error.response.data); // Muestra el mensaje de error del servidor
+                } else {
+                    console.error('Error:', error);
+                }
             });
     });
 }
+
 
 function getCategoriaPorFiltro(filtro) {
     axios.get(`/categoria/obtenerCategoriaPorNombre/${filtro}`)
