@@ -7,5 +7,6 @@ import java.util.ArrayList;
 
 public interface DetallePedidoRepository extends CrudRepository<DetallePedidoModel, Long> {
     ArrayList<DetallePedidoModel> findByPedidoId(Long pedidoId);
+    int countByProductoId(long id);
 }
 

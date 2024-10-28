@@ -47,15 +47,20 @@ function eliminarProducto(id) {
     confirmarOperacion('eliminar', () => {
         axios.delete(`/producto/eliminarProducto/${id}`)
             .then(response => {
-                console.log('Éxito:', response.data);
-                eliminar();
+                alert(response.data); // Muestra el mensaje de éxito
                 getProductos(); // Vuelve a cargar los productos después de eliminar
             })
             .catch(error => {
-                console.error('Error:', error);
+                if (error.response && (error.response.status === 400 || error.response.status === 409)) {
+                    alert(error.response.data); // Muestra el mensaje de error específico
+                } else {
+                    alert('Error al eliminar el producto.');
+                }
             });
+
     });
 }
+
 function getProductoById(id) {
     axios.get(`/producto/obtenerProductoPorId/${id}`)
         .then(function (response) {

@@ -43,9 +43,15 @@ public class ProductoController {
 
     @DeleteMapping("/eliminarProducto/{id}")
     @PreAuthorize("hasAuthority('ADMIN')")
-    public boolean eliminaProducto(@PathVariable("id") Long id) {
-        return this.productoService.eliminarProducto(id);
+    public ResponseEntity<String> eliminarProducto(@PathVariable("id") Long id) {
+        boolean eliminado = this.productoService.eliminarProducto(id);
+        if (eliminado) {
+            return ResponseEntity.ok("Producto eliminado correctamente.");
+        } else {
+            return ResponseEntity.status(409).body("No se puede eliminar el producto, ya que está asociada a uno o más pedidos.");
+        }
     }
+
 
     @GetMapping("/obtenerProductoPorId/{id}")
     @PreAuthorize("hasAuthority('ADMIN')")

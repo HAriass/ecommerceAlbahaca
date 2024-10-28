@@ -2,6 +2,7 @@
 package com.albahaca.ecommerce.services;
 
 import com.albahaca.ecommerce.models.ProductoModel;
+import com.albahaca.ecommerce.repositories.DetallePedidoRepository;
 import com.albahaca.ecommerce.repositories.ProductoRepository;
 import java.util.ArrayList;
 import java.util.Optional;
@@ -14,6 +15,9 @@ public class ProductoService {
     @Autowired
     ProductoRepository productoRepository;
     
+    @Autowired 
+    DetallePedidoRepository detallePedidoRepository;
+    
     public ArrayList<ProductoModel> listarProducto(){
         return (ArrayList<ProductoModel>) productoRepository.findAll();
     }
@@ -23,7 +27,10 @@ public class ProductoService {
         return productoRepository.save(producto);
     }
     
-    public boolean eliminarProducto(Long id){
+    public boolean eliminarProducto(Long id) {
+        if (detallePedidoRepository.countByProductoId(id) > 0) {
+            return false; // No elimina si hay detalle de pedido asociados
+        }
         try {
             productoRepository.deleteById(id);
             return true;
@@ -31,6 +38,7 @@ public class ProductoService {
             return false;
         }
     }
+
     
     public Optional<ProductoModel> obtenerProductoPorId(Long id){
         return productoRepository.findById(id);
