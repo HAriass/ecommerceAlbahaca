@@ -36,12 +36,10 @@ public class TECambioEstadoPedidoIntegracionTest {
     public void setUp() {
         // Inicializar estados y guardarlos en el repositorio si es necesario
         estadoPreparacion = new EstadoModel();
-        estadoPreparacion.setId(1L);
         estadoPreparacion.setNombre("enPreparacion");
         estadoPreparacion.setDescripcion("Estado en preparación");
 
         estadoEntregado = new EstadoModel();
-        estadoEntregado.setId(3L);
         estadoEntregado.setNombre("entregado");
         estadoEntregado.setDescripcion("Entregado al cliente");
 
@@ -53,7 +51,6 @@ public class TECambioEstadoPedidoIntegracionTest {
     public void testCambiarEstadoPedidoDeEnPreparacionAEntregado() {
         // Crear y guardar un pedido en estado "enPreparacion"
         PedidoModel pedido = new PedidoModel();
-        pedido.setId(1L);
         pedido.setFechaHora(LocalDateTime.now().minusSeconds(21));
         pedido.setEstado(estadoPreparacion);
         pedido.setTotal(100.0f);

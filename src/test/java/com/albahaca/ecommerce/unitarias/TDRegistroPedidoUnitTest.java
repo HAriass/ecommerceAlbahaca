@@ -33,8 +33,8 @@ public class TDRegistroPedidoUnitTest {
 public void testGuardarPedido() {
     EstadoModel estado1 = new EstadoModel();
     estado1.setId(1L);
-    estado1.setNombre("hola");
-    estado1.setDescripcion("aalsda");
+    estado1.setNombre("estado1");
+    estado1.setDescripcion("Descripcion estado 1");
 
     // Tabla de decisiones
     Object[][] decisionTable = {
