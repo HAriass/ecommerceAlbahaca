@@ -1,7 +1,6 @@
 package com.albahaca.ecommerce.controllers;
 
 import com.albahaca.ecommerce.models.CategoriaModel;
-import com.albahaca.ecommerce.models.ProductoModel;
 import com.albahaca.ecommerce.services.CategoriaService;
 import java.util.ArrayList;
 import java.util.List;
@@ -9,6 +8,7 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -32,14 +32,24 @@ public class CategoriaController {
 
     @PostMapping("/guardarCategoria")
     @PreAuthorize("hasAuthority('ADMIN')")
-    public CategoriaModel guardarCategoria(@RequestBody CategoriaModel categoria) {
-        return this.categoriaService.guardarCategoria(categoria);
+    public ResponseEntity<CategoriaModel> guardarCategoria(@RequestBody CategoriaModel categoria) {
+        try {
+            CategoriaModel categoriaGuardada = this.categoriaService.guardarCategoria(categoria);
+            return ResponseEntity.ok(categoriaGuardada);
+        } catch (IllegalArgumentException e) {
+            return ResponseEntity.badRequest().body(null); // Devuelve un 400 Bad Request
+        }
     }
 
     @DeleteMapping("/eliminarCategoria/{id}")
     @PreAuthorize("hasAuthority('ADMIN')")
-    public boolean eliminarCategoria(@PathVariable("id") Long id) {
-        return this.categoriaService.eliminarCategoria(id);
+    public ResponseEntity<String> eliminarCategoria(@PathVariable("id") Long id) {
+        boolean eliminado = this.categoriaService.eliminarCategoria(id);
+        if (eliminado) {
+            return ResponseEntity.ok("Categoría eliminada correctamente.");
+        } else {
+            return ResponseEntity.badRequest().body("No se puede eliminar la categoría porque tiene productos asociados.");
+        }
     }
 
     @GetMapping("/obtenerCategoriaPorId/{id}")
@@ -53,10 +63,8 @@ public class CategoriaController {
     public List<CategoriaModel> obtenerCategoriaPorId(@PathVariable("filtroName") String filtroName) {
         ArrayList<CategoriaModel> categorias = this.categoriaService.listarCategorias();
 
-        // Filtrar por nombre sin tener en cuenta mayúsculas y minúsculas
         return categorias.stream()
                 .filter(categoria -> categoria.getNombre().toLowerCase().contains(filtroName.toLowerCase()))
                 .collect(Collectors.toList());
     }
-
 }

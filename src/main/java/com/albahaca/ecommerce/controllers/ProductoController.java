@@ -8,6 +8,7 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -31,15 +32,26 @@ public class ProductoController {
 
     @PostMapping("/guardarProducto")
     @PreAuthorize("hasAuthority('ADMIN')")
-    public ProductoModel guardarProducto(@RequestBody ProductoModel producto) {
-        return this.productoService.guardarProducto(producto);
+    public ResponseEntity<ProductoModel> guardarProducto(@RequestBody ProductoModel producto) {
+        try {
+            ProductoModel productoGuardado = this.productoService.guardarProducto(producto);
+            return ResponseEntity.ok(productoGuardado);
+        } catch (IllegalArgumentException e) {
+            return ResponseEntity.badRequest().body(null); // Aquí se devuelve un 400 Bad Request
+        }
     }
 
     @DeleteMapping("/eliminarProducto/{id}")
     @PreAuthorize("hasAuthority('ADMIN')")
-    public boolean eliminaProducto(@PathVariable("id") Long id) {
-        return this.productoService.eliminarProducto(id);
+    public ResponseEntity<String> eliminarProducto(@PathVariable("id") Long id) {
+        boolean eliminado = this.productoService.eliminarProducto(id);
+        if (eliminado) {
+            return ResponseEntity.ok("Producto eliminado correctamente.");
+        } else {
+            return ResponseEntity.status(409).body("No se puede eliminar el producto, ya que está asociada a uno o más pedidos.");
+        }
     }
+
 
     @GetMapping("/obtenerProductoPorId/{id}")
     @PreAuthorize("hasAuthority('ADMIN')")

@@ -34,14 +34,16 @@ function eliminarMarca(id) {
         axios.delete(`/marca/eliminarMarca/${id}`)
             .then(response => {
                 console.log('Éxito:', response.data);
-                eliminar();
-                getMarcas(); // Vuelve a cargar los productos después de eliminar
+                alert(response.data); // Mensaje de éxito o advertencia
+                getMarcas(); // Recargar la lista después de eliminar
             })
             .catch(error => {
-                console.error('Error:', error);
+                console.error('Error:', error.response.data);
+                alert(error.response.data); // Mensaje de error si no se puede eliminar
             });
     });
 }
+
 function getMarcaById(id) {
     axios.get(`/marca/obtenerMarcaPorId/${id}`)
         .then(function (response) {

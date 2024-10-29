@@ -97,9 +97,5 @@ public class ProductoModel {
     public void setCategoria(CategoriaModel categoria) {
         this.categoria = categoria;
     }
-
-    
-    
-    
-    
+ 
 }

@@ -65,8 +65,8 @@ public class PERegistroProductoUnitTest {
     
     @ParameterizedTest
     @CsvSource({
-        "'creatina', 'suplemento', '2', 80.75, 'proteic', 'http://imagen2.com'",
-        "'prote', 'suplemento', '3', 1000, 'proteicus', 'http://imagen2.com'",
+        "'creatina', 'suplemento', 80.75,'http://imagen2.com'",
+        "'prote', 'suplemento', 1000,'http://imagen2.com'",
     })
     public void testGuardarProductoValidos(String nombre, String descripcion, float precio, String imagen) {
         // Creamos el producto con los valores parametrizados

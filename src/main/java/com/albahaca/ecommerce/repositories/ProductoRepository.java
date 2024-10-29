@@ -10,5 +10,5 @@ import org.springframework.stereotype.Repository;
 public interface ProductoRepository extends CrudRepository<ProductoModel, Long>{
 
     ArrayList<ProductoModel> findByCategoriaId(Long categoriaId);
-    
+    int countByMarcaId(Long marcaId); // Este método cuenta los productos relacionados con la marca
 }

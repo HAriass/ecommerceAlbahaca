@@ -1,8 +1,9 @@
-
 package com.albahaca.ecommerce.services;
 
 import com.albahaca.ecommerce.models.CategoriaModel;
+import com.albahaca.ecommerce.models.ProductoModel;
 import com.albahaca.ecommerce.repositories.CategoriaRepository;
+import com.albahaca.ecommerce.repositories.ProductoRepository;
 import java.util.ArrayList;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,20 +11,30 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class CategoriaService {
-    
+
     @Autowired
     CategoriaRepository categoriaRepository;
-    
-    public ArrayList<CategoriaModel> listarCategorias(){
+
+    @Autowired
+    ProductoRepository productoRepository; // Agregar el repositorio de Producto
+
+    public ArrayList<CategoriaModel> listarCategorias() {
         return (ArrayList<CategoriaModel>) categoriaRepository.findAll();
     }
-    
-    public CategoriaModel guardarCategoria(CategoriaModel categoria){
+
+    public CategoriaModel guardarCategoria(CategoriaModel categoria) {
         validarCategoria(categoria);
         return categoriaRepository.save(categoria);
     }
 
     public boolean eliminarCategoria(Long id) {
+        // Verificar si existen productos asociados a la categoría
+        ArrayList<ProductoModel> productosAsociados = productoRepository.findByCategoriaId(id);
+        if (!productosAsociados.isEmpty()) {
+            // No se puede eliminar si hay productos asociados
+            return false;
+        }
+        
         try {
             categoriaRepository.deleteById(id);
             return true;
@@ -31,13 +42,13 @@ public class CategoriaService {
             return false;
         }
     }
-    
-    public Optional<CategoriaModel> obtenerCategoriaPorId(Long id){
+
+    public Optional<CategoriaModel> obtenerCategoriaPorId(Long id) {
         return categoriaRepository.findById(id);
     }
-    
+
     private void validarCategoria(CategoriaModel categoria) {
-       if (categoria.getNombre() == null || categoria.getNombre().isEmpty()) {
+        if (categoria.getNombre() == null || categoria.getNombre().isEmpty()) {
             throw new IllegalArgumentException("El nombre no puede estar vacío");
         }
 

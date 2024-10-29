@@ -33,4 +33,8 @@ public class EstadoService {
     public Optional<EstadoModel> obtenerEstadoPorId(Long id) {
         return estadoRepository.findById(id); 
     }
+    
+    public EstadoModel obtenerEstadoPorNombre(String nombre){
+        return estadoRepository.findEstadoByNombre(nombre);
+    }
 }

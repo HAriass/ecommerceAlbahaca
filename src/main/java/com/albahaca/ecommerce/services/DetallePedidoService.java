@@ -26,6 +26,11 @@ public class DetallePedidoService {
     public ArrayList<DetallePedidoModel> listaDetallePedido() {
         return (ArrayList<DetallePedidoModel>) detallePedidoRepository.findAll();
     }
+    
+    // Obtener todos los DetallesPedidoPorPeido
+    public ArrayList<DetallePedidoModel> listaDetallePedidoPorPedido(long pedidoId) {
+        return (ArrayList<DetallePedidoModel>) detallePedidoRepository.findByPedidoId(pedidoId);
+    }
 
     // Obtener un DetallePedido por ID
     public Optional<DetallePedidoModel> obtenerDetallePorId(Long id) {
