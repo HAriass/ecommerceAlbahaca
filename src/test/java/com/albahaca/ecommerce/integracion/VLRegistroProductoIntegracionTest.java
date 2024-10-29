@@ -20,7 +20,7 @@ import org.springframework.security.test.context.support.WithMockUser;
 @AutoConfigureMockMvc
 @Transactional
 @Rollback
-public class VLRegistroProductoIntegrationTest {
+public class VLRegistroProductoIntegracionTest {
 
     @Autowired
     private MockMvc mockMvc;

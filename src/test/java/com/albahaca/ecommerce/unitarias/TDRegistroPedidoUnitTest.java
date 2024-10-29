@@ -53,8 +53,6 @@ public void testGuardarPedido() {
         EstadoModel estadoModel = (EstadoModel) row[1];
         pedido.setEstado(estadoModel);
 
-        // Imprimir valores de depuración
-        System.out.println("Probando con Total: " + total + ", Estado: " + estadoModel + ", Excepción esperada: " + expectedException);
 
         if (expectedException != null) {
             // Se espera que se lance una excepción
