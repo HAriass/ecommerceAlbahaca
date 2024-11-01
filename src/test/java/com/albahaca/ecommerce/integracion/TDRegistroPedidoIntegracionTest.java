@@ -42,7 +42,7 @@ public class TDRegistroPedidoIntegracionTest {
         PedidoModel pedido = new PedidoModel();
         pedido.setTotal(100.0f);
         pedido.setEstado(estado);
-        pedido.setFechaHora(LocalDateTime.now());
+        
 
         // Realiza la solicitud POST al controlador
         mockMvc.perform(post("/pedido/guardarPedido")
@@ -56,7 +56,7 @@ public class TDRegistroPedidoIntegracionTest {
 
     @Test
     @WithMockUser(authorities = "ADMIN")
-    public void testGuardarPedido_FalloPrecioNegativo() throws Exception {
+    public void testGuardarPedido_FalloTotalNegativo() throws Exception {
         // Configura un estado válido
         EstadoModel estado = new EstadoModel();
         estado.setId(1L);
