@@ -2,13 +2,16 @@
 <html xmlns:th="http://www.thymeleaf.org"
       xmlns:sec="https://www.thymeleaf.org/extras/spring-security">
 
-    <head>
-        <title>TODO supply a title</title>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    </head>
-    <body>
-        <table border="1" cellpadding="10" cellspacing="0">
+<head>
+    <title>Pedidos</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/pedidosadmin.css" />
+</head>
+<body>
+    <h2>Pedidos</h2>
+    <div class="table-container"> <!-- Añadir contenedor -->
+        <table>
             <thead>
                 <tr>
                     <th>ID</th>
@@ -21,10 +24,10 @@
             </thead>
             <tbody>
                 <!-- Aquí se iterarían los pedidos -->
-                
             </tbody>
         </table>
-        <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-        <script src="/js/pedidosAdmin.js"></script>
-    </body>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="/js/pedidosAdmin.js"></script>
+</body>
 </html>

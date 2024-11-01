@@ -38,3 +38,5 @@ function getCategorias() {
 document.addEventListener("DOMContentLoaded", function() {
     getCategorias();
 });
+
+

@@ -54,10 +54,10 @@
         <div th:if="${producto != null}" class="bg-black shadow-md rounded-lg p-6 max-w-lg mx-auto">
             <img th:src="'https://drive.google.com/thumbnail?id=' + ${producto.imagen}" alt="${producto.nombre}" class="rounded-t-lg w-full object-contain h-64 mb-4" />
             <div class="p-4">
-                <p class="text-lg mb-2 text-white"><strong>Nombre: </strong> <span th:text="${producto.nombre}" class="text-gray-400"></span></p>
-                <p class="text-gray-300 mb-2"><strong>Descripción: </strong> <span th:text="${producto.descripcion}"></span></p>
-                <p class="text-gray-300 mb-2"><strong>Stock: </strong> <span th:text="${producto.stock}"></span></p>
-                <p class="text-green-500 font-bold text-xl mb-4"><strong>Precio:</strong> <span th:text="${producto.precio}"></span></p>
+                <p class="text-lg mb-2 text-white"><span>Nombre: </span> <span th:text="${producto.nombre}" class="font-bold text-white"></span></p>
+                <p class="text-gray-300 mb-2"><span class="text-gray-400">Descripción: </span> <span th:text="${producto.descripcion}" class="font-bold text-white"></span></p>
+                <p class="text-gray-300 mb-2"><span class="text-gray-400">Stock: </span> <span th:text="${producto.stock}" class="font-bold text-white"></span></p>
+                <p class="text-yellow-300 font-bold mb-4"><span>Precio: $</span><span th:text="${producto.precio}" class="font-bold"></span></p>
             </div>
 
             <form id="addToCartForm" th:action="@{/addToCart}" method="post" sec:authorize="hasAuthority('USER')" class="space-y-4">

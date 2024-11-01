@@ -40,6 +40,7 @@ public class PedidoController {
         try {
             // Intenta guardar el pedido
             PedidoModel savedPedido = pedidoService.guardarPedido(pedidoModel);
+            //this.pedidoService.cambiarEstadoPedidos();
             return ResponseEntity.ok(savedPedido); // Retorna el pedido guardado con HTTP 200 OK
         } catch (IllegalArgumentException e) {
             // Maneja las excepciones de validación

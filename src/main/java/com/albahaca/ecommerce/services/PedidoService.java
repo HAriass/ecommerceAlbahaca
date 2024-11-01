@@ -6,7 +6,6 @@ import com.albahaca.ecommerce.repositories.PedidoRepository;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Optional;
-import javax.sound.midi.SysexMessage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
@@ -63,13 +62,12 @@ public class PedidoService {
 
             // Verifica si el pedido está en "enPreparacion" por más de 10 segundos
             if (estadoActual.equals("enPreparacion")) {
-                if (pedido.getFechaHora().plusSeconds(20).isBefore(ahora)) {
+                if (pedido.getFechaHora().plusSeconds(10).isBefore(ahora)) {
                     this.cambiarEstado("entregado", pedido);
                 }
             } 
         }
     }
-
     
     public void cambiarEstado(String nombreEstado, PedidoModel pedido){
         EstadoModel estadoNuevo = estadoService.obtenerEstadoPorNombre(nombreEstado);

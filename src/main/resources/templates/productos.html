@@ -60,12 +60,12 @@
                             </a>
                             <div class="p-5 flex flex-col flex-grow">
                                 <a href="#">
-                                    <h5 class="mb-2 text-2xl font-bold tracking-tight text-white" th:text="${producto.nombre}"></h5>
+                                    <h5 class="mb-3 text-2xl font-bold tracking-tight text-white" th:text="${producto.nombre}"></h5>
                                 </a>
-
-                                <!-- Descripción del producto -->
+                                
+                                                                <!-- Nombre de la marca del producto -->
                                 <p class="mb-3 font-normal text-white dark:text-gray-400">
-                                    <strong>Descripción:</strong> <span th:text="${producto.descripcion}"></span>
+                                    <strong>Marca:</strong> <span th:text="${producto.marca.nombre}"></span>
                                 </p>
                                 
                                 <!-- Stock del producto -->
@@ -81,15 +81,10 @@
                                         <span>Producto Agotado</span>
                                     </p>
                                 </div>
-                                
-                                <!-- Nombre de la marca del producto -->
-                                <p class="mb-3 font-normal text-white dark:text-gray-400">
-                                    <strong>Marca:</strong> <span th:text="${producto.marca.nombre}"></span>
-                                </p>
 
                                 <!-- Precio del producto, destacado -->
-                                <p class="mb-3 font-bold text-2xl text-yellow-400 dark:text-green-300">
-                                    <strong>Precio:</strong> <span th:text="${producto.precio}"></span>
+                                <p class="mb-3 font-bold text-xl text-yellow-300">
+                                    <strong>Precio: $</strong><span th:text="${producto.precio}"></span>
                                 </p>
 
                                 <div class="mt-auto flex justify-center">

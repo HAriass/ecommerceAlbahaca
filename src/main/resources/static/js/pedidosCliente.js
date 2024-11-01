@@ -20,20 +20,28 @@ function getPedidos() {
             console.log(pedidos);
             let htmlContent = '';
 
+            // Ordena los pedidos por fechaHora en forma descendente
+            pedidos.sort((a, b) => new Date(b.fechaHora) - new Date(a.fechaHora));
+
             pedidos.forEach(pedido => {
                 // Llama a getDetallesPedido para cada pedido y pasa el id
                 getDetallesPedido(pedido.id).then(detallesHtml => {
-                    const botonCancelar = pedido.estado.nombre === 'enPreparacion'
-                        ? `<button onclick="cancelarPedido(${pedido.id})">Cancelar</button>`
-                        : ''; // Solo mostrar botón si está en estado "enPreparacion"
-                    
+                    // Siempre muestra el botón, pero desactívalo si no está en estado "enPreparacion"
+                    const botonCancelar = `
+                        <button onclick="cancelarPedido(${pedido.id})"
+                                style="background-color: ${pedido.estado.nombre === 'enPreparacion' ? 'red' : 'gray'}; 
+                                       color: white; padding: 5px 10px; border: none; border-radius: 4px; 
+                                       cursor: ${pedido.estado.nombre === 'enPreparacion' ? 'pointer' : 'not-allowed'};"
+                                ${pedido.estado.nombre !== 'enPreparacion' ? 'disabled' : ''}>
+                            Cancelar
+                        </button>
+                    `;
+
                     htmlContent += `
                         <tr>
                             <td>${pedido.id}</td>
                             <td>${formatFechaHora(pedido.fechaHora)}</td> <!-- Formatea la fecha aquí -->
-                            <td>
-                                <ul>${detallesHtml}</ul> <!-- Mostrar detalles en lista -->
-                            </td>
+                            <td>${detallesHtml}</td>
                             <td>${pedido.estado.nombre}</td> 
                             <td>${pedido.total}</td>
                             <td>${botonCancelar}</td> <!-- Botón para cancelar el pedido -->
@@ -46,6 +54,8 @@ function getPedidos() {
         .catch((err) => console.error(err));
 }
 
+
+
 function getDetallesPedido(pedidoId) {
     return axios.get(`/detallePedido/listarDetallesPedidoPorPedido/${pedidoId}`)
         .then(function(response) {
@@ -54,7 +64,7 @@ function getDetallesPedido(pedidoId) {
             
             detalles.forEach(detalle => {
                 htmlContent += `
-                    <li>${detalle.producto.nombre} - Cantidad: ${detalle.cantidad} - Subtotal: ${detalle.subtotal}</li>
+                    <span>${detalle.producto.nombre} - Cantidad: ${detalle.cantidad} - Subtotal: ${detalle.subtotal}<span>
                 `;
             });
 

@@ -28,9 +28,7 @@ function getPedidos() {
                             <td>${pedido.id}</td>
                             <td>${pedido.cuenta.nombre}</td>
                             <td>${formatFechaHora(pedido.fechaHora)}</td> <!-- Formatea la fecha aquí -->
-                            <td>
-                                <ul>${detallesHtml}</ul> <!-- Mostrar detalles en lista -->
-                            </td>
+                            <td>${detallesHtml}</td>
                             <td>${pedido.estado.nombre}</td> 
                             <td>${pedido.total}</td>
                         </tr>
@@ -50,7 +48,7 @@ function getDetallesPedido(pedidoId) {
             
             detalles.forEach(detalle => {
                 htmlContent += `
-                    <li>${detalle.producto.nombre} - Cantidad: ${detalle.cantidad} - Subtotal: ${detalle.subtotal}</li>
+                    <span>${detalle.producto.nombre} - Cantidad: ${detalle.cantidad} - Subtotal: ${detalle.subtotal}</span>
                 `;
             });
 
