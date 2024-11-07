@@ -17,7 +17,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.albahaca.ecommerce.models.MarcaModel;
 import com.albahaca.ecommerce.services.MarcaService;
-
 @RestController
 @RequestMapping("/marca")
 public class MarcaController {
