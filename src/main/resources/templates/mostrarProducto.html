@@ -50,43 +50,69 @@
 
     <div class="content container mx-auto p-4">
         <h1 class="text-3xl text-white font-bold mb-6 text-center">Detalles del Producto</h1>
-
-        <div th:if="${producto != null}" class="bg-black shadow-md rounded-lg p-6 max-w-lg mx-auto">
-            <img th:src="'https://drive.google.com/thumbnail?id=' + ${producto.imagen}" alt="${producto.nombre}" class="rounded-t-lg w-full object-contain h-64 mb-4" />
-            <div class="p-4">
-                <p class="text-lg mb-2 text-white"><span>Nombre: </span> <span th:text="${producto.nombre}" class="font-bold text-white"></span></p>
-                <p class="text-gray-300 mb-2"><span class="text-gray-400">Descripción: </span> <span th:text="${producto.descripcion}" class="font-bold text-white"></span></p>
-                <p class="text-gray-300 mb-2"><span class="text-gray-400">Stock: </span> <span th:text="${producto.stock}" class="font-bold text-white"></span></p>
-                <p class="text-yellow-300 font-bold mb-4"><span>Precio: $</span><span th:text="${producto.precio}" class="font-bold"></span></p>
+    
+        <div th:if="${producto != null}" class="bg-black shadow-md rounded-lg p-4 max-w-md mx-auto">
+            <img th:src="'https://drive.google.com/thumbnail?id=' + ${producto.imagen}" 
+                 alt="${producto.nombre}" 
+                 class="rounded-t-lg w-full object-contain h-48 mb-3" />
+            <div class="p-3">
+                <p class="text-base mb-2 text-gray-400 truncate">
+                    <span class="font-semibold">Nombre: </span> 
+                    <span th:text="${producto.nombre}" class="text-white"></span>
+                </p>
+                <p class="text-base mb-2 text-gray-400 truncate">
+                    <span class="font-semibold">Descripción: </span> 
+                    <span 
+                        th:text="${producto.descripcion}" 
+                        th:attr="title=${producto.descripcion}" 
+                        class="text-white">
+                    </span>
+                </p>                               
+                <p class="text-base mb-2 text-gray-400">
+                    <span class="font-semibold">Stock: </span> 
+                    <span th:text="${producto.stock}" class="text-white"></span>
+                </p>
+                <p class="text-base mb-3 text-gray-400">
+                    <span class="font-semibold">Precio: $</span>
+                    <span th:text="${producto.precio}" class="text-green-300 font-bold"></span>
+                </p>
             </div>
-
-            <form id="addToCartForm" th:action="@{/addToCart}" method="post" sec:authorize="hasAuthority('USER')" class="space-y-4">
+        
+            <form id="addToCartForm" th:action="@{/addToCart}" method="post" sec:authorize="hasAuthority('USER')" class="space-y-3 mt-2">
                 <input type="hidden" name="productoId" th:value="${producto.id}" id="productoId" />
-                <!-- Mueve el botón dentro de un bloque th:if -->
+                
                 <div th:if="${producto.stock > 0}">
-                    <label class="block text-gray-400 font-semibold">Cantidad:</label> 
-                    <input type="number" name="cantidad" min="1" value="1" id="cantidad" th:disabled="${producto.stock == 0}" class="w-20 p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
-                    <input type="submit" value="Agregar al Carrito" th:disabled="${producto.stock == 0}" class="w-full bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded-md transition duration-300 cursor-pointer">
+                    <div class="flex flex-col gap-2">
+                        <label class="block text-gray-400 font-semibold">Cantidad:</label>
+                        <input type="number" name="cantidad" min="1" value="1" id="cantidad" 
+                               th:disabled="${producto.stock == 0}" 
+                               class="w-20 p-1 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
+                    </div>
+            
+                    <input type="submit" value="Agregar al Carrito" 
+                           th:disabled="${producto.stock == 0}" 
+                           class="w-full mt-3 bg-blue-500 hover:bg-blue-600 text-white font-semibold py-1.5 px-3 rounded-md transition duration-300 cursor-pointer">
                 </div>
-            </form>
-
-
-
-            <!-- Mostrar mensaje si no es usuario autenticado -->
+            </form>            
+        
             <div th:if="${!#authorization.expression('hasAuthority(''USER'')')}">
                 <p class="text-red-500">Debes iniciar sesión como cliente para agregar productos al carrito.</p>
             </div>
             
-            <!--Control de Stock-->
             <div th:if="${producto.stock == 0}">
                 <p class="text-red-500">Producto Agotado</p>
             </div>
         </div>
-
+        
+    
         <div th:if="${producto == null}" class="text-center text-red-500">
             <p>No se encontró el producto.</p>
         </div>
-    </div>
+    </div> 
+    
+</div>
+
+    
 
 
 
@@ -106,4 +132,4 @@
     </script>
 
 </body>
-</html>
+</html> 
