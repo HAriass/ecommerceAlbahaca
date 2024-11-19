@@ -9,3 +9,9 @@ html, body {
 .navbar{
     box-shadow: 0px 8px 12px rgba(0, 0, 0, 0.9);
 }
+
+.truncate {
+    overflow: hidden;       /* Oculta el texto que exceda el ancho del contenedor */
+    text-overflow: ellipsis; /* Muestra puntos suspensivos (...) */
+    white-space: nowrap;     /* Mantiene el texto en una sola línea */
+}
