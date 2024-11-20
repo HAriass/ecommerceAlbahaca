@@ -7,8 +7,12 @@ function getCategorias() {
         let htmlContent = '';
         
         categorias.forEach(categoria => {
+            const descripcionTruncada = categoria.descripcion.length > 30 
+                ? `${categoria.descripcion.substring(0, 30)}...` 
+                : categoria.descripcion;
+
             htmlContent += `
-                <div class="max-w-sm bg-gradient-to-b from-black via-black via-80% to-neutral-800 to-100% border border-gray-900 rounded-lg shadow flex flex-col justify-between">
+                <div class="max-w-sm bg-gradient-to-b from-black via-black via-80% to-neutral-800 to-100% border-solid border-2 border-sky-500 rounded-lg shadow flex flex-col justify-between">
                     <a href="#">
                         <img style="width:100%" class="rounded-t-lg" src="https://drive.google.com/thumbnail?id=${categoria.imagen}" alt="${categoria.nombre}" />
                     </a>
@@ -16,7 +20,9 @@ function getCategorias() {
                         <a href="#">
                             <h5 class="mb-2 text-2xl font-bold tracking-tight text-white">${categoria.nombre}</h5>
                         </a>
-                        <p class="mb-3 font-normal text-white dark:text-gray-400">${categoria.descripcion}</p>
+                        <p class="mb-3 font-normal text-white dark:text-gray-400" title="${categoria.descripcion}">
+                            ${descripcionTruncada}
+                        </p>
                         <div class="mt-auto">
                             <a href="/mostrarProductosCategoria/${categoria.id}" class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300">
                                 Ver más
