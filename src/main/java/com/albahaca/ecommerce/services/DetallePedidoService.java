@@ -27,7 +27,7 @@ public class DetallePedidoService {
         return (ArrayList<DetallePedidoModel>) detallePedidoRepository.findAll();
     }
     
-    // Obtener todos los DetallesPedidoPorPeido
+    // Obtener todos los DetallesPedidoPorPedido
     public ArrayList<DetallePedidoModel> listaDetallePedidoPorPedido(long pedidoId) {
         return (ArrayList<DetallePedidoModel>) detallePedidoRepository.findByPedidoId(pedidoId);
     }
@@ -47,5 +47,12 @@ public class DetallePedidoService {
         }
     }
     
-    
+    // Obtener el ID del producto asociado a un DetallePedido
+    public Long obtenerProductoIdPorDetalle(Long detallePedidoId) {
+        Optional<DetallePedidoModel> detallePedido = detallePedidoRepository.findById(detallePedidoId);
+        if (detallePedido.isPresent() && detallePedido.get().getProducto() != null) {
+            return detallePedido.get().getProducto().getId();
+        }
+        return null; // o lanzar una excepción según tus necesidades
+    }
 }

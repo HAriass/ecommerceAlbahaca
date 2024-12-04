@@ -1,12 +1,11 @@
 
 package com.albahaca.ecommerce.services;
 
-import com.albahaca.ecommerce.models.MetricasModel;
-import com.albahaca.ecommerce.repositories.MetricasRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
+import com.albahaca.ecommerce.models.MetricasModel;
+import com.albahaca.ecommerce.repositories.MetricasRepository;
 
 @Service
 public class MetricasService {
