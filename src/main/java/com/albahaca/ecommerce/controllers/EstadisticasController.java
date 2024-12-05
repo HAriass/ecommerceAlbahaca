@@ -32,6 +32,7 @@ public class EstadisticasController {
 
     @GetMapping("/listarPedidos")
     public ArrayList<PedidoModel> listarPedidos() {
+
         return this.pedidoService.listarPedidos();
     }
 
@@ -59,8 +60,7 @@ public class EstadisticasController {
     //ver si sirve porque no la use
     @GetMapping("/productosPrueba")
     public ArrayList<ProductoModel> obtenerProductosPorDetallePedido() {
-
-        System.out.println("sanchez gay");
+      
         // Lista para almacenar todos los productos
         ArrayList<ProductoModel> productos = new ArrayList<>();
         

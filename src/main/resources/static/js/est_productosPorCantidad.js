@@ -1,4 +1,35 @@
-async function loadContent(stat) {
+async function loadProductosPorCantidad(stat) {
+
+    const mainContent = document.getElementById('main-content');
+
+    //muestro en el main los input para poner las fecha inicio y fecha fin
+    mainContent.innerHTML = `
+        <h2 class="text-xl font-bold text-white">Productos Vendidos Por Cantidad</h2>
+        <p class="text-gray-300">Seleccione el período de tiempo para la estadística</p>
+        <input type="date" id="fechaInicio" class="text-black" placeholder="Fecha Inicio" />
+        <input type="date" id="fechaFin" class="text-black" placeholder="Fecha Fin" />
+        <button id="btnFiltrar" class="bg-blue-500 text-white py-2 px-4 rounded">Mostrar Estadisticas</button>
+    `;
+
+    const btnFiltrar = document.getElementById('btnFiltrar');
+
+    btnFiltrar.addEventListener('click', async () => {
+        const fechaInicio = document.getElementById('fechaInicio').value;
+        const fechaFin = document.getElementById('fechaFin').value;
+
+        if (!fechaInicio || !fechaFin) {
+            alert('Por favor, seleccione ambas fechas.');
+            return;
+        }
+
+        console.log(fechaInicio, fechaFin,stat);
+        // await loadProductosPorCantidad(stat, fechaInicio, fechaFin);
+    });
+
+}
+
+
+async function loadstat(stat) {
     const mainContent = document.getElementById('main-content');
 
     if (stat === 'estadistica1') {
