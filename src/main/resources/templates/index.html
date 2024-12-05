@@ -30,7 +30,7 @@
                          <li sec:authorize="hasAuthority('ADMIN')">
                              <a href="/menu" class="block py-2 px-3 text-white rounded hover:bg-gray-700 md:hover:bg-transparent md:border-0 md:hover:text-blue-400">Menu</a>
                          </li>
-                          <!-- Visible solo para ADMIN -->
+                          <!-- Visible solo para USER -->
                           <li sec:authorize="hasAuthority('USER')">
                             <a href="/carrito" class="block py-2 px-3 text-white rounded hover:bg-gray-700 md:hover:bg-transparent md:border-0 md:hover:text-blue-400">
                                 <i class="fas fa-shopping-cart"></i>

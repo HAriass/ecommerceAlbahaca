@@ -9,6 +9,8 @@
     <link rel="stylesheet" href="/css/index.css" />
     <link href="https://cdn.jsdelivr.net/npm/flowbite@2.5.1/dist/flowbite.min.css" rel="stylesheet" />
     <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 
 <body class="bg-gray-100">
@@ -22,46 +24,32 @@
                  </a>
                  <div class="hidden w-full md:block md:w-auto" id="navbar-default">
                      <ul class="font-medium flex flex-col p-4 md:p-0 mt-4 border md:flex-row md:space-x-8 rtl:space-x-reverse md:mt-0 md:border-0 dark:bg-black md:dark:bg-black dark:border-gray-700">
-                         <!-- Siempre visible -->
                          <li sec:authorize="hasAuthority('ADMIN')">
                              <a href="/" class="block py-2 px-3 text-white rounded hover:bg-gray-700 md:hover:bg-transparent md:border-0 md:hover:text-blue-400" aria-current="page">Inicio</a>
                          </li>
-
-                         <!-- Visible solo para ADMIN -->
                          <li sec:authorize="hasAuthority('ADMIN')">
                              <a href="/menu" class="block py-2 px-3 text-white rounded hover:bg-gray-700 md:hover:bg-transparent md:border-0 md:hover:text-blue-400">Menu</a>
                          </li>
-                          <!-- Visible solo para USER -->
-                          <li sec:authorize="hasAuthority('USER')">
-                            <a href="/carrito" class="block py-2 px-3 text-white rounded hover:bg-gray-700 md:hover:bg-transparent md:border-0 md:hover:text-blue-400">
+                         <li sec:authorize="hasAuthority('USER')">
+                             <a href="/carrito" class="block py-2 px-3 text-white rounded hover:bg-gray-700 md:hover:bg-transparent md:border-0 md:hover:text-blue-400">
                                 <i class="fas fa-shopping-cart"></i>
-                            </a>
-                          </li>
-                                           
-
-                         <!-- Icono de usuario con menú desplegable -->
+                             </a>
+                         </li>
                          <li class="relative">
                              <button id="userMenuButton" data-dropdown-toggle="userMenu" class="block py-2 px-3 text-white rounded hover:bg-gray-700">
                                  <img src="https://cdn-icons-png.flaticon.com/512/747/747376.png" class="w-6 h-6 rounded-full filter invert" alt="User icon">
                              </button>
-
-                             <!-- Menú desplegable -->
                              <div id="userMenu" class="hidden absolute right-0 mt-2 w-48 bg-black text-center rounded-md shadow-lg">
                                  <ul class="py-2">
-                                     <!-- Visible solo para usuarios no autenticados -->
                                      <li sec:authorize="isAnonymous()">
                                          <a href="/login" class="block px-2 py-2 text-white">Iniciar Sesion</a>
                                      </li>
-                                    <!-- Visible solo para usuarios autenticados -->
                                      <li sec:authorize="isAuthenticated() and hasAuthority('USER')">
                                          <a href="/pedidosCliente" class="block px-4 py-2 text-white">Pedidos</a>
                                      </li>
-                                     <!-- Visible solo para usuarios autenticados -->
                                      <li sec:authorize="isAuthenticated()">
                                          <a href="/logout" class="block px-4 py-2 text-red-400">Cerrar Sesion</a>
                                      </li>
-                                     
-
                                  </ul>
                              </div>
                          </li>
@@ -78,37 +66,20 @@
             <h2 class="text-lg font-bold mb-4">Estadísticas</h2>
             <button onclick="loadContent('estadistica1')" class="relative inline-flex items-center justify-center w-full p-0.5 mb-4 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-cyan-500 to-blue-500 group-hover:from-cyan-500 group-hover:to-blue-500 hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-cyan-200 dark:focus:ring-cyan-800">
                 <span class="relative w-full px-5 py-2.5 transition-all ease-in duration-75 bg-black rounded-md group-hover:bg-opacity-0">
-                    Estadística 1
+                    Productos Vendidos Por Cantidad
                 </span>
             </button>
-            <button onclick="loadContent('estadistica2')" class="relative inline-flex items-center justify-center w-full p-0.5 mb-4 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-cyan-500 to-blue-500 group-hover:from-cyan-500 group-hover:to-blue-500 hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-cyan-200 dark:focus:ring-cyan-800">
+            <button onclick="loadCantidadPorCategoria()" class="relative inline-flex items-center justify-center w-full p-0.5 mb-4 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-cyan-500 to-blue-500 group-hover:from-cyan-500 group-hover:to-blue-500 hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-cyan-200 dark:focus:ring-cyan-800">
                 <span class="relative w-full px-5 py-2.5 transition-all ease-in duration-75 bg-black rounded-md group-hover:bg-opacity-0">
-                    Estadística 2
+                    Cantidad Vendida por Categoría
                 </span>
-            </button>
-            <button onclick="loadContent('estadistica3')" class="relative inline-flex items-center justify-center w-full p-0.5 mb-4 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-cyan-500 to-blue-500 group-hover:from-cyan-500 group-hover:to-blue-500 hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-cyan-200 dark:focus:ring-cyan-800">
+            </button>    
+            <button onclick="loadClientesCantCompras()" class="relative inline-flex items-center justify-center w-full p-0.5 mb-4 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-cyan-500 to-blue-500 group-hover:from-cyan-500 group-hover:to-blue-500 hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-cyan-200 dark:focus:ring-cyan-800">
                 <span class="relative w-full px-5 py-2.5 transition-all ease-in duration-75 bg-black rounded-md group-hover:bg-opacity-0">
-                    Estadística 3
+                    Clientes Que Mas Compraron
                 </span>
-            </button>
-            <button onclick="loadContent('estadistica4')" class="relative inline-flex items-center justify-center w-full p-0.5 mb-4 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-cyan-500 to-blue-500 group-hover:from-cyan-500 group-hover:to-blue-500 hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-cyan-200 dark:focus:ring-cyan-800">
-                <span class="relative w-full px-5 py-2.5 transition-all ease-in duration-75 bg-black rounded-md group-hover:bg-opacity-0">
-                    Estadística 4
-                </span>
-            </button>
-            <button onclick="loadContent('estadistica5')" class="relative inline-flex items-center justify-center w-full p-0.5 mb-4 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-cyan-500 to-blue-500 group-hover:from-cyan-500 group-hover:to-blue-500 hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-cyan-200 dark:focus:ring-cyan-800">
-                <span class="relative w-full px-5 py-2.5 transition-all ease-in duration-75 bg-black rounded-md group-hover:bg-opacity-0">
-                    Estadística 5
-                </span>
-            </button>
-            <button onclick="loadContent('estadistica6')" class="relative inline-flex items-center justify-center w-full p-0.5 mb-4 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-cyan-500 to-blue-500 group-hover:from-cyan-500 group-hover:to-blue-500 hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-cyan-200 dark:focus:ring-cyan-800">
-                <span class="relative w-full px-5 py-2.5 transition-all ease-in duration-75 bg-black rounded-md group-hover:bg-opacity-0">
-                    Estadística 6
-                </span>
-            </button>
+            </button>                    
         </aside>
-
-
 
         <!-- Main Content -->
         <main id="main-content" class="flex-1 bg-gray-800 p-6">
@@ -119,32 +90,163 @@
 
     <!-- Scripts -->
     <script>
-        // Función para cargar contenido dinámico
-        function loadContent(stat) {
+        async function loadContent(stat) {
             const mainContent = document.getElementById('main-content');
-            switch (stat) {
-                case 'estadistica1':
-                    mainContent.innerHTML = '<h2 class="text-xl font-bold">Estadística 1</h2><p>Contenido para la Estadística 1</p>';
-                    break;
-                case 'estadistica2':
-                    mainContent.innerHTML = '<h2 class="text-xl font-bold">Estadística 2</h2><p>Contenido para la Estadística 2</p>';
-                    break;
-                case 'estadistica3':
-                    mainContent.innerHTML = '<h2 class="text-xl font-bold">Estadística 3</h2><p>Contenido para la Estadística 3</p>';
-                    break;
-                case 'estadistica4':
-                    mainContent.innerHTML = '<h2 class="text-xl font-bold">Estadística 4</h2><p>Contenido para la Estadística 4</p>';
-                    break;
-                case 'estadistica5':
-                    mainContent.innerHTML = '<h2 class="text-xl font-bold">Estadística 5</h2><p>Contenido para la Estadística 5</p>';
-                    break;
-                case 'estadistica6':
-                    mainContent.innerHTML = '<h2 class="text-xl font-bold">Estadística 6</h2><p>Contenido para la Estadística 6</p>';
-                    break;
-                default:
-                    mainContent.innerHTML = '<h2 class="text-xl font-bold">Error</h2><p>Contenido no disponible.</p>';
+
+            if (stat === 'estadistica1') {
+                mainContent.innerHTML = `
+                    <canvas id="chartMasVendidos" class="w-full max-w-2xl mt-16 mx-auto bg-white p-4 rounded shadow-md"></canvas>
+                `;
+
+                try {
+                    const response = await axios.get('/estadisticas/masVendidos');
+                    const data = response.data;
+                    console.log(data);
+
+                    const nombres = data.map(item => item.nombre);
+                    const cantidades = data.map(item => item.cantidad);
+
+                    const ctx = document.getElementById('chartMasVendidos').getContext('2d');
+                    new Chart(ctx, {
+                        type: 'bar',
+                        data: {
+                            labels: nombres,
+                            datasets: [{
+                                label: 'Cantidad Vendida',
+                                data: cantidades,
+                                backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                                borderColor: 'rgba(75, 192, 192, 1)',
+                                borderWidth: 1
+                            }]
+                        },
+                        options: {
+                            responsive: true,
+                            scales: {
+                                y: {
+                                    beginAtZero: true
+                                }
+                            }
+                        }
+                    });
+                } catch (error) {
+                    mainContent.innerHTML = `
+                        <h2 class="text-xl font-bold text-red-500">Error</h2>
+                        <p class="text-white">No se pudieron cargar los datos de la estadística.</p>
+                    `;
+                    console.error('Error al cargar los datos:', error);
+                }
+            } else {
+                mainContent.innerHTML = `
+                    <h2 class="text-xl font-bold text-white">Estadística ${stat}</h2>
+                    <p class="text-gray-300">Contenido para la Estadística ${stat}</p>
+                `;
             }
         }
+
+        async function loadCantidadPorCategoria() {
+            const mainContent = document.getElementById('main-content');
+
+            mainContent.innerHTML = `
+                <canvas id="chartPorCategoria" class="w-full max-w-2xl mt-16 mx-auto bg-white p-4 rounded shadow-md"></canvas>
+            `;
+
+            try {
+                // Hacemos la solicitud a la API para obtener los datos por categoría
+                const response = await axios.get('/estadisticas/cantidadPorCategoria');
+                const data = response.data;
+                console.log(data);
+
+                // Extraemos las categorías y las cantidades
+                const categorias = data.map(item => item.categoria);
+                const cantidades = data.map(item => item.cantidadVendida);
+
+                // Creamos el gráfico usando Chart.js
+                const ctx = document.getElementById('chartPorCategoria').getContext('2d');
+                new Chart(ctx, {
+                    type: 'bar',
+                    data: {
+                        labels: categorias,
+                        datasets: [{
+                            label: 'Cantidad Vendida',
+                            data: cantidades,
+                            backgroundColor: 'rgba(54, 162, 235, 0.2)', // Color de fondo
+                            borderColor: 'rgba(54, 162, 235, 1)', // Color de borde
+                            borderWidth: 1
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        scales: {
+                            y: {
+                                beginAtZero: true
+                            }
+                        }
+                    }
+                });
+            } catch (error) {
+                mainContent.innerHTML = `
+                    <h2 class="text-xl font-bold text-red-500">Error</h2>
+                    <p class="text-white">No se pudieron cargar los datos de la estadística.</p>
+                `;
+                console.error('Error al cargar los datos:', error);
+            }
+        }
+
+        async function loadClientesCantCompras() {
+            const mainContent = document.getElementById('main-content');
+
+            // Limpiar el contenido previo
+            mainContent.innerHTML = `
+                <canvas id="clientesChart" class="w-full max-w-2xl mt-16 mx-auto bg-white p-4 rounded shadow-md"></canvas>
+            `;
+
+            try {
+                // Hacemos la solicitud a la API para obtener los datos de clientes y sus compras
+                const response = await axios.get('/estadisticas/clientesMasCompraron');
+                const data = response.data;
+
+                // Log de los datos para comprobar que llegaron correctamente
+                console.log(data);
+
+                // Extraemos los clientes y las cantidades de productos comprados
+                const clientes = data.map(item => item.cliente);
+                const cantidades = data.map(item => item.cantidadComprada);
+
+                // Creamos el gráfico usando Chart.js
+                const ctx = document.getElementById('clientesChart').getContext('2d');
+                new Chart(ctx, {
+                    type: 'bar',
+                    data: {
+                        labels: clientes, // Los nombres de los clientes en el eje X
+                        datasets: [{
+                            label: 'Cantidad de Productos Comprados',
+                            data: cantidades, // Las cantidades de productos comprados por cada cliente
+                            backgroundColor: 'rgba(75, 192, 192, 0.2)', // Color de fondo de las barras
+                            borderColor: 'rgba(75, 192, 192, 1)', // Color de borde de las barras
+                            borderWidth: 1
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        scales: {
+                            y: {
+                                beginAtZero: true // Asegura que el eje Y comience desde cero
+                            }
+                        }
+                    }
+                });
+
+            } catch (error) {
+                // En caso de error, mostramos un mensaje en la interfaz
+                mainContent.innerHTML = `
+                    <h2 class="text-xl font-bold text-red-500">Error</h2>
+                    <p class="text-white">No se pudieron cargar los datos de la estadística.</p>
+                `;
+                console.error('Error al cargar los datos:', error);
+            }
+        }
+
+
 
         const userMenuButton = document.getElementById('userMenuButton');
         const userMenu = document.getElementById('userMenu');
@@ -152,6 +254,7 @@
         userMenuButton.addEventListener('click', () => {
             userMenu.classList.toggle('hidden');
         });
+
     </script>
 </body>
 </html>
