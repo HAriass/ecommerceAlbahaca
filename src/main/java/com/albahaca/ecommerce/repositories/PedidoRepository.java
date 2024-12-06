@@ -16,7 +16,9 @@ public interface PedidoRepository extends CrudRepository<PedidoModel, Long>{
     @Query("SELECT new com.albahaca.ecommerce.DTO.ClienteMasComprasDTO(c.nombre, COUNT(p.cuenta.id)) " +
            "FROM PedidoModel p " +
            "INNER JOIN p.cuenta c " +
+           "WHERE p.fechaHora BETWEEN :fechaInicio AND :fechaFin " +
            "GROUP BY c.id, c.nombre " +
            "ORDER BY COUNT(p.cuenta.id) DESC")
-    List<ClienteMasComprasDTO> obtenerClienteConMasCompras();
+    List<ClienteMasComprasDTO> obtenerClienteConMasCompras(java.time.LocalDateTime fechaInicio, java.time.LocalDateTime fechaFin);
+
 }

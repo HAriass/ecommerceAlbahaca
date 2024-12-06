@@ -5,6 +5,7 @@ import com.albahaca.ecommerce.DTO.ClienteMasComprasDTO;
 import com.albahaca.ecommerce.models.CuentaModel;
 import com.albahaca.ecommerce.repositories.CuentaRepository;
 import com.albahaca.ecommerce.repositories.PedidoRepository;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,8 +41,8 @@ public class CuentaService {
         return cuentaRepository.findById(id).orElse(null);
     }
     
-    public List<ClienteMasComprasDTO> obtenerClienteConMasCompras(){
-        return pedidoRepository.obtenerClienteConMasCompras();
+    public List<ClienteMasComprasDTO> obtenerClienteConMasCompras(LocalDateTime fechaInicio, LocalDateTime fechaFin){
+        return pedidoRepository.obtenerClienteConMasCompras(fechaInicio, fechaFin);
     }
     
 }

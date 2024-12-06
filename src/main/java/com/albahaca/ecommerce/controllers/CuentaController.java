@@ -3,6 +3,7 @@ package com.albahaca.ecommerce.controllers;
 import com.albahaca.ecommerce.DTO.ClienteMasComprasDTO;
 import com.albahaca.ecommerce.models.CuentaModel;
 import com.albahaca.ecommerce.services.CuentaService;
+import java.time.LocalDateTime;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
@@ -52,8 +53,15 @@ public class CuentaController {
     
     @GetMapping("/cliente-con-mas-compras")
     @PreAuthorize("hasAuthority('ADMIN')")
-    public ResponseEntity<List<ClienteMasComprasDTO>> obtenerClienteConMasCompras() {
-        List<ClienteMasComprasDTO> clientes = cuentaService.obtenerClienteConMasCompras();
+    public ResponseEntity<List<ClienteMasComprasDTO>> obtenerClienteConMasCompras(
+        @RequestParam("inicio") String inicio,
+        @RequestParam("fin") String fin) {
+        
+        // Convertir las fechas recibidas como String a LocalDateTime
+        LocalDateTime fechaInicio = LocalDateTime.parse(inicio);
+        LocalDateTime fechaFin = LocalDateTime.parse(fin);
+        
+        List<ClienteMasComprasDTO> clientes = cuentaService.obtenerClienteConMasCompras(fechaInicio, fechaFin);
 
         if (clientes.isEmpty()) {
             return ResponseEntity.noContent().build(); // Devuelve 204 si no hay datos
