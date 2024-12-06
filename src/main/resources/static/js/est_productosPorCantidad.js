@@ -23,13 +23,13 @@ async function loadProductosPorCantidad(stat) {
         }
 
         console.log(fechaInicio, fechaFin,stat);
-        // await loadProductosPorCantidad(stat, fechaInicio, fechaFin);
+        await loadstat(stat, fechaInicio, fechaFin);
     });
 
 }
 
 
-async function loadstat(stat) {
+async function loadstat(stat, fechaInicio, fechaFin) {
     const mainContent = document.getElementById('main-content');
 
     if (stat === 'estadistica1') {
@@ -38,7 +38,8 @@ async function loadstat(stat) {
         `;
 
         try {
-            const response = await axios.get('/estadisticas/masVendidos');
+            // Hacemos la solicitud a la API para obtener los datos con parametro fecha inicio y fin
+            const response = await axios.get('/estadisticas/masVendidos?fechaInicio=' + fechaInicio + '&fechaFin=' + fechaFin);
             const data = response.data;
             console.log(data);
 
