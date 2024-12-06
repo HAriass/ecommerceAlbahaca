@@ -115,8 +115,15 @@ public class ProductoController {
     //LO LIMITAMOS CUANDO SE TOME DEL FRONTEND Y LISTO. Es decir solo se toma el primer elemento del json.
     @GetMapping("/producto-mas-ingresos")
     @PreAuthorize("hasAuthority('ADMIN')")
-     public ResponseEntity<List<ProductoMasIngresoDTO>> obtenerProductosConMasIngresos() {
-        List<ProductoMasIngresoDTO> productosConMasIngresos = productoService.obtenerProductoConMasIngresos();
+     public ResponseEntity<List<ProductoMasIngresoDTO>> obtenerProductosConMasIngresos(
+            @RequestParam("inicio") String inicio,
+            @RequestParam("fin") String fin) {
+         
+        // Convertir las fechas recibidas como String a LocalDateTime
+        LocalDateTime fechaInicio = LocalDateTime.parse(inicio);
+        LocalDateTime fechaFin = LocalDateTime.parse(fin);
+        
+        List<ProductoMasIngresoDTO> productosConMasIngresos = productoService.obtenerProductoConMasIngresos(fechaInicio, fechaFin);
 
         if (productosConMasIngresos.isEmpty()) {
             return ResponseEntity.noContent().build(); // 204 si no hay datos

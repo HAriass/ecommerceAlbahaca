@@ -67,8 +67,8 @@ public class ProductoService {
         return detallePedidoRepository.obtenerProductosMasVendidos(fechaInicio, fechaFin);
     }
     
-    public List<ProductoMasIngresoDTO> obtenerProductoConMasIngresos() {
-        return detallePedidoRepository.obtenerProductoConMasIngresos();
+    public List<ProductoMasIngresoDTO> obtenerProductoConMasIngresos(LocalDateTime fechaInicio, LocalDateTime fechaFin) {
+        return detallePedidoRepository.obtenerProductoConMasIngresos(fechaInicio, fechaFin);
     }
     
 }
