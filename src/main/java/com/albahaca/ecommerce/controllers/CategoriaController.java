@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -71,14 +72,19 @@ public class CategoriaController {
     }
     
     
-    //Ganancia por categoria con fecha
+    // Ganancia por categoría con fecha
     @GetMapping("/ganancias")
     @PreAuthorize("hasAuthority('ADMIN')")
-    public List<GananciaPorCategoriaDTO> obtenerGananciasPorCategoriaConFecha() {
-        
-        //Hay que hacer que tome los datos del front, porque aca estan escrito a mano para la prueba rapida
-        LocalDateTime inicio = LocalDateTime.of(2024, 12, 05, 0, 0);
-        LocalDateTime fin = LocalDateTime.of(2024, 12, 05, 23, 59);
-        return categoriaService.obtenerGananciasPorCategoriaConFecha(inicio, fin);
+    public List<GananciaPorCategoriaDTO> obtenerGananciasPorCategoriaConFecha(
+            @RequestParam("inicio") String inicio,
+            @RequestParam("fin") String fin) {
+
+        // Convertir las fechas recibidas como String a LocalDateTime
+        LocalDateTime fechaInicio = LocalDateTime.parse(inicio);
+        LocalDateTime fechaFin = LocalDateTime.parse(fin);
+
+        // Llamar al servicio con las fechas proporcionadas
+        return categoriaService.obtenerGananciasPorCategoriaConFecha(fechaInicio, fechaFin);
     }
+
 }
