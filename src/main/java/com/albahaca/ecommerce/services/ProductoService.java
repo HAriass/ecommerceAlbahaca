@@ -1,13 +1,18 @@
 
 package com.albahaca.ecommerce.services;
 
+import com.albahaca.ecommerce.DTO.ProductoMasIngresoDTO;
+import com.albahaca.ecommerce.DTO.ProductoMasVendidoDTO;
 import com.albahaca.ecommerce.models.ProductoModel;
 import com.albahaca.ecommerce.repositories.DetallePedidoRepository;
 import com.albahaca.ecommerce.repositories.ProductoRepository;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
+
 
 @Service
 public class ProductoService {
@@ -55,6 +60,14 @@ public class ProductoService {
     
     public ArrayList<ProductoModel> obtenerProductoPorCategoria(Long categoriaId) {
         return productoRepository.findByCategoriaId(categoriaId);
+    }
+    
+    public List<ProductoMasVendidoDTO> obtenerProductosMasVendidos() {
+        return detallePedidoRepository.obtenerProductosMasVendidos();
+    }
+    
+    public List<ProductoMasIngresoDTO> obtenerProductoConMasIngresos() {
+        return detallePedidoRepository.obtenerProductoConMasIngresos();
     }
     
 }

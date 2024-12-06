@@ -1,10 +1,12 @@
 package com.albahaca.ecommerce.services;
 
+import com.albahaca.ecommerce.DTO.GananciaPorCategoriaDTO;
 import com.albahaca.ecommerce.models.CategoriaModel;
 import com.albahaca.ecommerce.models.ProductoModel;
 import com.albahaca.ecommerce.repositories.CategoriaRepository;
 import com.albahaca.ecommerce.repositories.ProductoRepository;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -55,5 +57,11 @@ public class CategoriaService {
         if (categoria.getDescripcion() == null || categoria.getDescripcion().isEmpty()) {
             throw new IllegalArgumentException("La descripción no puede estar vacía");
         }
+    }
+    
+    
+    //Ganancia por categoria
+    public List<GananciaPorCategoriaDTO> obtenerGananciasPorCategoria() {
+        return categoriaRepository.obtenerGananciasPorCategoria();
     }
 }

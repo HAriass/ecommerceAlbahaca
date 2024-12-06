@@ -1,6 +1,9 @@
 package com.albahaca.ecommerce.controllers;
 
+import com.albahaca.ecommerce.DTO.ProductoMasIngresoDTO;
+import com.albahaca.ecommerce.DTO.ProductoMasVendidoDTO;
 import com.albahaca.ecommerce.models.ProductoModel;
+import com.albahaca.ecommerce.services.DetallePedidoService;
 import com.albahaca.ecommerce.services.ProductoService;
 import java.util.ArrayList;
 import java.util.List;
@@ -24,6 +27,7 @@ public class ProductoController {
 
     @Autowired
     ProductoService productoService;
+
 
     @GetMapping("/listarProductos")
     public ArrayList<ProductoModel> listarProductos() {
@@ -88,5 +92,27 @@ public class ProductoController {
                         producto.getCategoria().getNombre().toLowerCase().contains(marcaCategoriaFiltro.toLowerCase()))
                 .collect(Collectors.toList());
     }
+    
+    @GetMapping("/mas-vendidos")
+    @PreAuthorize("hasAuthority('ADMIN')")
+    public List<ProductoMasVendidoDTO> obtenerProductosMasVendidos() {
+        return productoService.obtenerProductosMasVendidos();
+    }
+    
+    
+    //EN ESTE METODO TRAE LOS PRODUCTOS DE FORMA DECENDIENTE, COMO NO ME DEJA USAR EL LIMIT 1 Y PARA NO HACER QUILOMBO 
+    //LO LIMITAMOS CUANDO SE TOME DEL FRONTEND Y LISTO. Es decir solo se toma el primer elemento del json.
+    @GetMapping("/producto-mas-ingresos")
+    @PreAuthorize("hasAuthority('ADMIN')")
+     public ResponseEntity<List<ProductoMasIngresoDTO>> obtenerProductosConMasIngresos() {
+        List<ProductoMasIngresoDTO> productosConMasIngresos = productoService.obtenerProductoConMasIngresos();
+
+        if (productosConMasIngresos.isEmpty()) {
+            return ResponseEntity.noContent().build(); // 204 si no hay datos
+        }
+        return ResponseEntity.ok(productosConMasIngresos); // 200 con la lista de productos
+    }
+
+
 
 }

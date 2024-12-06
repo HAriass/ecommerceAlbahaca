@@ -1,5 +1,6 @@
 package com.albahaca.ecommerce.controllers;
 
+import com.albahaca.ecommerce.DTO.GananciaPorCategoriaDTO;
 import com.albahaca.ecommerce.models.CategoriaModel;
 import com.albahaca.ecommerce.services.CategoriaService;
 import java.util.ArrayList;
@@ -66,5 +67,12 @@ public class CategoriaController {
         return categorias.stream()
                 .filter(categoria -> categoria.getNombre().toLowerCase().contains(filtroName.toLowerCase()))
                 .collect(Collectors.toList());
+    }
+    
+    
+    @GetMapping("/ganancias")
+    @PreAuthorize("hasAuthority('ADMIN')")
+    public List<GananciaPorCategoriaDTO> obtenerGananciasPorCategoria() {
+        return categoriaService.obtenerGananciasPorCategoria();
     }
 }

@@ -1,11 +1,13 @@
 package com.albahaca.ecommerce.controllers;
 
+import com.albahaca.ecommerce.DTO.ClienteMasComprasDTO;
 import com.albahaca.ecommerce.models.CuentaModel;
 import com.albahaca.ecommerce.services.CuentaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 import java.util.ArrayList;
+import java.util.List;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -47,4 +49,18 @@ public class CuentaController {
     public boolean eliminarCuenta(@PathVariable("id") Long id) {
         return this.cuentaService.eliminarCuenta(id);
     }
+    
+    @GetMapping("/cliente-con-mas-compras")
+    @PreAuthorize("hasAuthority('ADMIN')")
+    public ResponseEntity<List<ClienteMasComprasDTO>> obtenerClienteConMasCompras() {
+        List<ClienteMasComprasDTO> clientes = cuentaService.obtenerClienteConMasCompras();
+
+        if (clientes.isEmpty()) {
+            return ResponseEntity.noContent().build(); // Devuelve 204 si no hay datos
+        }
+        
+        // Devuelve el primer cliente con más compras (el primero en la lista ordenada)
+        return ResponseEntity.ok(clientes);
+    }
+
 }
