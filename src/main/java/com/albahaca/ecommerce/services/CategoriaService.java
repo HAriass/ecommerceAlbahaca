@@ -5,6 +5,7 @@ import com.albahaca.ecommerce.models.CategoriaModel;
 import com.albahaca.ecommerce.models.ProductoModel;
 import com.albahaca.ecommerce.repositories.CategoriaRepository;
 import com.albahaca.ecommerce.repositories.ProductoRepository;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -61,7 +62,7 @@ public class CategoriaService {
     
     
     //Ganancia por categoria
-    public List<GananciaPorCategoriaDTO> obtenerGananciasPorCategoria() {
-        return categoriaRepository.obtenerGananciasPorCategoria();
+    public List<GananciaPorCategoriaDTO> obtenerGananciasPorCategoriaConFecha(LocalDateTime fechaInicio, LocalDateTime fechaFin) {
+        return categoriaRepository.obtenerGananciasPorCategoriaConFechas(fechaInicio, fechaFin);
     }
 }

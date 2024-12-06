@@ -9,14 +9,16 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface CategoriaRepository extends CrudRepository<CategoriaModel, Long> {
-    
-    
-     @Query("""
+
+    @Query("""
             SELECT new com.albahaca.ecommerce.DTO.GananciaPorCategoriaDTO(c.nombre, SUM(dp.subtotal))
             FROM DetallePedidoModel dp
             INNER JOIN dp.producto p
             INNER JOIN p.categoria c
+            INNER JOIN dp.pedido ped
+            WHERE ped.fechaHora BETWEEN :fechaInicio AND :fechaFin
             GROUP BY c.id, c.nombre
             """)
-    List<GananciaPorCategoriaDTO> obtenerGananciasPorCategoria();
+    List<GananciaPorCategoriaDTO> obtenerGananciasPorCategoriaConFechas(java.time.LocalDateTime fechaInicio, java.time.LocalDateTime fechaFin);
 }
+

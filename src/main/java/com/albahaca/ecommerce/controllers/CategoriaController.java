@@ -3,6 +3,7 @@ package com.albahaca.ecommerce.controllers;
 import com.albahaca.ecommerce.DTO.GananciaPorCategoriaDTO;
 import com.albahaca.ecommerce.models.CategoriaModel;
 import com.albahaca.ecommerce.services.CategoriaService;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -70,9 +71,14 @@ public class CategoriaController {
     }
     
     
+    //Ganancia por categoria con fecha
     @GetMapping("/ganancias")
     @PreAuthorize("hasAuthority('ADMIN')")
-    public List<GananciaPorCategoriaDTO> obtenerGananciasPorCategoria() {
-        return categoriaService.obtenerGananciasPorCategoria();
+    public List<GananciaPorCategoriaDTO> obtenerGananciasPorCategoriaConFecha() {
+        
+        //Hay que hacer que tome los datos del front, porque aca estan escrito a mano para la prueba rapida
+        LocalDateTime inicio = LocalDateTime.of(2024, 12, 05, 0, 0);
+        LocalDateTime fin = LocalDateTime.of(2024, 12, 05, 23, 59);
+        return categoriaService.obtenerGananciasPorCategoriaConFecha(inicio, fin);
     }
 }
