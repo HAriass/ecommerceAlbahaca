@@ -6,6 +6,7 @@ import com.albahaca.ecommerce.DTO.ProductoMasVendidoDTO;
 import com.albahaca.ecommerce.models.ProductoModel;
 import com.albahaca.ecommerce.repositories.DetallePedidoRepository;
 import com.albahaca.ecommerce.repositories.ProductoRepository;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -62,8 +63,8 @@ public class ProductoService {
         return productoRepository.findByCategoriaId(categoriaId);
     }
     
-    public List<ProductoMasVendidoDTO> obtenerProductosMasVendidos() {
-        return detallePedidoRepository.obtenerProductosMasVendidos();
+    public List<ProductoMasVendidoDTO> obtenerProductosMasVendidos(LocalDateTime fechaInicio, LocalDateTime fechaFin) {
+        return detallePedidoRepository.obtenerProductosMasVendidos(fechaInicio, fechaFin);
     }
     
     public List<ProductoMasIngresoDTO> obtenerProductoConMasIngresos() {

@@ -5,6 +5,7 @@ import com.albahaca.ecommerce.DTO.ProductoMasVendidoDTO;
 import com.albahaca.ecommerce.models.ProductoModel;
 import com.albahaca.ecommerce.services.DetallePedidoService;
 import com.albahaca.ecommerce.services.ProductoService;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -19,6 +20,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -95,9 +97,18 @@ public class ProductoController {
     
     @GetMapping("/mas-vendidos")
     @PreAuthorize("hasAuthority('ADMIN')")
-    public List<ProductoMasVendidoDTO> obtenerProductosMasVendidos() {
-        return productoService.obtenerProductosMasVendidos();
+    public List<ProductoMasVendidoDTO> obtenerProductosMasVendidos(
+            @RequestParam("inicio") String inicio,
+            @RequestParam("fin") String fin) {
+
+        // Convertir las fechas recibidas como String a LocalDateTime
+        LocalDateTime fechaInicio = LocalDateTime.parse(inicio);
+        LocalDateTime fechaFin = LocalDateTime.parse(fin);
+
+        // Llamar al servicio con las fechas proporcionadas
+        return productoService.obtenerProductosMasVendidos(fechaInicio, fechaFin);
     }
+
     
     
     //EN ESTE METODO TRAE LOS PRODUCTOS DE FORMA DECENDIENTE, COMO NO ME DEJA USAR EL LIMIT 1 Y PARA NO HACER QUILOMBO 

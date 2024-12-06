@@ -15,12 +15,13 @@ public interface DetallePedidoRepository extends CrudRepository<DetallePedidoMod
     
     //Consulta para productos mas vendido
     @Query("SELECT new com.albahaca.ecommerce.DTO.ProductoMasVendidoDTO(p.nombre, SUM(dp.cantidad)) " +
-           "FROM DetallePedidoModel dp " +
-           "INNER JOIN dp.producto p " +
-           "GROUP BY p.id, p.nombre " +
-           "ORDER BY SUM(dp.cantidad) DESC"
-            )
-    List<ProductoMasVendidoDTO> obtenerProductosMasVendidos();
+       "FROM DetallePedidoModel dp " +
+       "INNER JOIN dp.producto p " +
+       "WHERE dp.pedido.fechaHora BETWEEN :fechaInicio AND :fechaFin " +
+       "GROUP BY p.id, p.nombre " +
+       "ORDER BY SUM(dp.cantidad) DESC")
+    List<ProductoMasVendidoDTO> obtenerProductosMasVendidos(java.time.LocalDateTime fechaInicio, java.time.LocalDateTime fechaFin);
+
 
     @Query("SELECT new com.albahaca.ecommerce.DTO.ProductoMasIngresoDTO(p.nombre, SUM(dp.subtotal)) " +
            "FROM DetallePedidoModel dp " +
