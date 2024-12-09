@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -103,24 +104,24 @@ public class EstadisticasController {
 
     @GetMapping("/masVendidos")
     public ResponseEntity<List<Map<String, Object>>> obtenerProductosMasVendidos(
-            @RequestParam String fechaInicio,
-            @RequestParam String fechaFin) {
+                @RequestParam String fechaInicio,
+                @RequestParam String fechaFin) {
 
-        // Convertir las fechas de entrada (String) en LocalDate
-        LocalDate inicio = LocalDate.parse(fechaInicio);
-        LocalDate fin = LocalDate.parse(fechaFin);
+            // Convertir las fechas de entrada (String) en LocalDate
+            LocalDate inicio = LocalDate.parse(fechaInicio);
+            LocalDate fin = LocalDate.parse(fechaFin);
 
-        // Obtener todos los pedidos desde el servicio
-        ArrayList<PedidoModel> pedidos = this.pedidoService.listarPedidos();
+            // Obtener todos los pedidos desde el servicio
+            ArrayList<PedidoModel> pedidos = this.pedidoService.listarPedidos();
 
-        // Filtrar los pedidos por el rango de fechas
-        List<PedidoModel> pedidosFiltrados = pedidos.stream()
-                .filter(pedido -> {
-                    LocalDate fechaPedido = pedido.getFechaHora().toLocalDate();
-                    return (fechaPedido.isEqual(inicio) || fechaPedido.isEqual(fin)
-                            || (fechaPedido.isAfter(inicio) && fechaPedido.isBefore(fin)));
-                })
-                .toList();
+            // Filtrar los pedidos por el rango de fechas
+            List<PedidoModel> pedidosFiltrados = pedidos.stream()
+                    .filter(pedido -> {
+                        LocalDate fechaPedido = pedido.getFechaHora().toLocalDate();
+                        return (fechaPedido.isEqual(inicio) || fechaPedido.isEqual(fin)
+                                || (fechaPedido.isAfter(inicio) && fechaPedido.isBefore(fin)));
+                    })
+                    .toList();
 
         // Obtener los detalles solo de los pedidos filtrados
         ArrayList<DetallePedidoModel> detallesPedidos = this.obtenerDetallesPedidoPorPedidosFiltrados(pedidosFiltrados);
@@ -206,5 +207,86 @@ public class EstadisticasController {
 
         return ResponseEntity.ok(resultado);
     }
+
+    @GetMapping("/pedidosPorFecha")
+    public ResponseEntity<List<Map<String, Object>>> pedidosPorFecha(
+            @RequestParam String fechaInicio,
+            @RequestParam String fechaFin) {
+
+        // Convertir las fechas de entrada
+        LocalDate inicio = LocalDate.parse(fechaInicio);
+        LocalDate fin = LocalDate.parse(fechaFin);
+
+        // Obtener todos los pedidos
+        ArrayList<PedidoModel> pedidos = this.pedidoService.listarPedidos();
+
+        // Agrupar los pedidos por fecha
+        Map<LocalDate, Long> pedidosPorFecha = pedidos.stream()
+                .filter(pedido -> {
+                    LocalDate fechaPedido = pedido.getFechaHora().toLocalDate();
+                    return !fechaPedido.isBefore(inicio) && !fechaPedido.isAfter(fin);
+                })
+                .collect(Collectors.groupingBy(
+                        pedido -> pedido.getFechaHora().toLocalDate(),
+                        Collectors.counting()
+                ));
+
+        // Convertir el mapa en una lista de mapas para JSON y ordenarlo por fecha
+        List<Map<String, Object>> respuesta = pedidosPorFecha.entrySet().stream()
+                .sorted(Map.Entry.comparingByKey()) // Ordenar por fecha
+                .map(entry -> {
+                    Map<String, Object> mapa = new HashMap<>();
+                    mapa.put("fecha", entry.getKey().toString()); // Convertir LocalDate a String
+                    mapa.put("cantidad", entry.getValue());      // Mantener el valor como Long
+                    return mapa;
+                })
+                .toList();
+
+        return ResponseEntity.ok(respuesta);
+    }
+
+
+    @GetMapping("/totalRecaudadoPorFecha")
+    public ResponseEntity<List<Map<String, Object>>> totalRecaudadoPorFecha(
+            @RequestParam String fechaInicio,
+            @RequestParam String fechaFin) {
+
+        // Convertir las fechas de entrada
+        LocalDate inicio = LocalDate.parse(fechaInicio);
+        LocalDate fin = LocalDate.parse(fechaFin);
+
+        // Obtener todos los pedidos
+        ArrayList<PedidoModel> pedidos = this.pedidoService.listarPedidos();
+
+        // Agrupar los pedidos por fecha y calcular el total recaudado
+        Map<LocalDate, Double> totalPorFecha = pedidos.stream()
+                .filter(pedido -> {
+                    LocalDate fechaPedido = pedido.getFechaHora().toLocalDate();
+                    return !fechaPedido.isBefore(inicio) && !fechaPedido.isAfter(fin);
+                })
+                .collect(Collectors.groupingBy(
+                        pedido -> pedido.getFechaHora().toLocalDate(),
+                        Collectors.summingDouble(pedido -> (double) pedido.getTotal())
+                ));
+
+        // Ordenar el mapa por fecha (clave) antes de crear la respuesta
+        List<Map<String, Object>> respuesta = totalPorFecha.entrySet().stream()
+                .sorted(Map.Entry.comparingByKey()) // Ordenar por fecha
+                .map(entry -> {
+                    Map<String, Object> mapa = new HashMap<>();
+                    mapa.put("fecha", entry.getKey().toString()); // Convertir LocalDate a String
+                    mapa.put("total", entry.getValue());         // Mantener el valor como Double
+                    return mapa;
+                })
+                .toList();
+
+        return ResponseEntity.ok(respuesta);
+    }
+
+
+
+
+
+
 
 }

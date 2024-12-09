@@ -11,6 +11,8 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/dayjs@1.10.8/dayjs.min.js"></script>
+
 </head>
 
 <body class="bg-gray-100">
@@ -78,7 +80,17 @@
                 <span class="relative w-full px-5 py-2.5 transition-all ease-in duration-75 bg-black rounded-md group-hover:bg-opacity-0">
                     Clientes Que Mas Compraron
                 </span>
-            </button>                    
+            </button>   
+            <button onclick="loadCantidadDePedidos()" class="relative inline-flex items-center justify-center w-full p-0.5 mb-4 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-cyan-500 to-blue-500 group-hover:from-cyan-500 group-hover:to-blue-500 hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-cyan-200 dark:focus:ring-cyan-800">
+                <span class="relative w-full px-5 py-2.5 transition-all ease-in duration-75 bg-black rounded-md group-hover:bg-opacity-0">
+                    Cantidad De Pedidos
+                </span>
+            </button> 
+            <button onclick="loadTotalRecaudado()" class="relative inline-flex items-center justify-center w-full p-0.5 mb-4 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-cyan-500 to-blue-500 group-hover:from-cyan-500 group-hover:to-blue-500 hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-cyan-200 dark:focus:ring-cyan-800">
+                <span class="relative w-full px-5 py-2.5 transition-all ease-in duration-75 bg-black rounded-md group-hover:bg-opacity-0">
+                    Monto Recaudado Por Pedidos
+                </span>
+            </button>                   
         </aside>
 
         <!-- Main Content -->
@@ -89,12 +101,7 @@
     </div>
 
     <!-- Scripts -->
-    <script>
-        
-
-       
-
-
+    <script>       
         const userMenuButton = document.getElementById('userMenuButton');
         const userMenu = document.getElementById('userMenu');
 
@@ -107,6 +114,8 @@
     <script src="/js/est_productosPorCantidad.js"></script>
     <script src="/js/est_cantidadPorCategoria.js"></script>
     <script src="/js/est_clientesQueMasCompraros.js"></script>
+    <script src="/js/est_cantidadDePedidos.js"></script>
+    <script src="/js/est_totalRecaudado.js"></script>
 
 </body>
 </html>
