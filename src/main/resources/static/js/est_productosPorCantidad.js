@@ -22,6 +22,11 @@ async function loadProductosPorCantidad(stat) {
             return;
         }
 
+        if (fechaInicio > fechaFin) {
+            alert('El rango de fechas es invalido');
+            return;
+        }
+
         console.log(fechaInicio, fechaFin,stat);
         await loadstat(stat, fechaInicio, fechaFin);
     });
