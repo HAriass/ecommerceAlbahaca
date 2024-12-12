@@ -52,7 +52,7 @@ async function loadstat(stat, fechaInicio, fechaFin) {
             // Crear el gráfico
             const ctx = document.getElementById('chartTotalRecaudado').getContext('2d');
             new Chart(ctx, {
-                type: 'line',
+                type: 'bar',
                 data: {
                     labels: fechas,
                     datasets: [{

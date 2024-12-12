@@ -28,13 +28,13 @@ async function loadProductosPorCantidad(stat) {
         }
 
         console.log(fechaInicio, fechaFin,stat);
-        await loadstat(stat, fechaInicio, fechaFin);
+        await crearGraph(stat, fechaInicio, fechaFin);
     });
 
 }
 
 
-async function loadstat(stat, fechaInicio, fechaFin) {
+async function crearGraph(stat, fechaInicio, fechaFin) {
     const mainContent = document.getElementById('main-content');
 
     if (stat === 'estadistica1') {

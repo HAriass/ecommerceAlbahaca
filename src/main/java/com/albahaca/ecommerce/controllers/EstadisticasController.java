@@ -213,6 +213,7 @@ public class EstadisticasController {
             @RequestParam String fechaInicio,
             @RequestParam String fechaFin) {
 
+
         // Convertir las fechas de entrada
         LocalDate inicio = LocalDate.parse(fechaInicio);
         LocalDate fin = LocalDate.parse(fechaFin);
