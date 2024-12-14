@@ -1,0 +1,117 @@
+
+@import url(https://fonts.googleapis.com/css?family=Roboto:100,300,400,900,700,500,300,100);
+
+.invoce-background{
+    width: 100%;
+    background-color: #ffffff;
+    margin: auto;
+    border: 1px solid #363131;
+}
+
+
+.invoiceh1{
+  font-size: 1.5em;
+  color: #000000;
+}
+
+.invoceh2{
+    font-size: .9em;
+}
+
+.invoce-p{
+  font-size: 16px;
+  color: #000000;
+  line-height: 1.2em;
+}
+
+.topFactura{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 30px;
+  padding-bottom: 15px;
+}
+
+
+.divlogo{
+    display: flex;
+    align-items: start;
+    padding: 10px 0;
+    width: 350px;
+}
+
+.logoAlbahaca{
+    height: 45px !important;
+    width: 45px;
+    margin-right: 8px;
+    align-self: center;
+}
+
+.infoCliente{
+    display: flex;
+    justify-content: left;
+    align-items: center;
+    padding: 0px 0 20px 30px;
+    width: 100%;
+}
+
+.clientlogo{
+	height: 30px;
+	width: 30px;
+	background: url(http://michaeltruong.ca/images/client.jpg) no-repeat;
+	background-size: 30px 30px;
+    border-radius: 50px;
+    margin-right: 8px;
+}
+
+.infoFactura{
+    padding-right: 15px;
+
+}
+.title{
+  float: right;
+}
+.title p{text-align: right;}
+
+.tableinvoce{
+  width: 100%;
+  border-collapse: collapse;
+}
+.tableitem{
+  padding: 5px 0 5px 15px;
+  border: 1px solid #000000;
+  background-color: white;
+}
+.tabletitle{
+  padding: 5px;
+  background: #ffffff;
+  color: #000000;
+  border: 1px solid #000000;
+  font-weight: bold;
+
+}
+
+.titleItem{
+    color: black !important;
+}
+
+.tabletitle:hover{
+  background: #ffffff;
+  color: #000000;
+  border: 1px solid #000000;
+  font-weight: bold;
+
+
+}
+
+.service{border: 1px solid #000000;}
+
+.service:hover{
+    background-color: white;
+}
+
+.itemtext{font-size: .9em;}
+
+.totalItem{
+    color: black !important;
+}
