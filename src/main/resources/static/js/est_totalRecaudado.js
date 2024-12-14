@@ -16,6 +16,7 @@ async function loadTotalRecaudado() {
         const fechaInicio = document.getElementById('fechaInicio').value;
         const fechaFin = document.getElementById('fechaFin').value;
 
+
         if (!fechaInicio || !fechaFin) {
             alert('Por favor, seleccione ambas fechas.');
             return;
@@ -30,6 +31,14 @@ async function loadTotalRecaudado() {
         await loadstat('totalRecaudado', fechaInicio, fechaFin);
     });
 }
+
+function formatPrecio(precio) {
+    return precio.toLocaleString('es-ES', {
+        minimumFractionDigits: 2,
+        maximumFractionDigits: 2
+    });
+}
+
 
 async function loadstat(stat, fechaInicio, fechaFin) {
     const mainContent = document.getElementById('main-content');
@@ -48,6 +57,7 @@ async function loadstat(stat, fechaInicio, fechaFin) {
             // Extraer fechas y totales del resultado
             const fechas = data.map(item => item.fecha);
             const totales = data.map(item => item.total);
+      
 
             // Crear el gráfico
             const ctx = document.getElementById('chartTotalRecaudado').getContext('2d');

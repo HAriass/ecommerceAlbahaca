@@ -21,6 +21,9 @@ function getPedidos() {
             console.log(pedidos);
             let htmlContent = '';
 
+            // Ordena los pedidos por fechaHora en forma descendente
+            pedidos.sort((a, b) => new Date(b.fechaHora) - new Date(a.fechaHora));
+
             pedidos.forEach(pedido => {
                 // Llama a getDetallesPedido para cada pedido y pasa el id
                 getDetallesPedido(pedido.id).then(detallesHtml => {
@@ -42,7 +45,7 @@ function getPedidos() {
                             <td>${formatFechaHora(pedido.fechaHora)}</td>
                             <td>${detallesHtml}</td>
                             <td>${pedido.estado.nombre}</td> 
-                            <td>${pedido.total}</td>
+                            <td>$${formatPrecio(pedido.total)}</td>
                             <td><button type="button" class="btn btn-primary" data-pedido='${JSON.stringify(pedidoImpresion)}' onclick="imprimirPedido(this)">Factura</button></td>
                         </tr>
                     `;

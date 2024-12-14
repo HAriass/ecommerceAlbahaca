@@ -1,5 +1,6 @@
 import {confirmarOperacion} from './alertas.js';
 import {eliminar} from './alertas.js';
+import {formatPrecio} from './formatPrecio.js'
 
 function getProductos() {
     axios.get("/producto/listarProductos")
@@ -15,7 +16,7 @@ function getProductos() {
                         <tr>
                             <td title="${producto.nombre}">${producto.nombre}</td>
                             <td title="${producto.descripcion}">${producto.descripcion}</td>
-                            <td title="${producto.precio}">${producto.precio}</td>
+                            <td title="$${formatPrecio(producto.precio)}">$${formatPrecio(producto.precio)}</td>
                             <td title="${producto.stock}">${producto.stock}</td>
                             <td title="${producto.marca.nombre}">${producto.marca.nombre}</td>
                             <td title="${producto.categoria.nombre}">${producto.categoria.nombre}</td>
