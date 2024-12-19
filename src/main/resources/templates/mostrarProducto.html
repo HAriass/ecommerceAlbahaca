@@ -52,9 +52,9 @@
         <h1 class="text-3xl text-white font-bold mb-6 text-center">Detalles del Producto</h1>
     
         <div th:if="${producto != null}" class="bg-black shadow-md rounded-lg p-4 max-w-md mx-auto">
-            <img th:src="'https://drive.google.com/thumbnail?id=' + ${producto.imagen}" 
+            <img th:src="${producto.imagen}" 
                  alt="${producto.nombre}" 
-                 class="rounded-t-lg w-full object-contain h-48 mb-3" />
+                 class="rounded-t-lg w-full object-fit h-48 mb-3" />
             <div class="p-3">
                 <p class="text-base mb-2 text-gray-400 truncate">
                     <span class="font-semibold">Nombre: </span> 
@@ -122,7 +122,7 @@
     <script>
         document.getElementById("addToCartForm").addEventListener("submit", function(event) {
             const cantidad = parseInt(document.getElementById("cantidad").value);
-            const stock = parseInt(/* Inserta el valor de stock */ [[${producto.stock}]]);
+            const stock = parseInt([[${producto.stock}]]);
 
             if (cantidad > stock) {
                 event.preventDefault(); // Evita el envío del formulario
