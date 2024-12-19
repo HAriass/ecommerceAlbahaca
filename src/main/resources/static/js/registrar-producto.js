@@ -2,19 +2,12 @@ import { registrar } from './alertas.js';
 
 const form = document.getElementById('addProducto');
 
-function extractDriveId(url) {
-    const regex = /\/d\/([a-zA-Z0-9_-]+)/;
-    const match = url.match(regex);
-    return match ? match[1] : null;
-}
-
 function guardarProducto() {
     form.addEventListener('submit', function (event) {
         event.preventDefault(); // Previene el comportamiento por defecto del formulario
 
         // Captura los datos del formulario
         const formData = new FormData(form);
-        //console.log("DATOS FORMULARIO:", Array.from(formData.entries()));
 
         // Convierte los datos del formulario a un objeto
         const data = {};
@@ -31,12 +24,6 @@ function guardarProducto() {
 
         delete data["marcas"]; // Elimina la propiedad original
         delete data["categorias"]; // Elimina la propiedad original
-        
-        // Extrae el ID de Google Drive si hay un campo 'imagen'
-        if (data['imagen']) {
-            const driveId = extractDriveId(data['imagen']); // Extrae el ID
-            data['imagen'] = driveId; // Reemplaza la URL completa con el ID
-        }
 
         // Convierte el objeto a JSON
         const jsonData = JSON.stringify(data);
@@ -55,8 +42,7 @@ function guardarProducto() {
             .catch(error => {
                 console.error('Error:', error);
             });
-
-         });
+    });
 }
 
 function getMarcas() {
@@ -66,20 +52,17 @@ function getMarcas() {
             const selecetMarca = document.querySelector("#marcas");
             let htmlContent = '';
 
-            //valido si hay marcar cargadar
+            //valido si hay marcas cargadas
             if (marcas.length === 0) {
                 selecetMarca.innerHTML = '<option value="" selected>No existen marcas registradas</option>';
             } else {
-                //Agrego opcion por defecto
+                //Agrego opción por defecto
                 htmlContent += `<option value="" selected hidden>Seleccionar Marca</option>`;
                 marcas.forEach(marca => {
-                    htmlContent += ` <option value="${marca.id}">${marca.nombre}</option>
-                        `;
+                    htmlContent += ` <option value="${marca.id}">${marca.nombre}</option>`;
                 });
                 selecetMarca.innerHTML = htmlContent;
             }
-
-
         })
         .catch((err) => console.error(err));
 }
@@ -91,23 +74,20 @@ function getCategorias() {
             const selectCategoria = document.querySelector("#categorias");
             let htmlContent = '';
 
-            //valido si hay categorias registradas
+            //valido si hay categorías registradas
             if (categorias.length === 0) {
-                selectCategoria.innerHTML = '<option value="" selected>No existen categorias registradas</option>';
+                selectCategoria.innerHTML = '<option value="" selected>No existen categorías registradas</option>';
             } else {
-                //agrego opcion por defecto
+                //Agrego opción por defecto
                 htmlContent += `<option value="" selected hidden>Seleccionar Categoría</option>`;
                 categorias.forEach(categoria => {
-                    htmlContent += `<option value="${categoria.id}">${categoria.nombre}</option>
-                        `;
+                    htmlContent += `<option value="${categoria.id}">${categoria.nombre}</option>`;
                 });
                 selectCategoria.innerHTML = htmlContent;
             }
-
         })
         .catch((err) => console.error(err));
 }
-
 
 // Llama a la función para añadir el listener
 guardarProducto();
